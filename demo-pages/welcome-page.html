@@ -163,20 +163,166 @@
     <main id="main">
       <section id="carousel">
         <div class="images-container">
-          <img src="/images/desktop-middle-banner-1704x740-24ff0036277417190c7425279caa0e76.jpg" alt="" class="img" />
           <img
-            src="/images/nike.jpg"
+            src="/images/desktop-middle-banner-1704x740-24ff0036277417190c7425279caa0e76.jpg"
             alt=""
             class="img"
-          /><img src="/images/adidas-shoes.jpg" alt="" class="img" />
+          />
+          <img src="/images/nike.jpg" alt="" class="img" /><img
+            src="/images/adidas-shoes.jpg"
+            alt=""
+            class="img"
+          />
           <img src="/images/banner.jpg" alt="" class="img" />
           <img src="/images/nike-shoes.jpg" alt="" class="img" />
+        </div>
+      </section>
+      <section id="women-products">
+        <div class="products-container">
+          <article class="women-products-header">
+            <h3>Women's</h3>
+            <h1>New Products</h1>
+          </article>
+          <div class="women-products-container">
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size transition"><span>S</span></p>
+                <p class="size transition"><span>M</span></p>
+                <p class="size transition"><span>L</span></p>
+                <p class="size transition"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
     </main>
   </body>
   <script>
     const imgContainer = document.getElementsByClassName("images-container")[0];
+    const productContainer = document.getElementsByClassName(
+      "women-products-container"
+    )[0];
+    let productsCurTranslate = 100;
+
+    setInterval(() => {
+      if (Math.abs(productsCurTranslate) == 100) {
+        productsCurTranslate = 100;
+      }
+      productContainer.style.transform = `translateX(${(productsCurTranslate -= 100)}%)`;
+    }, 3000);
+
     let curTranslateX = 0;
 
     setInterval(() => {
