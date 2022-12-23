@@ -304,7 +304,79 @@
                 <p class="size"><span>XL</span></p>
               </div>
             </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
+            <article class="product-card">
+              <div class="card-img-container">
+                <img class="prod-img" src="./images/nike-product.jpg" alt="" />
+              </div>
+              <div class="product-title">
+                <a href="/">Product title</a>
+                <h3>39.99$</h3>
+              </div>
+              <div class="sizes">
+                <p class="size"><span>S</span></p>
+                <p class="size"><span>M</span></p>
+                <p class="size"><span>L</span></p>
+                <p class="size"><span>XL</span></p>
+              </div>
+            </article>
           </div>
+        </div>
+      </section>
+      <section id="men-women-categories">
+        <div class="categories-container">
+          <a class="women-img-container">
+            <img src="/images/women-section.png" alt="" />
+            <div class="categories-btn women"><span>Women's</span></div>
+          </a>
+          <a class="men-img-container">
+            <img src="/images/mens-section.png" alt="" />
+            <div class="categories-btn men"><span>Men's</span></div>
+          </a>
         </div>
       </section>
     </main>
@@ -317,11 +389,11 @@
     let productsCurTranslate = 100;
 
     setInterval(() => {
-      if (Math.abs(productsCurTranslate) == 100) {
+      if (Math.abs(productsCurTranslate) == 200) {
         productsCurTranslate = 100;
       }
       productContainer.style.transform = `translateX(${(productsCurTranslate -= 100)}%)`;
-    }, 3000);
+    }, 5000);
 
     let curTranslateX = 0;
 
@@ -331,6 +403,6 @@
       }
 
       imgContainer.style.transform = `translateX(${(curTranslateX -= 100)}%)`;
-    }, 3000);
+    }, 5000);
   </script>
 </html>
