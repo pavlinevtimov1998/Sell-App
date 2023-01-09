@@ -1,6 +1,6 @@
-const { catchAsyncError } = require('../Util/errorParser');
-
 const authController = require('express').Router();
+
+const { catchAsyncError } = require('../Util/errorParser');
 
 authController.post('/login', catchAsyncError((req, res) => {
 
