@@ -1,0 +1,12 @@
+.social-icon {
+  fill: #fff;
+  width: 24px;
+}
+
+.social-icon:hover {
+  fill: #0d47a1;
+}
+
+.social-icon:hover {
+  fill: rgb(109, 107, 107);
+}
