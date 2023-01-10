@@ -1,5 +1,6 @@
 body {
     font-family: "Source Sans Pro", sans-serif;
+    height: auto;
 }
 
 ul,
@@ -116,4 +117,14 @@ a:hover {
     opacity: 1 !important;
     height: auto !important;
     padding: 30px 40px;
+}
+
+.fixed-nav {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    transition: all 0.5s ease;
 }
