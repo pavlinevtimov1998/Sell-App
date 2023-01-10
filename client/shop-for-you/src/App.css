@@ -15,3 +15,10 @@ body {
 .carousel-item {
   height: 100%;
 }
+
+#men-women-categories {
+  width: 100%;
+  max-width: 1100px;
+  height: 670px;
+  margin: 0 auto;
+}

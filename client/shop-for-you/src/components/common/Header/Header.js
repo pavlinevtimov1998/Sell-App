@@ -53,7 +53,7 @@ export const Header = () => {
         <div className={styles["master-container"]}>
           <div className={styles["space"]} />
           <a href="/" className={styles["logo"]}>
-            <img src="./logo-no-background.png" alt="" />
+            <img src="/images/logo-no-background.png" alt="" />
           </a>
           <article className={styles["auth"]}>
             <ul className={styles["right-elements"]}>
