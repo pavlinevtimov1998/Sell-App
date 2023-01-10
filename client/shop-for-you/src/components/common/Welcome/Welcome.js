@@ -1,6 +1,6 @@
 import { Carousel } from "../../Carousel/Carousel";
 import { Categories } from "./Categories/Categories";
-import { ProductsSlider } from "./ProductsSlider";
+import { ProductsSlider } from "./ProductsSlider/ProductsSlider";
 
 export const Welcome = () => {
   return (

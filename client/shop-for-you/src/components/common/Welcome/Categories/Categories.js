@@ -2,7 +2,7 @@ import styles from "./Categories.module.css";
 
 export const Categories = () => {
   return (
-    <section id={styles["men-women-categories"]}>
+    <section id="men-women-categories">
       <div className={styles["categories-container"]}>
         <a className={styles["women-img-container"]} href="/">
           <img src="/images/women-section.png" alt="" />
