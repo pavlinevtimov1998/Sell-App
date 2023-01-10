@@ -2,6 +2,12 @@ body {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+ul,
+h1,
+p {
+  margin: unset;
+}
+
 #header {
   width: 100%;
 }
@@ -74,4 +80,23 @@ body {
 .size span {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.transition {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form-group {
+  display: flex;
+}
+
+.form-group input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.form-group .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

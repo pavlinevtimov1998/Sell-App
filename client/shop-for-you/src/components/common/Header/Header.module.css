@@ -97,6 +97,7 @@
 .right-elements {
   display: flex;
   align-items: center;
+  margin: unset;
 }
 
 .form-container {
@@ -106,7 +107,6 @@
   padding-bottom: 2px;
 }
 .sign-in {
-  text-decoration: none;
   color: #757575;
   font-size: 14px;
   font-weight: 600;
@@ -118,6 +118,7 @@
   cursor: pointer;
 }
 .sign-in:hover {
+  text-decoration: none;
   color: #0a0a0a;
 }
 .search-icon {
@@ -129,6 +130,7 @@
   fill: #0a0a0a;
 }
 .cart-btn a {
+  text-decoration: none;
   color: #fff;
   padding: 6px 18px;
   display: flex;
@@ -170,6 +172,7 @@
   align-items: center;
   width: 100%;
   justify-content: center;
+  margin: unset;
 }
 .list__item {
   margin-inline: 40px;

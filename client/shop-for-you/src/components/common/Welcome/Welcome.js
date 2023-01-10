@@ -1,6 +1,7 @@
 import { Carousel } from "../../Carousel/Carousel";
 import { Categories } from "./Categories/Categories";
 import { ProductsSlider } from "./ProductsSlider/ProductsSlider";
+import { Subscribe } from "../../Subscribe/Subscribe";
 
 export const Welcome = () => {
   return (
@@ -9,6 +10,7 @@ export const Welcome = () => {
       <ProductsSlider />
       <Categories />
       <ProductsSlider />
+      <Subscribe />
     </>
   );
 };

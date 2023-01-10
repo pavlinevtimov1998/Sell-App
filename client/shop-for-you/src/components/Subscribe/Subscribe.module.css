@@ -1,0 +1,18 @@
+.subscribe-section {
+  padding: 35px;
+}
+
+.subscribe-container {
+  max-width: 750px;
+  margin: auto;
+}
+
+.subscribe-container h1,
+.subscribe-container p {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subscribe-container p {
+  letter-spacing: 0.1px;
+}
