@@ -2,24 +2,36 @@ import styles from "./Footer.module.css";
 
 export const Footer = () => {
   return (
-    <footer>
+    <footer id="footer">
       <div className={styles["footer-container"]}>
-        <ul className={styles["categories"]}>
-          <li>Men</li>
-          <li>Women</li>
-          <li>Sale</li>
-        </ul>
-        <ul className={styles["for-us"]}>
+        <ul className={`${styles["categories"]} ${styles["list"]}`}>
           <li>
-            <img src="/images/logo-white.png" alt="" />
+            <a href="/">Men</a>
           </li>
-          <li>About us</li>
+          <li>
+            <a href="/">Women</a>
+          </li>
+          <li>
+            <a href="/">Sale</a>
+          </li>
+        </ul>
+        <ul className={`${styles["for-us"]} ${styles["list"]}`}>
+          <li className={styles["logo"]}>
+            <img
+              className={styles["img"]}
+              src="/images/logo-white.png"
+              alt=""
+            />
+          </li>
+          <li>
+            <a href="/">About us</a>
+          </li>
         </ul>
         <ul className={styles["social-media"]}>
           <li>
             <a href="/">
               <svg
-                className={[`${styles["social-icon"]} ${styles["transition"]}`]}
+                className={[`${styles["social-icon"]} transition`]}
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -30,7 +42,9 @@ export const Footer = () => {
           <li>
             <a href="/">
               <svg
-                className={[`${styles["social-icon"]} ${styles["transition"]}`]}
+                className={[
+                  `${styles["social-icon"]} transition ${styles["linkedin"]}`,
+                ]}
                 version="1.1"
                 id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg"

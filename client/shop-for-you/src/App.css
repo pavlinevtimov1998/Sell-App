@@ -8,8 +8,16 @@ p {
   margin: unset;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 #header {
   width: 100%;
+}
+
+#footer {
+  background-color: black;
 }
 
 .w-100 {
