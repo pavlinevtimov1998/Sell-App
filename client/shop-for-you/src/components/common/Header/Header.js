@@ -14,7 +14,7 @@ export const Header = () => {
           <article className={styles["social"]}>
             <a href="/" className={styles["github"]}>
               <svg
-                className="social-icon transition"
+                className={[`${styles["social-icon"]} ${styles["transition"]}`]}
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -23,7 +23,7 @@ export const Header = () => {
             </a>
             <a href="/" className={styles["linkdin"]}>
               <svg
-                className="social-icon transition"
+                className={[`${styles["social-icon"]} ${styles["transition"]}`]}
                 version="1.1"
                 id="Layer_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +150,10 @@ export const Header = () => {
               </a>
             </li>
             <li className={styles["list__item"]}>
-              <a className="item__link transition" href="/">
+              <a
+                className={[`${styles["item__link"]} ${styles["transition"]}`]}
+                href="/"
+              >
                 Women's
               </a>
             </li>
