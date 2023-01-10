@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { DropdownMenu } from "../../DropdownMenu/DropdownMenu";
+
 import styles from "./Header.module.css";
+
+import { DropdownMenu } from "../../DropdownMenu/DropdownMenu";
 
 const subcategories = [1, 2, 3, 4, 5];
 
