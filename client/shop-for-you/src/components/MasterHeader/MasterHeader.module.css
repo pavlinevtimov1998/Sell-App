@@ -59,7 +59,10 @@
 .search-icon:hover {
     fill: #0a0a0a;
 }
-.cart-btn a {
+.cart-btn {
+    position: relative;
+}
+.cart-btn-link {
     text-decoration: none;
     color: #fff;
     padding: 6px 18px;
@@ -71,6 +74,9 @@
     letter-spacing: 0.4px;
     background-color: #0a0a0a;
     text-transform: uppercase;
+}
+.cart-btn-link:hover {
+    color: #fff;
 }
 .cart-icon {
     width: 20px;

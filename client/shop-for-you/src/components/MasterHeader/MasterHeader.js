@@ -1,16 +1,36 @@
 import { useRef } from "react";
+import { CartDropdown } from "../CartDropdown/CartDropdown";
 import { SearchDropdown } from "../SearchDropdown/SearchDropdown";
 
 import styles from "./MasterHeader.module.css";
 
 export const MasterHeader = () => {
-    const searchRef = useRef([]);
+    const refArr = useRef([]);
 
-    const dropDownSearchHandler = (e, index) => {
-        if (e.type === "mouseover") {
-            searchRef.current[0].classList.add("active-dropdown-search");
-        } else {
-            searchRef.current[0].classList.remove("active-dropdown-search");
+    const dropDownHandler = (e, index) => {
+        switch (index) {
+            case 0:
+                if (e.type === "mouseover") {
+                    refArr.current[index].classList.add(
+                        "active-dropdown-search"
+                    );
+                } else {
+                    refArr.current[index].classList.remove(
+                        "active-dropdown-search"
+                    );
+                }
+                break;
+            case 1:
+                if (e.type === "mouseover") {
+                    refArr.current[index].classList.add("active-dropdown-cart");
+                } else {
+                    refArr.current[index].classList.remove(
+                        "active-dropdown-cart"
+                    );
+                }
+                break;
+            default:
+                break;
         }
     };
 
@@ -24,8 +44,8 @@ export const MasterHeader = () => {
                 <article className={styles["auth"]}>
                     <ul className={styles["right-elements"]}>
                         <li
-                            onMouseOver={(e) => dropDownSearchHandler(e, 0)}
-                            onMouseLeave={(e) => dropDownSearchHandler(e, 0)}
+                            onMouseOver={(e) => dropDownHandler(e, 0)}
+                            onMouseLeave={(e) => dropDownHandler(e, 0)}
                             className={`${styles["search-icon"]} ${styles["transition"]}`}
                         >
                             <svg
@@ -49,7 +69,7 @@ export const MasterHeader = () => {
 	c2.938-10.965,9.971-20.13,19.802-25.807C73.696,26.972,81.027,25,88.433,25C103.597,25,117.719,33.146,125.29,46.259z"
                                 />
                             </svg>
-                            <SearchDropdown elRef={searchRef} />
+                            <SearchDropdown elRef={refArr} />
                         </li>
                         <li className={styles["sign-btn"]}>
                             <a
@@ -61,9 +81,13 @@ export const MasterHeader = () => {
                             </a>
                         </li>
                         <li className={styles["line"]} />
-                        <li className={styles["cart-btn"]}>
+                        <li
+                            onMouseOver={(e) => dropDownHandler(e, 1)}
+                            onMouseLeave={(e) => dropDownHandler(e, 1)}
+                            className={styles["cart-btn"]}
+                        >
                             <a
-                                className={styles["cart-btn"]}
+                                className={styles["cart-btn-link"]}
                                 href="/"
                                 title="Cart"
                             >
@@ -84,6 +108,7 @@ export const MasterHeader = () => {
                                     <circle cx={12} cy={27} r={2} />
                                 </svg>
                             </a>
+                            <CartDropdown elRef={refArr} />
                         </li>
                     </ul>
                 </article>
