@@ -103,21 +103,33 @@ a:hover {
     display: flex;
 }
 
-.form-group input {
+.form-group input,
+.form-control {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.form-group .btn {
+.form-group .btn,
+.form-inline .btn {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+/* dropdown */
 
 .active-dropdown {
     opacity: 1 !important;
     height: auto !important;
     padding: 30px 40px;
 }
+
+.active-dropdown-search {
+    opacity: 1 !important;
+    height: 70px !important;
+    left: 2px !important;
+}
+
+/* ---------- */
 
 .fixed-nav {
     position: fixed;
@@ -127,4 +139,11 @@ a:hover {
     z-index: 1000;
     background-color: #fff;
     transition: all 0.5s ease;
+}
+
+/* Search header form */
+
+.mr-sm-2,
+.mx-sm-2 {
+    margin: unset !important;
 }

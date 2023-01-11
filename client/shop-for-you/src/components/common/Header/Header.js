@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
 
 import { DropdownMenu } from "../../DropdownMenu/DropdownMenu";
+import { MasterHeader } from "../../MasterHeader/MasterHeader";
 
 const subcategories = [1, 2, 3, 4, 5];
 
@@ -98,118 +99,7 @@ export const Header = () => {
                 </div>
             </nav>
             <div ref={stickyNavRef} className="fixed-nav">
-                <nav className={styles["master-header"]}>
-                    <div className={styles["master-container"]}>
-                        <div className={styles["space"]} />
-                        <a href="/" className={styles["logo"]}>
-                            <img src="/images/logo-no-background.png" alt="" />
-                        </a>
-                        <article className={styles["auth"]}>
-                            <ul className={styles["right-elements"]}>
-                                <li
-                                    className={`${styles["search-icon"]} ${styles["transition"]}`}
-                                >
-                                    <svg
-                                        version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        x="0px"
-                                        y="0px"
-                                        viewBox="0 0 183.792 183.792"
-                                        style={{
-                                            enableBackground:
-                                                "new 0 0 183.792 183.792",
-                                        }}
-                                        xmlSpace="preserve"
-                                    >
-                                        <path
-                                            d="M54.734,9.053C39.12,18.067,27.95,32.624,23.284,50.039c-4.667,17.415-2.271,35.606,6.743,51.22
-	c12.023,20.823,34.441,33.759,58.508,33.759c7.599,0,15.139-1.308,22.287-3.818l30.364,52.592l21.65-12.5l-30.359-52.583
-	c10.255-8.774,17.638-20.411,21.207-33.73c4.666-17.415,2.27-35.605-6.744-51.22C134.918,12.936,112.499,0,88.433,0
-	C76.645,0,64.992,3.13,54.734,9.053z M125.29,46.259c5.676,9.831,7.184,21.285,4.246,32.25c-2.938,10.965-9.971,20.13-19.802,25.806
-	c-6.462,3.731-13.793,5.703-21.199,5.703c-15.163,0-29.286-8.146-36.857-21.259c-5.676-9.831-7.184-21.284-4.245-32.25
-	c2.938-10.965,9.971-20.13,19.802-25.807C73.696,26.972,81.027,25,88.433,25C103.597,25,117.719,33.146,125.29,46.259z"
-                                        />
-                                    </svg>
-                                    <div className={styles["form-container"]}>
-                                        <form className={styles["search-form"]}>
-                                            <input
-                                                type="text"
-                                                name="search"
-                                                id="search"
-                                            />
-                                            <button
-                                                className={styles["search-btn"]}
-                                            >
-                                                <svg
-                                                    className={
-                                                        styles[
-                                                            "btn-search-icon"
-                                                        ]
-                                                    }
-                                                    version="1.1"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                                                    x="0px"
-                                                    y="0px"
-                                                    viewBox="0 0 487.95 487.95"
-                                                    style={{
-                                                        enableBackground:
-                                                            "new 0 0 487.95 487.95",
-                                                    }}
-                                                    xmlSpace="preserve"
-                                                >
-                                                    <path
-                                                        d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1
-			c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4
-			c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </li>
-                                <li className={styles["sign-btn"]}>
-                                    <a
-                                        className={`${styles["sign-in"]} ${styles["transition"]}`}
-                                        href="/"
-                                        alt="asd"
-                                    >
-                                        Sign In
-                                    </a>
-                                </li>
-                                <li className={styles["line"]} />
-                                <li className={styles["cart-btn"]}>
-                                    <a
-                                        className={styles["cart-btn"]}
-                                        href="/"
-                                        title="Cart"
-                                    >
-                                        <span>Cart /</span>
-                                        <span className={styles["price"]}>
-                                            {" "}
-                                            0.00${" "}
-                                        </span>
-                                        <svg
-                                            className={styles["cart-icon"]}
-                                            viewBox="0 0 32 32"
-                                            id="i-cart"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            stroke="currentcolor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                        >
-                                            <path d="M6 6 L30 6 27 19 9 19 M27 23 L10 23 5 2 2 2" />
-                                            <circle cx={25} cy={27} r={2} />
-                                            <circle cx={12} cy={27} r={2} />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
-                    </div>
-                </nav>
+                <MasterHeader />
                 <nav className={styles["categories__nav"]}>
                     <div className={styles["categories__container"]}>
                         <ul className={styles["list"]}>
