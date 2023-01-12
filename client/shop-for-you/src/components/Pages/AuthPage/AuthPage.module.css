@@ -1,0 +1,33 @@
+.wrapper {
+    width: 100%;
+}
+
+.heading {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.heading h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.form-container {
+    width: 250px;
+    margin: auto;
+    padding: 25px 0;
+}
+
+.group {
+    display: block;
+}
+
+.terms {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.check {
+    display: flex;
+    margin-bottom: 15px;
+}

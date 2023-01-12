@@ -1,0 +1,8 @@
+.subcategories-container {
+    width: 80%;
+    margin: auto;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { CartDropdown } from "../CartDropdown/CartDropdown";
 import { SearchDropdown } from "../SearchDropdown/SearchDropdown";
 
@@ -38,9 +39,9 @@ export const MasterHeader = () => {
         <nav className={styles["master-header"]}>
             <div className={styles["master-container"]}>
                 <div className={styles["space"]} />
-                <a href="/" className={styles["logo"]}>
+                <Link to="/" className={styles["logo"]}>
                     <img src="/images/logo-no-background.png" alt="" />
-                </a>
+                </Link>
                 <article className={styles["auth"]}>
                     <ul className={styles["right-elements"]}>
                         <li
@@ -72,13 +73,13 @@ export const MasterHeader = () => {
                             <SearchDropdown elRef={refArr} />
                         </li>
                         <li className={styles["sign-btn"]}>
-                            <a
+                            <Link
                                 className={`${styles["sign-in"]} ${styles["transition"]}`}
-                                href="/"
+                                to="/login"
                                 alt="asd"
                             >
                                 Sign In
-                            </a>
+                            </Link>
                         </li>
                         <li className={styles["line"]} />
                         <li
@@ -86,9 +87,9 @@ export const MasterHeader = () => {
                             onMouseLeave={(e) => dropDownHandler(e, 1)}
                             className={styles["cart-btn"]}
                         >
-                            <a
+                            <Link
                                 className={styles["cart-btn-link"]}
-                                href="/"
+                                to="/cart"
                                 title="Cart"
                             >
                                 <span>Cart /</span>
@@ -107,7 +108,7 @@ export const MasterHeader = () => {
                                     <circle cx={25} cy={27} r={2} />
                                     <circle cx={12} cy={27} r={2} />
                                 </svg>
-                            </a>
+                            </Link>
                             <CartDropdown elRef={refArr} />
                         </li>
                     </ul>

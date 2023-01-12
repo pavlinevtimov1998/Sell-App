@@ -1,8 +1,9 @@
-import styles from './CategoriesHeader.module.css'
+import styles from "./CategoriesHeader.module.css";
 
 import { useRef } from "react";
 
 import { DropdownMenu } from "../DropdownMenu/DropdownMenu";
+import { Link } from "react-router-dom";
 
 const subcategories = [1, 2, 3, 4, 5];
 
@@ -26,12 +27,12 @@ export const CategoriesHeader = () => {
                         onMouseLeave={(e) => dropDownMenuHandler(e, 0)}
                         className={styles["list__item"]}
                     >
-                        <a
+                        <Link
                             className={`${styles["item__link"]} ${styles["transition"]}`}
                             href="/"
                         >
                             Men's
-                        </a>
+                        </Link>
                         <DropdownMenu
                             elRef={dropdownRef}
                             subcategories={subcategories}
@@ -42,26 +43,26 @@ export const CategoriesHeader = () => {
                         onMouseLeave={(e) => dropDownMenuHandler(e, 1)}
                         className={styles["list__item"]}
                     >
-                        <a
+                        <Link
                             className={[
                                 `${styles["item__link"]} ${styles["transition"]}`,
                             ]}
                             href="/"
                         >
                             Women's
-                        </a>
+                        </Link>
                         <DropdownMenu
                             elRef={dropdownRef}
                             subcategories={subcategories}
                         />
                     </li>
                     <li className={styles["list__item"]}>
-                        <a
+                        <Link
                             className={`${styles["item__link"]} ${styles["transition"]}`}
                             href="/"
                         >
                             Sale
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

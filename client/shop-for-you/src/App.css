@@ -10,6 +10,7 @@ h3,
 h4,
 p {
     margin: unset;
+    list-style: none;
 }
 
 a {
@@ -23,6 +24,11 @@ a:hover {
 
 #header {
     width: 100%;
+}
+
+#main {
+    min-height: calc(100vh - 190px);
+    margin-top: 140px;
 }
 
 #footer {
@@ -104,22 +110,6 @@ a:hover {
     cursor: pointer;
 }
 
-.form-group {
-    display: flex;
-}
-
-.form-group input,
-.form-control {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.form-group .btn,
-.form-inline .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
 /* dropdown */
 
 .active-dropdown {
@@ -158,4 +148,15 @@ a:hover {
 .mr-sm-2,
 .mx-sm-2 {
     margin: unset !important;
+}
+
+/* Error */
+
+.error {
+    color: red !important;
+    font-weight: 600;
+}
+
+.input-error {
+    border-left: 4px solid red;
 }

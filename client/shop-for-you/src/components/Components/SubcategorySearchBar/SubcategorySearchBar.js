@@ -1,23 +1,17 @@
-import styles from "./SearchDropdown.module.css";
+import styles from "./SubcategorySearchBar.module.css";
 
-export const SearchDropdown = ({ elRef }) => {
+export const SubcategorySearchBar = ({ category }) => {
     return (
-        <div
-            ref={(e) => elRef.current.push(e)}
-            className={styles["search-form-container"]}
-        >
+        <div className={styles["search-subcategory"]}>
+            <h1 className={styles["category"]}>{category}</h1>
             <form className="form-inline">
                 <input
-                    className={`form-control mr-sm-2 ${styles["input"]}`}
+                    className="form-control mr-sm-2"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
                 />
-                <button
-                    title="Search"
-                    type="submit"
-                    className={`btn btn-dark ${styles["btn-search"]}`}
-                >
+                <button title="Search" type="submit" className="btn btn-dark">
                     <svg
                         className={styles["search-btn-icon"]}
                         version="1.1"
