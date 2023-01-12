@@ -5,7 +5,6 @@ import styles from "./Header.module.css";
 import { MasterHeader } from "../../MasterHeader/MasterHeader";
 import { CategoriesHeader } from "../../CategoriesHeader/CategoriesHeader";
 
-
 export const Header = () => {
     const [isScroll, setIsScroll] = useState(false);
     const stickyNavRef = useRef(null);
@@ -33,8 +32,6 @@ export const Header = () => {
             setIsScroll(false);
         }
     };
-
-   
 
     return (
         <header id="header">
@@ -92,7 +89,7 @@ export const Header = () => {
             </nav>
             <div ref={stickyNavRef} className="fixed-nav">
                 <MasterHeader />
-                <CategoriesHeader/>
+                <CategoriesHeader />
             </div>
         </header>
     );
