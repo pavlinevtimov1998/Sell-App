@@ -1,13 +1,13 @@
 import { Footer } from "../common/Footer/Footer";
 import { Header } from "../common/Header/Header";
-import { HomePage } from "../Pages/HomePage/HomePage";
+import { Router } from "../Router/Router";
 
 export const MainWrapper = () => {
     return (
         <>
             <Header />
             <main id="main">
-                <HomePage />
+                <Router />
             </main>
             <Footer />
         </>
