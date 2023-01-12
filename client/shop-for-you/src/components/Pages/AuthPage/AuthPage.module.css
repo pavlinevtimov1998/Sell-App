@@ -31,3 +31,15 @@
     display: flex;
     margin-bottom: 15px;
 }
+
+.register-link {
+    margin-top: 5px;
+}
+
+.register-link a {
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

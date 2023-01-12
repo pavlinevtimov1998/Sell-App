@@ -1,9 +1,9 @@
-export const AuthForm = ({ styles, type }) => {
+export const AuthForm = ({ styles, isRegister }) => {
     return (
         <div className={styles["form-container"]}>
             <form>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <label htmlFor="exampleInputEmail1">Email</label>
                     <input
                         type="email"
                         className="form-control input-error"
@@ -27,7 +27,7 @@ export const AuthForm = ({ styles, type }) => {
                         Password should be at least 5 characters!
                     </small>
                 </div>
-                {type === "register" && (
+                {isRegister && (
                     <>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword2">
@@ -59,7 +59,7 @@ export const AuthForm = ({ styles, type }) => {
                     </>
                 )}
                 <button type="submit" className="btn btn-dark">
-                    {type === "register" ? "Register" : "Login"}
+                    {isRegister ? "Register" : "Login"}
                 </button>
             </form>
         </div>

@@ -12,8 +12,8 @@ export const AppRouter = () => {
                 path="/categories/:categoryId"
                 element={<SubcategoriesPage />}
             />
-            <Route path="/login" element={<AuthPage type={"login"} />} />
-            <Route path="/register" element={<AuthPage type={"register"} />} />
+            <Route path="/login" element={<AuthPage isRegister={false} />} />
+            <Route path="/register" element={<AuthPage isRegister={true} />} />
         </Routes>
     );
 };
