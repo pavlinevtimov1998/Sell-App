@@ -18,35 +18,36 @@ async function register(body) {
 
     return getToken({
         _id: user._id,
-        username: user.username,
+        email: user.email,
         isAdmin: user.isAdmin,
     }).then((token) => {
         return [token, user];
     });
 }
 
-async function login(body) {
-    const user = await User.findOne({ username: body.username });
+async function login({ email, password }) {
+    console.log(email, password);
+    const user = await User.findOne({ email });
 
     if (!user) {
         throw {
-            message: "Username or password don't match!",
+            message: "Email or password don't match!",
             status: 401,
         };
     }
 
-    const isValid = await bcrypt.compare(body.password, user.password);
+    const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
         throw {
-            message: "Username or password don't match!",
+            message: "Email or password don't match!",
             status: 401,
         };
     }
 
     return getToken({
         _id: user._id,
-        username: user.username,
+        email: user.email,
         isAdmin: user.isAdmin,
     }).then((token) => {
         return [token, user];
@@ -55,4 +56,5 @@ async function login(body) {
 
 module.exports = {
     register,
+    login,
 };
