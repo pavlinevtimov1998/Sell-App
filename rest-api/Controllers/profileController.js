@@ -43,7 +43,7 @@ profileController.patch(
             image
         );
 
-        res.json({ image: profileData.userInfo.image });
+        res.json({ image: profileData.image });
     })
 );
 
