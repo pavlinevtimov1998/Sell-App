@@ -14,7 +14,8 @@ authController.post(
         res.status(200).json({
             _id: user._id,
             email: user.email,
-            userInfo: user.userInfo,
+            phoneNumber: user.phoneNumber,
+            image: user.image,
             isAdmin: user.isAdmin,
         });
     })
@@ -30,7 +31,8 @@ authController.post(
         res.status(201).json({
             _id: user._id,
             email: user.email,
-            userInfo: user.userInfo,
+            phoneNumber: user.phoneNumber,
+            image: user.image,
             isAdmin: user.isAdmin,
         });
     })
