@@ -23,7 +23,7 @@ productsController.get(
     catchAsyncError(async (req, res) => {
         const count = await productsService.getProductsCount();
 
-        res.status(200).json({ products: count });
+        res.status(200).json({ productsCount: count });
     })
 );
 
