@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
+const config = require("../config/config");
 
 const userSchema = new mongoose.Schema(
     {
@@ -16,21 +19,24 @@ const userSchema = new mongoose.Schema(
                 message: () => "Invalid email!",
             },
         },
-        username: {
-            type: String,
-        },
         password: {
             required: true,
             trim: true,
             type: String,
             minLength: [6, "Password should be at least 6 characters!"],
         },
-        favorites: [
-            {
-                type: mongoose.Types.ObjectId,
-                ref: "Product",
-            },
-        ],
+        firstName: {
+            type: String,
+        },
+        lastName: {
+            type: String,
+        },
+        image: {
+            type: String,
+        },
+        phoneNumber: {
+            type: String,
+        },
         isAdmin: {
             type: Boolean,
             default: false,
@@ -38,6 +44,17 @@ const userSchema = new mongoose.Schema(
     },
     { timestamps: { createdAt: "createdAt" } }
 );
+
+userSchema.pre("save", async function (next) {
+    const hashedPassword = await bcrypt.hash(
+        this.password,
+        Number(config.SALT)
+    );
+
+    this.password = hashedPassword;
+
+    next();
+});
 
 const User = mongoose.model("User", userSchema);
 
