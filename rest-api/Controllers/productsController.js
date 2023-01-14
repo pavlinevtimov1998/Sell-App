@@ -1,5 +1,6 @@
 const productsController = require("express").Router();
 
+const { isUser } = require("../Middlewares/guards.js");
 const productsService = require("../Services/productService.js");
 const { catchAsyncError } = require("../Util/errorParser");
 const { upload } = require("../Util/imageUpload.js");
@@ -29,6 +30,7 @@ productsController.get(
 
 productsController.post(
     "/",
+    isUser,
     upload.array("images", 5),
     catchAsyncError(async (req, res) => {
         const productData = req.body;
@@ -51,6 +53,24 @@ productsController.get(
         const product = await productsService.getOneProduct(productId);
 
         res.status(200).json(product);
+    })
+);
+
+productsController.patch(
+    "/:productId",
+    isUser,
+    catchAsyncError(async (req, res) => {
+        const productData = req.body;
+        const productId = req.params.productId;
+        const userId = req.user._id;
+
+        const product = await productsService.editProduct(
+            productData,
+            productId,
+            userId
+        );
+
+        res.status(201).json(product);
     })
 );
 

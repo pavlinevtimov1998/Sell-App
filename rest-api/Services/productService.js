@@ -25,9 +25,23 @@ async function createProduct(body, files) {
     return product.save();
 }
 
+async function editProduct(body, productId, userId) {
+    const product = await Product.findById(productId);
+
+    if (product._ownerId.toString() !== userId) {
+        throw {
+            message: "Unauthorized!",
+            status: 401,
+        };
+    }
+
+    return product.update(body, { new: true, runValidators: true });
+}
+
 module.exports = {
     getProducts,
     getProductsCount,
     getOneProduct,
     createProduct,
+    editProduct,
 };
