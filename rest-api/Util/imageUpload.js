@@ -13,10 +13,10 @@ const deleteCloudinaryImage = (id) => cloudinary.uploader.destroy(id);
 async function getImagesUrl(files) {
     if (Array.isArray(files)) {
         const imagesUrl = await Promise.all(
-            files.map((f, i) => uploadToCloudinary(f[i].path))
+            files.map((f) => uploadToCloudinary(f.path))
         );
 
-        await Promise.all(files.map((f, i) => asyncUnlink(f[i].path)));
+        await Promise.all(files.map((f) => asyncUnlink(f.path)));
 
         return imagesUrl.map((img) => img.secure_url);
     } else {
@@ -31,7 +31,6 @@ async function getImagesUrl(files) {
 
 module.exports = {
     upload,
-    uploadToCloudinary,
     deleteCloudinaryImage,
     getImagesUrl,
 };
