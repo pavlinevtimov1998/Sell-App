@@ -16,18 +16,18 @@ async function updateProfileImg(userId, file) {
         User.findById(userId),
     ]);
 
-    const { image } = profileData.userInfo;
+    const { image } = profileData;
 
     if (image) {
-        cloudinaryImageId = profileData.userInfo.image.substring(
-            profileData.userInfo.image.lastIndexOf("/") + 1,
-            profileData.userInfo.image.lastIndexOf(".")
+        cloudinaryImageId = profileData.image.substring(
+            profileData.image.lastIndexOf("/") + 1,
+            profileData.image.lastIndexOf(".")
         );
 
         await deleteCloudinaryImage(cloudinaryImageId);
     }
 
-    profileData.userInfo.image = newImage;
+    profileData.image = newImage;
 
     return profileData.save();
 }
