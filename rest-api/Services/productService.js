@@ -1,4 +1,6 @@
 const Product = require("../Models/Product");
+const Town = require("../Models/Town");
+const { getImagesUrl } = require("../Util/imageUpload");
 
 const getProducts = (title, category) =>
     Product.find({
@@ -14,8 +16,18 @@ const getOneProduct = (productId) =>
         select: "-password -__v",
     });
 
+async function createProduct(body, files) {
+    const product = await Product.create(body);
+    const imagesUrl = await getImagesUrl(files);
+
+    product.images = imagesUrl;
+
+    return product.save();
+}
+
 module.exports = {
     getProducts,
     getProductsCount,
-    getOneProduct
+    getOneProduct,
+    createProduct,
 };

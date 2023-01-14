@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
             trim: true,
             minLength: [6, "Product title should be at least 6 characters!"],
         },
-        photos: [
+        images: [
             {
                 type: String,
             },
@@ -19,10 +19,10 @@ const productSchema = new mongoose.Schema(
             trim: true,
             minLength: [25, "Description should be at least 25 characters!"],
         },
-        location: {
+        town: {
             type: String,
-            required: [true, "Location is required!"],
-            trim: true,
+            required: [true, "Town is required!"],
+            ref: "Town",
         },
         phoneNumber: {
             type: String,
@@ -35,6 +35,13 @@ const productSchema = new mongoose.Schema(
             min: [0.01, "Price should be at least 0.01$!"],
             trim: true,
         },
+        favorites: [
+            {
+                type: mongoose.Types.ObjectId,
+                ref: "User",
+                default: [],
+            },
+        ],
         _ownerId: {
             type: mongoose.Types.ObjectId,
             ref: "User",
