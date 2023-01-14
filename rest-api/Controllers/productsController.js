@@ -74,4 +74,24 @@ productsController.patch(
     })
 );
 
+productsController.patch(
+    "/:productId/images-update",
+    isUser,
+    upload.array("images"),
+    catchAsyncError(async (req, res) => {
+        const productId = req.params.productId;
+        const userId = req.user._id;
+        const { action } = req.body;
+
+        const product = await productsService.editProductImages(
+            productId,
+            userId,
+            req.files,
+            action
+        );
+
+        res.status(201).json(product);
+    })
+);
+
 module.exports = productsController;
