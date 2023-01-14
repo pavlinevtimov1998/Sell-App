@@ -1,6 +1,6 @@
 const Product = require("../Models/Product");
 const Town = require("../Models/Town");
-const { getImagesUrl } = require("../Util/imageUpload");
+const { getImagesUrl, deleteCloudinaryImage } = require("../Util/imageUpload");
 
 const getProducts = (title, category) =>
     Product.find({
@@ -26,7 +26,65 @@ async function createProduct(body, files) {
 }
 
 async function editProduct(body, productId, userId) {
+    const product = await isOwnProduct(productId, userId);
+
+    return product.update(body, { new: true, runValidators: true });
+}
+
+async function editProductImages(productId, userId, files, action) {
+    const product = await isOwnProduct(productId, userId);
+
+    if (files.length == 0) {
+        throw {
+            message: "At least 1 image is required!",
+            status: 400,
+        };
+    }
+
+    if (action == "update") {
+        return updateImages(product, files);
+    } else if (action == "add") {
+        return addImage(product, files);
+    }
+
+    throw {
+        message: "Not found!",
+        status: 404,
+    };
+}
+
+async function addImage(query, files) {
+    const [imageUrl] = await getImagesUrl(files);
+
+    query.images.push(imageUrl);
+
+    return query.save();
+}
+
+async function updateImages(query, files) {
+    const imagesUrl = await getImagesUrl(files);
+
+    await Promise.all(
+        query.images.map((url) =>
+            deleteCloudinaryImage(
+                url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."))
+            )
+        )
+    );
+
+    query.images = imagesUrl;
+    return query.save();
+}
+
+async function isOwnProduct(productId, userId) {
     const product = await Product.findById(productId);
+
+    if (!product) {
+        throw {
+            message: "Not found!",
+            status: 404,
+        };
+    }
 
     if (product._ownerId.toString() !== userId) {
         throw {
@@ -35,7 +93,7 @@ async function editProduct(body, productId, userId) {
         };
     }
 
-    return product.update(body, { new: true, runValidators: true });
+    return product;
 }
 
 module.exports = {
@@ -44,4 +102,5 @@ module.exports = {
     getOneProduct,
     createProduct,
     editProduct,
+    editProductImages,
 };
