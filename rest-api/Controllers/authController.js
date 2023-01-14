@@ -1,17 +1,41 @@
-const authController = require('express').Router();
+const authController = require("express").Router();
 
-const { catchAsyncError } = require('../Util/errorParser');
+const config = require("../config/config");
+const { catchAsyncError } = require("../Util/errorParser");
 
-authController.post('/login', catchAsyncError((req, res) => {
+authController.post(
+    "/login",
+    catchAsyncError(async (req, res) => {
+        const [token, user] = await userService.login(req.body);
 
-}))
+        res.cookie(config.COOKIE_NAME, token, { httpOnly: true });
 
-authController.post('/register', catchAsyncError((req, res) => {
-    
-}))
+        res.status(200).json({
+            _id: user._id,
+            username: user.username,
+            // image: user.image,
+        });
+    })
+);
 
-authController.post('/logout', catchAsyncError((req, res) => {
-    
-}))
+authController.post(
+    "/register",
+    catchAsyncError(async (req, res) => {
+        const [token, user] = await userService.register(req.body);
 
-module.exports = authController
+        res.cookie(config.COOKIE_NAME, token, { httpOnly: true });
+
+        res.status(201).json({
+            _id: user._id,
+            username: user.username,
+            // image: user.image,
+        });
+    })
+);
+
+userController.post("/logout", (req, res) => {
+    res.clearCookie(config.COOKIE_NAME);
+    res.status(200).json({ message: "Successfull logout!" });
+});
+
+module.exports = authController;
