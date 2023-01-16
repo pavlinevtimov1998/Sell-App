@@ -54,7 +54,7 @@ async function editProductImages(productId, userId, files, action) {
 }
 
 async function addImage(query, files) {
-    const [imageUrl] = await getImagesUrl(files);
+    const imageUrl = await getImagesUrl(files)[0];
 
     query.images.push(imageUrl);
 
