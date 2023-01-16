@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../Models/User");
 
-const { getToken } = require("../Util/jwtConfig");
+const { removePass } = require("../Utils/removePass");
 
 async function register(body) {
     const { password, rePassword } = body;
@@ -16,13 +16,7 @@ async function register(body) {
 
     const user = await User.create(body);
 
-    return getToken({
-        _id: user._id,
-        email: user.email,
-        isAdmin: user.isAdmin,
-    }).then((token) => {
-        return [token, user];
-    });
+    return removePass(user);
 }
 
 async function login({ email, password }) {
@@ -54,7 +48,10 @@ async function login({ email, password }) {
     });
 }
 
+const removeAccount = (userId) => User.findByIdAndDelete(userId);
+
 module.exports = {
     register,
     login,
+    removeAccount,
 };
