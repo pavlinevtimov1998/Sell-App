@@ -1,6 +1,6 @@
 const User = require("../Models/User");
 
-const { getImagesUrl, deleteCloudinaryImage } = require("../Util/imageUpload");
+const { getImagesUrl, deleteCloudinaryImage } = require("../Utils/imageUpload");
 
 const getProfileData = (userId) =>
     User.findById(userId).select("-password -__v -updatedAt").lean();
