@@ -2,8 +2,8 @@ const profileController = require("express").Router();
 
 const profileService = require("../Services/profileService");
 const { isUser } = require("../Middlewares/guards");
-const { catchAsyncError } = require("../Util/errorParser");
-const { upload } = require("../Util/imageUpload");
+const { catchAsyncError } = require("../Utils/errorParser");
+const { upload } = require("../Utils/imageUpload");
 
 profileController.get(
     "/",
