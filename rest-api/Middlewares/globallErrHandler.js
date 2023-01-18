@@ -1,5 +1,11 @@
 exports.globalErrorHandler = (err, req, res, next) => {
-  res.status(err.status).json({
-    message: err.message,
-  });
+    if (err.code == "LIMIT_UNEXPECTED_FILE") {
+        return res.status(400).json({
+            message: "Cannot upload more than 5 images!",
+        });
+    }
+
+    res.status(err.status || 500).json({
+        message: err.message || "Something went wrong!",
+    });
 };
