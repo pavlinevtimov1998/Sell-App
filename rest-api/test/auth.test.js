@@ -1,15 +1,15 @@
 process.env.NODE_ENV = "TEST";
-console.log(process.env.NODE_ENV);
+
 const express = require("express");
+
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
 
 const expressConfig = require("../config/express");
-const { COOKIE_NAME } = require("../config/config");
-const { createToken } = require("../server");
-
 const User = require("../Models/User");
+
+const { COOKIE_NAME } = require("../config/config");
 const { getToken } = require("../Utils/jwtConfig");
 
 const app = express();
