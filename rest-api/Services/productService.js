@@ -1,6 +1,6 @@
 const Product = require("../Models/Product");
 const Town = require("../Models/Town");
-const { getImagesUrl, deleteCloudinaryImage } = require("../Util/imageUpload");
+const { getImagesUrl, deleteCloudinaryImage } = require("../Utils/imageUpload");
 
 const getProducts = (title, category) =>
     Product.find({
