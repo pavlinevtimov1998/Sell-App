@@ -49,7 +49,7 @@ authController.post(
     })
 );
 
-authController.post("/logout", isUser("Unauthorized!"), (req, res) => {
+authController.get("/logout", isUser("Unauthorized!"), (req, res) => {
     res.clearCookie(COOKIE_NAME);
     res.status(200).json({ message: "Successfull logout!" });
 });
