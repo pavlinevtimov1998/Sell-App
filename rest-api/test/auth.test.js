@@ -1,3 +1,5 @@
+process.env.NODE_ENV = "TEST";
+console.log(process.env.NODE_ENV);
 const express = require("express");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
@@ -8,6 +10,7 @@ const { COOKIE_NAME } = require("../config/config");
 const { createToken } = require("../server");
 
 const User = require("../Models/User");
+const { getToken } = require("../Utils/jwtConfig");
 
 const app = express();
 expressConfig(app, express);
@@ -76,7 +79,12 @@ describe("Auth testing", () => {
             chai.request(app)
                 .post("/api/auth/register")
                 .send(data)
-                .end((err, res) => {});
+                .end((err, res) => {
+                    expect(res.status).to.equal(201);
+                    expect(res.body).to.be.a("object");
+                    expect(res.body).to.haveOwnProperty("email");
+                    expect(res.header["set-cookie"][0]).to.include(COOKIE_NAME);
+                });
 
             chai.request(app)
                 .post("/api/auth/register")
@@ -128,4 +136,128 @@ describe("Auth testing", () => {
                 });
         });
     });
+
+    describe("/login endpoint", () => {
+        let data;
+
+        beforeEach((done) => {
+            data = {
+                email: "testuser@gmail.com",
+                password: "123123",
+            };
+
+            User.create(data, (err, result) => {
+                done();
+            });
+        });
+
+        afterEach((done) => {
+            User.deleteMany({}, (err) => {
+                done();
+            });
+        });
+
+        it("should login successfully with correct data", (done) => {
+            chai.request(app)
+                .post("/api/auth/login")
+                .send(data)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200);
+                    expect(res.body).to.be.a("object");
+                    expect(res.body).to.haveOwnProperty("email");
+                    expect(res.header["set-cookie"][0]).to.include(COOKIE_NAME);
+                    done();
+                });
+        });
+
+        it("should throw error if email is incorrect", (done) => {
+            data.email = "differentemail@gmail.com";
+
+            chai.request(app)
+                .post("/api/auth/login")
+                .send(data)
+                .end((err, res) => {
+                    expect(res.status).to.equal(401);
+                    expect(res.body.message).to.be.equal(
+                        "Email or password don't match!"
+                    );
+                    done();
+                });
+        });
+
+        it("should throw error if password is incorrect", (done) => {
+            data.password = "different-pass";
+
+            chai.request(app)
+                .post("/api/auth/login")
+                .send(data)
+                .end((err, res) => {
+                    expect(res.status).to.equal(401);
+                    expect(res.body.message).to.be.equal(
+                        "Email or password don't match!"
+                    );
+                    done();
+                });
+        });
+    });
+
+    describe("/register and login endpoints requests already logged in user", () => {
+        let data;
+        let token;
+
+        beforeEach((done) => {
+            data = {
+                email: "testuser@gmail.com",
+                password: "123123",
+                rePassword: "123123",
+            };
+
+            User.create(data, (err, result) => {
+                getToken({
+                    _id: result._id,
+                    email: result.email,
+                    isAdmin: result.isAdmin,
+                }).then((createdToken) => {
+                    token = createdToken;
+                    done();
+                });
+            });
+        });
+
+        afterEach((done) => {
+            User.deleteMany({}, (err) => {
+                done();
+            });
+        });
+
+        it("should stop request to /register", (done) => {
+            chai.request(app)
+                .post("/api/auth/register")
+                .set("Cookie", `${COOKIE_NAME}=${token}`)
+                .send(data)
+                .end((err, res) => {
+                    expect(res.status).to.equal(400);
+                    expect(res.body.message).to.include(
+                        "You are already logged in!"
+                    );
+                    done();
+                });
+        });
+
+        it("should stop request to /login", (done) => {
+            chai.request(app)
+                .post("/api/auth/login")
+                .set("Cookie", `${COOKIE_NAME}=${token}`)
+                .send({ email: data.email, password: data.password })
+                .end((err, res) => {
+                    expect(res.status).to.equal(400);
+                    expect(res.body.message).to.include(
+                        "You are already logged in!"
+                    );
+                    done();
+                });
+        });
+    });
+
+    
 });
