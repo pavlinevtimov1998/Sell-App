@@ -2,8 +2,8 @@ const productsController = require("express").Router();
 
 const { isUser } = require("../Middlewares/guards.js");
 const productsService = require("../Services/productService.js");
-const { catchAsyncError } = require("../Util/errorParser");
-const { upload } = require("../Util/imageUpload.js");
+const { catchAsyncError } = require("../Utils/errorParser");
+const { upload } = require("../Utils/imageUpload.js");
 
 productsController.get(
     "/",
