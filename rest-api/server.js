@@ -9,9 +9,11 @@ const config = require("./config/config");
 const expressConfig = require("./config/express");
 const { initDB } = require("./config/database");
 
+
 async function startServer() {
   const app = express();
-
+  
+  console.log(config);
   await initDB(config.DB_URL);
 
   expressConfig(app, express);
