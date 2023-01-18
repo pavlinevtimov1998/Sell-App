@@ -1,12 +1,20 @@
-const isUser = (req, res, next) => {
+const isUser = (message) => (req, res, next) => {
     if (!req.user) {
-        res.status(401).json({ message: "Unauthorized!" });
+        return res.status(401).json({ message });
     }
 
     next();
 };
 
+const isGuest = (message) => (req, res, next) => {
+    if (req.user) {
+        return res.status(400).json({ message });
+    }
+
+    next();
+};
 
 module.exports = {
-    isUser
-}
+    isUser,
+    isGuest,
+};
