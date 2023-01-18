@@ -1,6 +1,6 @@
 const categoriesController = require("express").Router();
 
-const { catchAsyncError } = require("../Util/errorParser");
+const { catchAsyncError } = require("../Utils/errorParser");
 
 categoriesController.get(
   "/",
