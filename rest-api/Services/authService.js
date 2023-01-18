@@ -20,7 +20,6 @@ async function register(body) {
 }
 
 async function login({ email, password }) {
-    console.log(email, password);
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -39,13 +38,7 @@ async function login({ email, password }) {
         };
     }
 
-    return getToken({
-        _id: user._id,
-        email: user.email,
-        isAdmin: user.isAdmin,
-    }).then((token) => {
-        return [token, user];
-    });
+    return removePass(user);
 }
 
 const removeAccount = (userId) => User.findByIdAndDelete(userId);
