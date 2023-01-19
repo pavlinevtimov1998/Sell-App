@@ -14,7 +14,16 @@ const isGuest = (message) => (req, res, next) => {
     next();
 };
 
+const isAdmin = (message) => (req, res, next) => {
+    if (!req.user || !req.user.isAdmin) {
+        return res.status(400).json({ message });
+    }
+
+    next();
+};
+
 module.exports = {
     isUser,
     isGuest,
+    isAdmin
 };
