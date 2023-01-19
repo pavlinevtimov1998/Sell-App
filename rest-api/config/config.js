@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || "DEVELOPMENT";
 const config = {
     DEVELOPMENT: {
         PORT: process.env.PORT || 3030,
-        DB_URL: "mongodb://localhost:27017/Sell-App",
+        DB_URL: "mongodb://localhost:27017/sell-app",
         COOKIE_NAME: process.env.COOKIE_NAME || "token", // enter your cookie name here
         SECRET: process.env.JWT_SECRET || "very secret word", //enter your secret here
         SALT_ROUNDS: process.env.SALT || 10,
