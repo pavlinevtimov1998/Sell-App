@@ -8,7 +8,7 @@ const { upload } = require("../Utils/imageUpload.js");
 productsController.get(
     "/",
     catchAsyncError(async (req, res) => {
-        const { title, category, skip, limit } = req.query;
+        const { title, location, category, skip, limit } = req.query;
 
         const products = await productsService
             .getProducts(title || "", location || "", category || "")
@@ -30,7 +30,7 @@ productsController.get(
 
 productsController.post(
     "/",
-    isUser,
+    isUser("Unauthorized!"),
     upload.array("images", 5),
     catchAsyncError(async (req, res) => {
         const productData = req.body;
@@ -91,6 +91,18 @@ productsController.patch(
         );
 
         res.status(201).json(product);
+    })
+);
+
+productsController.delete(
+    "/:productId",
+    catchAsyncError(async (req, res) => {
+        const userId = req.user._id;
+        const productId = req.params.productId;
+
+        await productsService.deleteProduct(userId, productId);
+
+        res.status(204).json();
     })
 );
 

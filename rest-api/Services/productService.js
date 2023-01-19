@@ -53,6 +53,14 @@ async function editProductImages(productId, userId, files, action) {
     };
 }
 
+async function deleteProduct(userId, productId) {
+    const product = await isOwnProduct(productId, userId);
+
+    await deleteImagesFromCloudinary(product);
+
+    return product.delete();
+}
+
 async function addImage(query, files) {
     const imageUrl = await getImagesUrl(files)[0];
 
@@ -64,17 +72,20 @@ async function addImage(query, files) {
 async function updateImages(query, files) {
     const imagesUrl = await getImagesUrl(files);
 
-    await Promise.all(
+    await deleteImagesFromCloudinary(query);
+
+    query.images = imagesUrl;
+    return query.save();
+}
+
+const deleteImagesFromCloudinary = (query) =>
+    Promise.all(
         query.images.map((url) =>
             deleteCloudinaryImage(
                 url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."))
             )
         )
     );
-
-    query.images = imagesUrl;
-    return query.save();
-}
 
 async function isOwnProduct(productId, userId) {
     const product = await Product.findById(productId);
@@ -103,4 +114,5 @@ module.exports = {
     createProduct,
     editProduct,
     editProductImages,
+    deleteProduct,
 };
