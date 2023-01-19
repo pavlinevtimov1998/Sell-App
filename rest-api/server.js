@@ -2,29 +2,25 @@ const express = require("express");
 const dotenv = require("dotenv");
 
 dotenv.config({
-  path: __dirname + "/config.env",
+    path: __dirname + "/config.env",
 });
 
-const config = require("./config/config");
+const { DB_URL, PORT } = require("./config/config");
 const expressConfig = require("./config/express");
 const { initDB } = require("./config/database");
 
-
 async function startServer() {
-  const app = express();
-  
-  console.log(config);
-  await initDB(config.DB_URL);
+    const app = express();
 
-  expressConfig(app, express);
-  
-  // app.use("*", (req, res) => {
-  //   res.sendFile(__dirname + "/public/index.html");
-  // });
+    await initDB(DB_URL);
 
-  app.listen(config.PORT, () =>
-    console.log(`Server listening on port ${config.PORT}...`)
-  );
+    expressConfig(app, express);
+
+    // app.use("*", (req, res) => {
+    //   res.sendFile(__dirname + "/public/index.html");
+    // });
+
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));
 }
 
 startServer();
