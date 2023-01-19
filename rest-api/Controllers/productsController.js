@@ -58,7 +58,7 @@ productsController.get(
 
 productsController.patch(
     "/:productId",
-    isUser,
+    isUser("Unauthorized!"),
     catchAsyncError(async (req, res) => {
         const productData = req.body;
         const productId = req.params.productId;
@@ -76,7 +76,7 @@ productsController.patch(
 
 productsController.patch(
     "/:productId/images-update",
-    isUser,
+    isUser("Unauthorized!"),
     upload.array("images"),
     catchAsyncError(async (req, res) => {
         const productId = req.params.productId;
