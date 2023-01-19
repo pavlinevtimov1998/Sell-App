@@ -1,3 +1,4 @@
+require("../server");
 process.env.NODE_ENV = "TEST";
 
 const express = require("express");
