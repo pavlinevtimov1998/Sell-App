@@ -1,35 +1,21 @@
 const Category = require("../Models/Category");
-
-const { getImagesUrl } = require("../Utils/imageUpload");
+const Subcategory = require("../Models/Subcategory");
 
 const getAllCategories = () => Category.find();
 
-async function categoryAction(body, file, isEdit, categoryId) {
-    if (!file) {
-        throw {
-            message: "Image is required!",
-            status: 400,
-        };
-    }
-    
-    body.image = await getImagesUrl(file);
+const createCategory = (data) => categoriesActionHandler(Category, ...data);
 
-    if (isEdit) {
-        const category = await Category.findByIdAndUpdate(categoryId, body, {
-            runValidators: true,
-        });
+const editCategory = (data) => categoriesActionHandler(Category, ...data);
 
-        const url = category.image;
+const createSubcategory = (data) =>
+    categoriesActionHandler(Subcategory, ...data);
 
-        return deleteCloudinaryImage(
-            url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."))
-        );
-    }
-
-    return Category.create(body);
-}
+const editSubcategory = (data) => categoriesActionHandler(Subcategory, ...data);
 
 module.exports = {
     getAllCategories,
-    categoryAction,
+    createCategory,
+    editCategory,
+    createSubcategory,
+    editSubcategory,
 };
