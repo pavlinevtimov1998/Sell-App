@@ -22,7 +22,7 @@ categoriesController.post(
         const categoryData = req.body;
         const file = req.file;
 
-        const category = await categoriesService.categoryAction(
+        const category = await categoriesService.createCategory(
             categoryData,
             file
         );
@@ -42,7 +42,7 @@ categoriesController.patch(
         const file = req.file;
         const categoryId = req.params.categoryId;
 
-        await categoriesService.categoryAction(
+        await categoriesService.editCategory(
             categoryData,
             file,
             true,
