@@ -56,7 +56,7 @@ async function editProductImages(productId, userId, files, action) {
 async function deleteProduct(userId, productId) {
     const product = await isOwnProduct(productId, userId);
 
-    await deleteImagesFromCloudinary(product);
+    await deleteImagesFromCloudinary(product.images);
 
     return product.delete();
 }
@@ -72,15 +72,15 @@ async function addImage(query, files) {
 async function updateImages(query, files) {
     const imagesUrl = await getImagesUrl(files);
 
-    await deleteImagesFromCloudinary(query);
+    await deleteImagesFromCloudinary(query.images);
 
     query.images = imagesUrl;
     return query.save();
 }
 
-const deleteImagesFromCloudinary = (query) =>
+const deleteImagesFromCloudinary = (images) =>
     Promise.all(
-        query.images.map((url) =>
+        images.map((url) =>
             deleteCloudinaryImage(
                 url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."))
             )
