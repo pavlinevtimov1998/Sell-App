@@ -22,13 +22,35 @@ categoriesController.post(
         const categoryData = req.body;
         const file = req.file;
 
-        const category = await categoriesService.createCategory(
+        const category = await categoriesService.categoryAction(
             categoryData,
             file
         );
 
         res.status(200).json({
             message: `Successfully created ${category.title} category!`,
+        });
+    })
+);
+
+categoriesController.patch(
+    "/:categoryId",
+    isAdmin("Unauthorized!"),
+    upload.single("image"),
+    catchAsyncError(async (req, res) => {
+        const categoryData = req.body;
+        const file = req.file;
+        const categoryId = req.params.categoryId;
+
+        await categoriesService.categoryAction(
+            categoryData,
+            file,
+            true,
+            categoryId
+        );
+
+        res.status(200).json({
+            message: `Successfully edited!`,
         });
     })
 );
