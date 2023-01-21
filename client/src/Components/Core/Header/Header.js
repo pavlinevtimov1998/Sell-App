@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { useHeaderVisibility } from "../../../Hooks/useHeaderVisibility";
 
 import styles from "./Header.module.css";
 
 export const Header = () => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const { isHeaderVisible } = useHeaderVisibility();
 
     const toggleDropdown = () => {
         setIsDropdownVisible((state) => !state);
     };
 
+    const headerClass = isHeaderVisible ? "show" : "hide";
+
     return (
-        <header className={styles["header"]}>
+        <header className={`${styles["header"]} ${styles[headerClass]}`}>
             <nav className={styles["nav-bar"]}>
                 <article className={styles["header-logo"]}>
                     <a href="/">
