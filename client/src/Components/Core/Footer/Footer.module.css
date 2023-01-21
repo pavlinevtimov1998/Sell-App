@@ -1,0 +1,35 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0 100px;
+    border-top: 2px solid rgb(79, 79, 79);
+    background-color: #f2f4f5;
+}
+
+.articles {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.articles article ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 20px;
+}
+
+.articles article ul a {
+    color: #002f34;
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.social-media {
+    color: blue;
+}
