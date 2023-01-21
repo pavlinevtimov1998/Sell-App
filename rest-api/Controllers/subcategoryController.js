@@ -12,9 +12,9 @@ subcategoriesController.post(
         const subcategoryData = req.body;
         subcategoryData.category = req.params.categoryId;
 
-        const subcategory = await categoriesService.createSubcategory({
-            subcategoryData,
-        });
+        const subcategory = await categoriesService.createSubcategory(
+            subcategoryData
+        );
 
         res.status(200).json({
             message: `Successfully created ${subcategory.title} subcategory!`,
