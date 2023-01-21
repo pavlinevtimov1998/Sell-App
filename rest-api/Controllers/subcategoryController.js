@@ -6,16 +6,14 @@ const { catchAsyncError } = require("../Utils/errorParser");
 const { upload } = require("../Utils/imageUpload");
 
 subcategoriesController.post(
-    "/",
+    "/:categoryId",
     isAdmin("Unauthorized!"),
-    upload.single("image"),
     catchAsyncError(async (req, res) => {
         const subcategoryData = req.body;
-        const file = req.file;
+        subcategoryData.category = req.params.categoryId;
 
         const subcategory = await categoriesService.createSubcategory({
             subcategoryData,
-            file,
         });
 
         res.status(200).json({
@@ -29,14 +27,11 @@ subcategoriesController.patch(
     isAdmin("Unauthorized!"),
     upload.single("image"),
     catchAsyncError(async (req, res) => {
-        const subcategoryData = req.body;
-        const file = req.file;
+        const { title } = req.body;
         const subcategoryId = req.params.subcategoryId;
 
         await categoriesService.editSubcategory({
-            subcategoryData,
-            file,
-            isEdit: true,
+            title,
             subcategoryId,
         });
 
