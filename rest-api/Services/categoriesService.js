@@ -1,21 +1,53 @@
 const Category = require("../Models/Category");
 const Subcategory = require("../Models/Subcategory");
 
-const getAllCategories = () => Category.find();
+const getAllCategories = () =>
+    Category.find().populate({ path: "subcategory", select: "title" });
 
-const createCategory = (data) => categoriesActionHandler(Category, ...data);
+async function categoriesActionHandler(body, file, isEdit, id) {
+    if (!file) {
+        throw {
+            message: "Image is required!",
+            status: 400,
+        };
+    }
 
-const editCategory = (data) => categoriesActionHandler(Category, ...data);
+    body.image = await getImagesUrl(file);
 
-const createSubcategory = (data) =>
-    categoriesActionHandler(Subcategory, ...data);
+    if (isEdit) {
+        const category = await Category.findByIdAndUpdate(id, body, {
+            runValidators: true,
+        });
 
-const editSubcategory = (data) => categoriesActionHandler(Subcategory, ...data);
+        const url = category.image;
+
+        return deleteCloudinaryImage(
+            url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."))
+        );
+    }
+
+    return Category.create(body);
+}
+
+const editCategory = (title, id) => Category.findByIdAndUpdate(id, { title });
+
+async function createSubcategory(body) {
+    const subcategory = await Subcategory.create(body);
+
+    await Category.findByIdAndUpdate(
+        { _id: body.category },
+        { $push: { subcategories: subcategory._id } }
+    );
+
+    return subcategory;
+}
+
+const editSubcategory = (title, id) =>
+    Subcategory.findByIdAndUpdate(id, { title });
 
 module.exports = {
     getAllCategories,
-    createCategory,
-    editCategory,
+    categoriesActionHandler,
     createSubcategory,
     editSubcategory,
 };
