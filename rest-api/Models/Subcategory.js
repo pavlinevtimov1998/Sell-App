@@ -4,9 +4,6 @@ const subcategorySchema = new mongoose.Schema({
     title: {
         type: String,
     },
-    image: {
-        type: String,
-    },
     products: [
         {
             type: mongoose.Types.ObjectId,
