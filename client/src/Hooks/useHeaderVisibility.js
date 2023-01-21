@@ -8,8 +8,6 @@ export function useHeaderVisibility() {
         const handleScroll = () => {
             const currentScrollPosition = window.pageYOffset;
 
-            console.log(currentScrollPosition, prevScrollPosition);
-
             setPrevScrollPosition(currentScrollPosition);
             if (currentScrollPosition < prevScrollPosition) {
                 setIsHeaderVisible(true);
