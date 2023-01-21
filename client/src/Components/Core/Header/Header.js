@@ -17,77 +17,73 @@ export const Header = () => {
         <header className={`${styles["header"]} ${styles[headerClass]}`}>
             <nav className={styles["nav-bar"]}>
                 <article className={styles["header-logo"]}>
-                    <a href="/">
+                    <a href="/" className={styles["logo"]}>
                         <img src="/logo.png" alt="LOGO" />
                     </a>
                 </article>
-                <article className={styles["header-links"]}>
-                    <li className={styles["profile"]}>
-                        <a
-                            href="/users/profile"
-                            onMouseEnter={toggleDropdown}
-                            onMouseLeave={toggleDropdown}
-                        >
-                            <span>Your profile</span>
-                            <div
-                                className={`${styles["menu"]} ${
-                                    styles[isDropdownVisible ? "open" : ""]
-                                }`}
-                            >
-                                <div className={styles["drop-down"]}>
-                                    <div className={styles["user"]}>
-                                        <h3>Userbane</h3>
-                                    </div>
-                                    <ul className={styles["user-links"]}>
-                                        <li>
-                                            <a href="/users/messages">
-                                                <span>Messages</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/users/profile">
-                                                <span>My Posts</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/">
-                                                <span>Your Bag</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/">
-                                                <span>Payments</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/delivery">
-                                                <span>Delivery</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/users/settings">
-                                                <span>Settings</span>
-                                            </a>
-                                        </li>
-                                        <li className={styles["logout"]}>
-                                            <a href="/">
-                                                <span>Logout</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                <article className={styles["user-options"]}>
                     <a
-                        href="/products/create"
-                        className={styles["add-post toggle"]}
+                        href="/users/profile"
+                        onMouseEnter={toggleDropdown}
+                        onMouseLeave={toggleDropdown}
+                        className={styles["profile"]}
                     >
+                        <span>Your profile</span>
+                        <div
+                            className={`${styles["menu"]} ${
+                                styles[isDropdownVisible ? "open" : ""]
+                            }`}
+                        >
+                            <div className={styles["drop-down"]}>
+                                <div className={styles["username"]}>
+                                    <h3>Userbane</h3>
+                                </div>
+                                <ul className={styles["user-links"]}>
+                                    <li>
+                                        <a href="/users/messages">
+                                            <span>Messages</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/users/profile">
+                                            <span>My Posts</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                            <span>Your Bag</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/">
+                                            <span>Payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/delivery">
+                                            <span>Delivery</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/users/settings">
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li className={styles["logout"]}>
+                                        <a href="/">
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/products/create" className={styles["toggle"]}>
                         <span>Add Product</span>
                     </a>
                 </article>
 
-                {/* <article className={styles["header-links"]}>
+                {/* <article className={styles["guest-links"]}>
                     <ul>
                         <li>
                             <a href="/users/login" className={styles["login"]}>

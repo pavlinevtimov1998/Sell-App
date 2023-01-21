@@ -12,6 +12,7 @@
     box-shadow: 0 16px 16px #dce1e1;
     display: flex;
     justify-content: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 header.show {
@@ -25,32 +26,27 @@ header.hide {
     transition: all 0.3s ease-in-out;
 }
 
-.header .nav-bar {
+.nav-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1450px;
+    width: 80%;
+    max-width: 1250px;
     height: 100%;
 }
 
-.nav-hidden {
-    transform: translateY(-80px);
-    box-shadow: unset;
-}
-
 .toggle {
-    border: solid 6px white;
+    border: solid 6px #fff;
     border-radius: 5px;
     font-size: 20px;
-    background-color: white;
+    background-color: #fff;
     color: #002f34;
     transition: all 0.3s ease;
 }
 
 .toggle:hover {
     background-color: #002f34;
-    color: white;
+    color: #fff;
     transition: all 0.3s ease;
 }
 
@@ -59,38 +55,25 @@ header.hide {
     margin: 10px 32px;
 }
 
-.header-links {
+.user-options {
     display: flex;
     font-weight: 500;
     gap: 40px;
-    margin-right: 100px;
     align-items: center;
 }
 
-.header-links .nav-links {
-    display: flex;
-    gap: 50px;
-}
-
-.header-links li a:hover {
-    color: darkgray;
-    transition: all 0.3s ease;
-}
-
-.header-logo {
-    margin-left: 100px;
-}
-.header-logo a {
+.logo {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 55px;
 }
-.header-logo img {
+
+.logo img {
     width: 100%;
 }
 
-.header-links a {
+.user-options a {
     display: flex;
     gap: 4px;
     align-items: center;
@@ -102,12 +85,13 @@ header.hide {
 
 .profile {
     position: relative;
-    z-index: 20;
+    z-index: 10;
+    color: #fff;
 }
 
-.profile span {
-    display: flex;
-    align-items: center;
+.profile:hover {
+    color: darkgray;
+    transition: all 0.3s ease;
 }
 
 .menu {
@@ -125,17 +109,7 @@ header.hide {
 }
 
 .menu.open {
-    position: absolute;
-    z-index: 10;
-    top: 25px;
-    left: -35px;
-    min-width: 210px;
-    background-color: white;
-    border-radius: 8px;
-    transition: all 0.4s ease-in-out;
-    transform-origin: center top;
     transform: scaleY(1);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .drop-down {
@@ -159,7 +133,7 @@ header.hide {
     color: #002f34;
 }
 
-.user {
+.username {
     display: flex;
     justify-content: center;
     gap: 15px;
