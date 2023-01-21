@@ -1,6 +1,14 @@
+import { useState } from "react";
+
 import styles from "./Header.module.css";
 
 export const Header = () => {
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownVisible((state) => !state);
+    };
+
     return (
         <header className={styles["header"]}>
             <nav className={styles["nav-bar"]}>
@@ -9,13 +17,19 @@ export const Header = () => {
                         <img src="/logo.png" alt="LOGO" />
                     </a>
                 </article>
-                {/* <article className={styles["header-links"]}>
-                    <ul className={styles["nav-links"]}>
-                        <li className={styles["profile"]}>
-                            <a href="/users/profile">
-                                <span>Your profile</span>
-                            </a>
-                            <div className={styles["menu"]}>
+                <article className={styles["header-links"]}>
+                    <li className={styles["profile"]}>
+                        <a
+                            href="/users/profile"
+                            onMouseEnter={toggleDropdown}
+                            onMouseLeave={toggleDropdown}
+                        >
+                            <span>Your profile</span>
+                            <div
+                                className={`${styles["menu"]} ${
+                                    styles[isDropdownVisible ? "open" : ""]
+                                }`}
+                            >
                                 <div className={styles["drop-down"]}>
                                     <div className={styles["user"]}>
                                         <h3>Userbane</h3>
@@ -59,19 +73,20 @@ export const Header = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </a>
+                    </li>
                     <a
                         href="/products/create"
                         className={styles["add-post toggle"]}
                     >
                         <span>Add Product</span>
                     </a>
-                </article> */}
-                <article className={styles["header-links"]}>
+                </article>
+
+                {/* <article className={styles["header-links"]}>
                     <ul>
                         <li>
-                            <a href="/users/login">
+                            <a href="/users/login" className={styles["login"]}>
                                 <span>Login</span>
                             </a>
                         </li>
@@ -79,7 +94,7 @@ export const Header = () => {
                     <a href="/users/register" className={styles["toggle"]}>
                         <span>Sign up</span>
                     </a>
-                </article>
+                </article> */}
             </nav>
         </header>
     );
