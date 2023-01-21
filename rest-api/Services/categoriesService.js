@@ -33,7 +33,7 @@ const editCategory = (title, id) => Category.findByIdAndUpdate(id, { title });
 
 async function createSubcategory(body) {
     const subcategory = await Subcategory.create(body);
-
+    
     await Category.findByIdAndUpdate(
         { _id: body.category },
         { $push: { subcategories: subcategory._id } }
