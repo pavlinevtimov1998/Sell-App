@@ -1,0 +1,51 @@
+.menu {
+    position: absolute;
+    z-index: 10;
+    top: 25px;
+    left: -35px;
+    min-width: 210px;
+    background-color: white;
+    border-radius: 8px;
+    transition: all 0.4s ease-in-out;
+    transform-origin: center top;
+    transform: scaleY(0);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.menu.open {
+    transform: scaleY(1);
+}
+
+.drop-down {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-links {
+    display: flex;
+    flex-direction: column;
+    color: #002f34;
+    width: 100%;
+}
+
+.user-links li {
+    padding-block: 10px;
+    padding-left: 20px;
+}
+
+.user-links li a {
+    color: #002f34;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 18px 5px;
+    width: 100%;
+    border-bottom: #002f34 solid 2px;
+}
+.logout {
+    border-top: #002f34 solid 2px;
+    padding-bottom: 10px;
+}
