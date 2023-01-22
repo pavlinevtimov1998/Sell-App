@@ -1,0 +1,93 @@
+.form-container {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f4f5;
+    padding: 55px 0;
+    color: #002f34;
+    margin-top: 80px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.input-search input {
+    width: 550px;
+}
+.search-town input {
+    width: 380px;
+}
+.search-btn {
+    background-color: white;
+    width: 140px;
+    font-size: 18px;
+    font-weight: 500;
+    height: 100%;
+    letter-spacing: 0.3px;
+    border-radius: 0 2px 2px 0;
+    transition: all 0.3s ease;
+}
+
+.btn-container {
+    height: 70px;
+}
+
+.search-btn:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #002f34;
+    transition: all 0.3s ease;
+}
+
+.search-btn div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn mat-icon {
+    padding: unset;
+    width: unset;
+}
+
+.search-btn span {
+    display: block;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+}
+
+.search input {
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.search {
+    border-right: 2px solid #f2f4f5;
+    display: flex;
+    align-items: center;
+}
+
+.search div {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.input-search {
+    border-radius: 2px 0 0 2px;
+}
+
+@media screen and (max-width: 900px) {
+    .form-container {
+        display: none;
+    }
+}
