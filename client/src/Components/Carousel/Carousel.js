@@ -18,22 +18,15 @@ const slides = [
 
 export const Carousel = () => {
     const { currentSlide, slidesRef } = useCarousel({
-        slideInterval: 3000,
-        slidesLength: 2,
+        slideInterval: 5000,
+        slidesLength: slides.length,
     });
 
     return (
         <section className={styles["wraper"]}>
             <div className={styles["carousel-container"]}>
-                {/* <div className={styles["category-info"]}>
-                    <h2>ufuyfuyfuyf</h2>
-                    <p>guigiuyguyg</p>
-                    <div />
-                    <button>Go to mmhbvmhbvjhv</button>
-                </div> */}
                 <div
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                    // className={`${styles["img-container"]} ${styles["category-active"]}`}
                     className={styles["slides"]}
                 >
                     {slides.map((slide, index) => (

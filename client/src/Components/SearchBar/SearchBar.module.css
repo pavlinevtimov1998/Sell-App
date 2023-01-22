@@ -1,5 +1,5 @@
-.form-container {
-    width: 100vw;
+.search {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,18 +12,35 @@
 .search-form {
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: #fff;
+    width: 80%;
 }
 
-.input-search input {
-    width: 550px;
+.product-search,
+.town-search {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-inline: 10px;
 }
-.search-town input {
-    width: 380px;
+
+.town-search {
+    width: 30%;
 }
+
+.btn-container {
+    width: 15%;
+}
+
 .search-btn {
-    background-color: white;
-    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background-color: #fff;
     font-size: 18px;
     font-weight: 500;
     height: 100%;
@@ -32,26 +49,22 @@
     transition: all 0.3s ease;
 }
 
-.btn-container {
-    height: 70px;
-}
-
 .search-btn:hover {
-    color: white;
+    color: #fff;
+    fill: #fff;
     cursor: pointer;
     background-color: #002f34;
     transition: all 0.3s ease;
 }
 
-.search-btn div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-container,
+input {
+    height: 70px;
 }
 
-.search-btn mat-icon {
-    padding: unset;
-    width: unset;
+.product,
+.location {
+    flex: 1;
 }
 
 .search-btn span {
@@ -60,30 +73,20 @@
     letter-spacing: 0.5px;
 }
 
-.search input {
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    height: 70px;
-    line-height: 70px;
+.location-icon {
+    width: 20px;
+    height: 20px;
+    fill: #002f34;
 }
 
-.search {
-    border-right: 2px solid #f2f4f5;
-    display: flex;
-    align-items: center;
+.search-icon,
+.search-icon-btn {
+    width: 20px;
+    height: 20px;
 }
 
-.search div {
-    width: 15%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.input-search {
-    border-radius: 2px 0 0 2px;
+.search-icon {
+    fill: #002f34;
 }
 
 @media screen and (max-width: 900px) {
