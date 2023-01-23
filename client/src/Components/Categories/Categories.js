@@ -1,27 +1,14 @@
-import { useEffect, useState } from "react";
+import { useFetch } from "../../Hooks/useFetch";
 
 import styles from "./Categories.module.css";
+import { getAll } from "../../Services/categoriesService";
 
 import { CategoryItem } from "../CategoryItem/CategoryItem";
 
 export const Categories = () => {
-    const [categories, setCategories] = useState(null);
+    const { isLoading, data, error } = useFetch(getAll);
 
-    const getData = () => {
-        fetch("http://localhost:3030/api/categories")
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                setCategories(res);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
+    console.log(isLoading, data, error);
 
     return (
         <section className={styles["categories"]}>
@@ -29,8 +16,8 @@ export const Categories = () => {
                 <h1 className={styles["title"]}>Categories</h1>
             </header>
             <div className={styles["categories-container"]}>
-                {categories &&
-                    categories.map((c) => (
+                {data &&
+                    data.map((c) => (
                         <CategoryItem
                             key={c._id}
                             category={c}
