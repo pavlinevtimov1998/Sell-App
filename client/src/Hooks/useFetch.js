@@ -10,9 +10,9 @@ export function useFetch(fetchData) {
             .then((result) => {
                 console.log(result);
                 setData(result);
+                setIsLoading(false);
             })
-            .catch((err) => setError(err))
-            .finally(() => setIsLoading(false));
+            .catch((err) => setError(err));
     }, [fetchData]);
 
     return { isLoading, data, error };
