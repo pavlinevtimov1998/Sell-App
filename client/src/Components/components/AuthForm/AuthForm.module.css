@@ -1,0 +1,79 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    color: #002f34;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 10px;
+    gap: 10px;
+}
+
+.label {
+    font-size: 18px;
+}
+
+.email-input,
+.pass-input,
+.repass-input {
+    background-color: #f2f4f5;
+    padding: 10px;
+}
+
+.all-fields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-block: 20px;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+    font-size: 22px;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+    padding-left: 30px;
+    margin-bottom: 28px;
+}
+
+.btn {
+    display: flex;
+    gap: 4px;
+    background-color: #002f34;
+    border: #002f34 solid 4px;
+    border-radius: 3px;
+    color: #fff;
+    fill: #fff;
+    font-size: 18px;
+    padding: 8px 24px;
+    transition: all 0.3s ease;
+}
+
+.btn-container span {
+    padding-left: 5px;
+}
+
+.btn:hover {
+    background-color: #fff;
+    fill: #002f34;
+    color: #002f34;
+    border: #002f34 solid 4px;
+}
+
+.btn-icon {
+    width: 20px;
+}
