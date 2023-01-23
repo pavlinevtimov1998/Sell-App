@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:3030/api";
 
 async function request(url, options) {
-    const response = await fetch(`${API_URL}/${url}`, options);
+    const response = await fetch(`${API_URL}${url}`, options);
 
     return response.json();
 }
