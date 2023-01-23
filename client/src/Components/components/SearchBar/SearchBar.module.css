@@ -59,24 +59,27 @@
 }
 
 .btn-container,
-input {
+.product-input,
+.location-input {
     height: 70px;
 }
 
-input {
+.product-input,
+.location-input {
     font-size: 16px;
     font-weight: 600;
     color: #002f34;
 }
 
-input::placeholder {
+.product-input::placeholder,
+.location-input::placeholder {
     font-size: 16px;
     font-weight: 500;
     color: #002f34;
 }
 
-.product,
-.location {
+.product-input,
+.location-input {
     flex: 1;
 }
 
