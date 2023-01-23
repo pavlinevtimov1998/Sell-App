@@ -6,20 +6,16 @@ import { useState } from "react";
 export const CategoryItem = ({ category, subcategories }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-    const openSubcategoryMenu = () => {
-        setIsDropdownVisible(true);
-    };
-
-    const closeSubcategoryMenu = () => {
-        setIsDropdownVisible(false);
+    const toggleSubcategoryMenu = () => {
+        setIsDropdownVisible((state) => !state);
     };
 
     const isVisible = isDropdownVisible ? "open" : "hide";
 
     return (
         <button
-            onClick={openSubcategoryMenu}
-            onMouseLeave={closeSubcategoryMenu}
+            onMouseEnter={toggleSubcategoryMenu}
+            onMouseLeave={toggleSubcategoryMenu}
             type="button"
             title={category.title}
             className={`${styles["item"]}`}
