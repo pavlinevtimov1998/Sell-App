@@ -5,8 +5,6 @@ const config = require("./config");
 const cors = require("../Middlewares/cors");
 const { isAuth } = require("../Middlewares/isAuthMiddleware");
 
-const router = require("../router");
-
 function expressConfig(app, express) {
     cloudinary.config(config.CLOUDINARY_CONFIG);
 
@@ -16,7 +14,6 @@ function expressConfig(app, express) {
     app.use(cookieParser());
     app.use(isAuth);
 
-    app.use("/api", router);
     //   app.use(express.static(__dirname + "/public"));
 }
 
