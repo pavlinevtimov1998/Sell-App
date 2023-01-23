@@ -3,9 +3,8 @@
     z-index: 100;
     top: 0;
     left: 0;
-    height: 80px;
-    width: 100vw;
-    font-size: 18px;
+    height: 72px;
+    width: 100%;
     letter-spacing: 0.3px;
     transition: 0.5s;
     background-color: #002f34;
@@ -38,7 +37,8 @@ header.hide {
 .toggle {
     border: solid 6px #fff;
     border-radius: 5px;
-    font-size: 20px;
+    padding: 5px 12px;
+    font-size: 16px;
     background-color: #fff;
     color: #002f34;
     transition: all 0.3s ease;
@@ -48,11 +48,6 @@ header.hide {
     background-color: #002f34;
     color: #fff;
     transition: all 0.3s ease;
-}
-
-.toggle span {
-    display: block;
-    margin: 10px 32px;
 }
 
 .user-options {
@@ -66,32 +61,40 @@ header.hide {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
+    width: 45px;
 }
 
 .logo img {
     width: 100%;
 }
 
-.user-options a {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-}
-
 .login {
     color: #fff;
 }
 
-.profile {
+.profile-btn {
+    display: flex;
+    gap: 8px;
+    align-items: center;
     position: relative;
+    font-size: 16px;
     z-index: 10;
     color: #fff;
+    fill: #fff;
+    transition: all 0.3s ease;
 }
 
-.profile:hover {
+.user-icon {
+    width: 14px;
+}
+
+.arrow-icon {
+    width: 14px;
+}
+
+.profile-btn:hover {
     color: darkgray;
-    transition: all 0.3s ease;
+    fill: darkgray;
 }
 
 /* media */
