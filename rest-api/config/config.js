@@ -28,7 +28,7 @@ const config = {
             api_secret: process.env.API_SECRET,
         },
         CORS: {
-            origin: "",
+            origin: "http://localhost:3000",
         },
     },
     TEST: {
