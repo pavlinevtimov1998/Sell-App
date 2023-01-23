@@ -77,3 +77,11 @@
 .btn-icon {
     width: 20px;
 }
+
+.input-error {
+    border-left: red solid 2px;
+}
+
+.error {
+    color: red;
+}
