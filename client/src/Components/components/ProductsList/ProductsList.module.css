@@ -1,0 +1,18 @@
+.products-wraper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f4f5;
+}
+
+.products-header {
+    margin-top: 30px;
+    font-size: 24px;
+}
+
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-top: 30px;
+}
