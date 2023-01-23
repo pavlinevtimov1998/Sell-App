@@ -7,7 +7,11 @@ export const CategoryItem = ({ category, subcategories }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
     const openSubcategoryMenu = () => {
-        setIsDropdownVisible((state) => !state);
+        setIsDropdownVisible(true);
+    };
+
+    const closeSubcategoryMenu = () => {
+        setIsDropdownVisible(false);
     };
 
     const isVisible = isDropdownVisible ? "open" : "hide";
@@ -15,6 +19,7 @@ export const CategoryItem = ({ category, subcategories }) => {
     return (
         <button
             onClick={openSubcategoryMenu}
+            onMouseLeave={closeSubcategoryMenu}
             type="button"
             title={category.title}
             className={`${styles["item"]}`}
