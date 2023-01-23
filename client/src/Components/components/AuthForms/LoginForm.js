@@ -1,8 +1,51 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthContext";
+
+import { login } from "../../../Services/userService";
+
 import styles from "./AuthForms.module.css";
 
 export const LoginForm = () => {
+    const { handleLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [data, setData] = useState({ email: "", password: "" });
+    const [errors, setErrors] = useState({ email: false, password: false });
+
+    const onChangeHandler = (e) =>
+        setData((state) => ({ ...state, [e.target.name]: e.target.value }));
+
+    const validator = (e) => {
+        if (e.target.value === "") {
+            setErrors((errors) => ({
+                ...errors,
+                [e.target.name]: true,
+            }));
+        } else {
+            setErrors((errors) => ({
+                ...errors,
+                [e.target.name]: false,
+            }));
+        }
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        login(data)
+            .then((result) => {
+                console.log(result);
+
+                handleLogin(result);
+                navigate("/", { replace: true });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     return (
-        <form className={styles["form"]}>
+        <form className={styles["form"]} onSubmit={onSubmit}>
             <div className={styles["title"]}>
                 <h3>Login</h3>
             </div>
@@ -12,14 +55,21 @@ export const LoginForm = () => {
                         Your email
                     </label>
                     <input
-                        className={styles["email-input"]}
+                        className={`${styles["email-input"]} ${
+                            errors.email ? styles["input-error"] : ""
+                        }`}
                         type="email"
                         name="email"
                         id="email"
+                        value={data.email}
+                        onChange={onChangeHandler}
+                        onBlur={validator}
                     />
-                    {/* <p className={styles["error"]}>
-            Email is required!
-        </p>
+
+                    {errors.email && (
+                        <p className={styles["error"]}>Email is required!</p>
+                    )}
+                    {/* 
         <p className={styles["error"]}>
             Invalid email!
         </p> */}
@@ -29,14 +79,20 @@ export const LoginForm = () => {
                         Password
                     </label>
                     <input
-                        className={styles["pass-input"]}
+                        className={`${styles["pass-input"]} ${
+                            errors.password ? styles["input-error"] : ""
+                        }`}
                         type="password"
                         name="password"
                         id="password"
+                        value={data.password}
+                        onChange={onChangeHandler}
+                        onBlur={validator}
                     />
-                    {/* <p className={styles["error"]}>
-            Password is required!
-        </p>
+                    {errors.password && (
+                        <p className={styles["error"]}>Password is required!</p>
+                    )}
+                    {/* 
         <p className={styles["error"]}>
             Password should be at least 6 characters!
         </p> */}
