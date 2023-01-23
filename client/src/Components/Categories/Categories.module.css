@@ -1,0 +1,24 @@
+.categories {
+    width: 100%;
+    background-color: #fff;
+    padding-block: 25px;
+}
+
+.categories-header {
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.categories-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
