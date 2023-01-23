@@ -6,10 +6,16 @@ export const MainLayout = ({ children }) => {
         <>
             <Header />
 
-            <div style={{ minHeight: "100vh" }}>
-                
+            <div
+                style={{
+                    minHeight: "100vh",
+                    maxWidth: "1250px",
+                    margin: "auto",
+                }}
+            >
+
                 {children}
-                
+            
             </div>
 
             <Footer />
