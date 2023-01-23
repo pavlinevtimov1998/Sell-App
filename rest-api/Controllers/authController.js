@@ -39,13 +39,7 @@ authController.post(
 
         res.cookie(COOKIE_NAME, token, { httpOnly: true });
 
-        res.status(200).json({
-            _id: user._id,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
-            image: user.image,
-            isAdmin: user.isAdmin,
-        });
+        res.status(200).json(user);
     })
 );
 
@@ -64,6 +58,18 @@ authController.delete(
 
         res.clearCookie(COOKIE_NAME);
         res.status(204).json();
+    })
+);
+
+authController.get(
+    "/user-data",
+    isUser("Unauthorized!"),
+    catchAsyncError(async (req, res) => {
+        const userId = req.user._id;
+
+        const user = await authService.getUserData(userId);
+
+        res.status(200).json(user);
     })
 );
 
