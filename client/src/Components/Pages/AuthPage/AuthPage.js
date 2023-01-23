@@ -1,17 +1,15 @@
 import styles from "./AuthPage.module.css";
 
-import { AuthForm } from "../../components/AuthForm/AuthForm";
 import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
+import { RegisterForm } from "../../components/AuthForms/RegisterForm";
+import { LoginForm } from "../../components/AuthForms/LoginForm";
 
 export const AuthPage = ({ action }) => {
-    const title = action === "register" ? "Register" : "Login";
-
     return (
         <MainLayout>
             <section className={styles["auth-section"]}>
                 <article className={styles["form-wraper"]}>
-                    
-                    <AuthForm title={title} />
+                    {action === "register" ? <RegisterForm /> : <LoginForm />}
 
                     <div className={styles["line-container"]}>
                         <div className={styles["line"]} />

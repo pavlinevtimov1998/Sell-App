@@ -1,10 +1,10 @@
-import styles from "./AuthForm.module.css";
+import styles from "./AuthForms.module.css";
 
-export const AuthForm = ({ title }) => {
+export const RegisterForm = () => {
     return (
         <form className={styles["form"]}>
             <div className={styles["title"]}>
-                <h3>{title}</h3>
+                <h3>Register</h3>
             </div>
             <div className={styles["all-fields"]}>
                 <div className={styles["field"]}>
@@ -42,25 +42,23 @@ export const AuthForm = ({ title }) => {
             </p> */}
                 </div>
 
-                {title === "Register" && (
-                    <div className={styles["field"]}>
-                        <label className={styles["label"]} htmlFor="password">
-                            Repeat Password
-                        </label>
-                        <input
-                            className={styles["pass-input"]}
-                            type="password"
-                            name="password"
-                            id="password"
-                        />
-                        {/* <p className={styles["error"]}>
+                <div className={styles["field"]}>
+                    <label className={styles["label"]} htmlFor="password">
+                        Repeat Password
+                    </label>
+                    <input
+                        className={styles["pass-input"]}
+                        type="password"
+                        name="password"
+                        id="password"
+                    />
+                    {/* <p className={styles["error"]}>
                 Password is required!
             </p>
             <p className={styles["error"]}>
                 Password should be at least 6 characters!
             </p> */}
-                    </div>
-                )}
+                </div>
             </div>
             <div className={styles["action"]}>
                 <div className={styles["password-link"]}>
