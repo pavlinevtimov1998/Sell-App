@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./UserDropdownMenu.module.css";
 
 export const UserDropdownMenu = ({ isDropdownVisible }) => {
@@ -13,24 +14,24 @@ export const UserDropdownMenu = ({ isDropdownVisible }) => {
                 </div>
                 <ul className={styles["user-links"]}>
                     <li>
-                        <a href="/users/messages">
+                        <Link href="/users/messages">
                             <span>Messages</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/users/profile">
+                        <Link href="/users/profile">
                             <span>My Posts</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/">
+                        <Link href="/">
                             <span>Your Bag</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/">
+                        <Link href="/">
                             <span>Payments</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a href="/delivery">
