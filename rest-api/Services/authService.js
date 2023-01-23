@@ -43,8 +43,15 @@ async function login({ email, password }) {
 
 const removeAccount = (userId) => User.findByIdAndDelete(userId);
 
+const getUserData = async (userId) => {
+    const user = await User.findById(userId);
+
+    return removePass(user);
+};
+
 module.exports = {
     register,
     login,
     removeAccount,
+    getUserData,
 };
