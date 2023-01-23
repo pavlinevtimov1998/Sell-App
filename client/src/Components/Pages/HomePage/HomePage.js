@@ -6,9 +6,13 @@ import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 import { getAll } from "../../../Services/categoriesService";
+import { getLastProducts } from "../../../Services/productsService";
+import { ProductsList } from "../../components/ProductsList/ProductsList";
+
+const getData = () => Promise.all([getAll(), getLastProducts()]);
 
 export const HomePage = () => {
-    const { isLoading, data } = useFetch(getAll);
+    const { isLoading, data } = useFetch(getData);
 
     return (
         <>
@@ -18,7 +22,8 @@ export const HomePage = () => {
                 ) : (
                     <>
                         <SearchBar />
-                        <Categories data={data} />
+                        <Categories data={data[0]} />
+                        <ProductsList products={data[1]} />
                     </>
                 )}
             </MainLayout>
