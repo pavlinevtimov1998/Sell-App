@@ -16,7 +16,7 @@ export const SearchBar = () => {
                         placeholder="Search between 12983123 products..."
                         type="text"
                         name="title"
-                        className={styles["product"]}
+                        className={styles["product-input"]}
                     />
                 </div>
                 <div className={styles["town-search"]}>
@@ -31,7 +31,7 @@ export const SearchBar = () => {
                         type="text"
                         placeholder="Location"
                         name="location"
-                        className={styles["location"]}
+                        className={styles["location-input"]}
                     />
                 </div>
                 <div className={styles["btn-container"]}>
