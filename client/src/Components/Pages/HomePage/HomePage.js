@@ -1,9 +1,9 @@
 import { useFetch } from "../../../Hooks/useFetch";
 
-import { SearchBar } from "../../SearchBar/SearchBar";
-import { Categories } from "../../Categories/Categories";
-import { MainLayout } from "../../Core/MainLayout/MainLayout";
-import { Spinner } from "../../Spinner/Spinner";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { Categories } from "../../components/Categories/Categories";
+import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 import { getAll } from "../../../Services/categoriesService";
 

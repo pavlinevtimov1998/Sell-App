@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHeaderVisibility } from "../../../Hooks/useHeaderVisibility";
+import { useHeaderVisibility } from "../../../../Hooks/useHeaderVisibility";
 import { UserDropdownMenu } from "../../UserDropdownMenu/UserDropdownMenu";
 
 import styles from "./Header.module.css";

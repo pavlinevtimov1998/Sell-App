@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { MainWrapper } from "./Components/MainWrapper/MainWrapper";
+import { MainWrapper } from "./Components/components/MainWrapper/MainWrapper";
 
 function App() {
     return (
