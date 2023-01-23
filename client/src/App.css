@@ -22,6 +22,11 @@ textarea:focus {
     outline: none;
 }
 
+button {
+    cursor: pointer;
+    background-color: unset;
+}
+
 body {
     font-family: "Roboto", sans-serif;
     background-color: #f2f4f5;
@@ -38,4 +43,5 @@ li {
 
 a {
     text-decoration: none;
+    color: unset;
 }
