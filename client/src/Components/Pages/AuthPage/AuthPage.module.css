@@ -1,0 +1,77 @@
+.auth-section {
+    margin-top: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wraper {
+    min-width: 400px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+        0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+
+.line-container {
+    display: flex;
+    margin-block: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+.line {
+    width: 100%;
+    background-color: #757575;
+    height: 0.5px;
+    margin: 0 30px 0 30px;
+}
+
+.options {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 25px;
+}
+
+.opt {
+    display: flex;
+    align-items: center;
+    width: 60%;
+}
+
+.opt button {
+    padding: 10px;
+    background-color: white;
+    border: solid 4px #002f34;
+    width: 100%;
+}
+
+.opt span {
+    padding-left: 10px;
+}
+
+i {
+    font-size: 18px;
+    color: greenyellow;
+}
+
+.opt mat-icon {
+    color: blue;
+}
+
+.input-error {
+    border-left: red solid 2px;
+}
+
+.error {
+    color: red;
+}
