@@ -13,7 +13,7 @@ productsController.get(
         const products = await productsService
             .getProducts(title || "", location || "", category || "")
             .skip(skip || 0)
-            .limit(limit || 12);
+            .limit(limit || 16);
 
         res.status(200).json(products);
     })
