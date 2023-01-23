@@ -40,7 +40,7 @@ export const Header = () => {
                         </svg>
                         <span>Your profile</span>
                         <svg
-                        className={styles["arrow-icon"]}
+                            className={styles["arrow-icon"]}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 320 512"
                         >
