@@ -28,6 +28,7 @@
 
 .town-search {
     width: 30%;
+    border-inline: 2px solid #f2f4f5;
 }
 
 .btn-container {
@@ -81,7 +82,7 @@ input {
 
 .search-icon,
 .search-icon-btn {
-    width: 20px;
+    width: 35px;
     height: 20px;
 }
 
