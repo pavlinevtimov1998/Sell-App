@@ -10,12 +10,13 @@ export const Logout = () => {
     useEffect(() => {
         logout()
             .then((result) => {
-                console.log(result);
                 handleLogout();
                 navigate("/", { replace: true });
             })
             .catch((err) => {
-                console.log(err);
+                if (err.message === "Token expired!") {
+                    handleLogout();
+                }
                 navigate("/", { replace: true });
             });
     });
