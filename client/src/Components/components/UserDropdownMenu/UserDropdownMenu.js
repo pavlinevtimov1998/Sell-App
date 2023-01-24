@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../Contexts/AuthContext";
+
 import { Link } from "react-router-dom";
+
 import styles from "./UserDropdownMenu.module.css";
 
 export const UserDropdownMenu = ({ isDropdownVisible }) => {
+    const { userData } = useContext(AuthContext);
+
     return (
         <div
             className={`${styles["menu"]} ${
@@ -10,43 +16,43 @@ export const UserDropdownMenu = ({ isDropdownVisible }) => {
         >
             <div className={styles["drop-down"]}>
                 <div className={styles["username"]}>
-                    <h3>Userbane</h3>
+                    <h3>Hello, {userData.email}</h3>
                 </div>
                 <ul className={styles["user-links"]}>
                     <li>
-                        <Link href="/users/messages">
+                        <Link to="/users/messages">
                             <span>Messages</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/users/profile">
+                        <Link to="/users/profile">
                             <span>My Posts</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link to="/">
                             <span>Your Bag</span>
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <Link to="/">
                             <span>Payments</span>
                         </Link>
                     </li>
                     <li>
-                        <a href="/delivery">
+                        <Link to="/delivery">
                             <span>Delivery</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/users/settings">
+                        <Link to="/users/settings">
                             <span>Settings</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className={styles["logout"]}>
-                        <a href="/">
+                        <Link to="/">
                             <span>Logout</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
