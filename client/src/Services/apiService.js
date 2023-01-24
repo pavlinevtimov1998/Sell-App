@@ -3,6 +3,14 @@ const API_URL = "http://localhost:3030/api";
 async function request(url, options) {
     const response = await fetch(`${API_URL}${url}`, options);
 
+    if (!response.ok) {
+        if (response.status === 401) {
+            const result = await response.json();
+
+            throw result;
+        }
+    }
+
     return response.json();
 }
 

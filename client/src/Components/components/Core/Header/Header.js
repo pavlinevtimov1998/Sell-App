@@ -5,8 +5,8 @@ import { useHeaderVisibility } from "../../../../Hooks/useHeaderVisibility";
 
 import styles from "./Header.module.css";
 
-import { GuestOptions } from "./UserAction/GuestOptions";
-import { UserOptions } from "./UserAction/UserOptions";
+import { GuestOptions } from "./UserNav/GuestOptions";
+import { UserOptions } from "./UserNav/UserOptions";
 
 export const Header = () => {
     const { isHeaderVisible } = useHeaderVisibility();

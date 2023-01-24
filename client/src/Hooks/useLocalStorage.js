@@ -1,15 +1,24 @@
 import { useState } from "react";
 
+const KEY = "user";
+
 export const useLocalStorage = () => {
     const [userData, setUserData] = useState(() => {
-        const userData = localStorage.getItem("user");
+        const userData = localStorage.getItem(KEY);
 
         return userData ? JSON.parse(userData) : null;
     });
 
-    const addUserData = (data) => setUserData(data);
+    const addUserData = (data) => {
+        localStorage.setItem(KEY, JSON.stringify(data));
 
-    const removeUserData = (data) => setUserData(null);
+        setUserData(data);
+    };
+
+    const removeUserData = () => {
+        localStorage.removeItem(KEY);
+        setUserData(null);
+    };
 
     return { userData, addUserData, removeUserData };
 };

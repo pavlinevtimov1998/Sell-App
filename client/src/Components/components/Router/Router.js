@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import { AuthPage } from "../../Pages/AuthPage/AuthPage";
 
 import { HomePage } from "../../Pages/HomePage/HomePage";
+import { AuthPage } from "../../Pages/AuthPage/AuthPage";
+import { Logout } from "../Logout/Logout";
 
 export const AppRouter = () => {
     return (
@@ -13,6 +14,7 @@ export const AppRouter = () => {
                 element={<AuthPage action={"register"} />}
                 path="/register"
             />
+            <Route element={<Logout />} path="/logout" />
         </Routes>
     );
 };

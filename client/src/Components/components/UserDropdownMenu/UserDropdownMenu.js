@@ -50,7 +50,7 @@ export const UserDropdownMenu = ({ isDropdownVisible }) => {
                         </Link>
                     </li>
                     <li className={styles["logout"]}>
-                        <Link to="/">
+                        <Link to="/logout">
                             <span>Logout</span>
                         </Link>
                     </li>
