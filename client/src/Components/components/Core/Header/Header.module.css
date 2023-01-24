@@ -68,8 +68,19 @@ header.hide {
     width: 100%;
 }
 
+.guest-links {
+    display: flex;
+    font-weight: 500;
+    gap: 40px;
+    align-items: center;
+}
+
 .login {
     color: #fff;
+}
+
+.login:hover {
+    color: darkgray;
 }
 
 .profile-btn {
