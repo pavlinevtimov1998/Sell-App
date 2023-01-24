@@ -34,8 +34,6 @@ export const LoginForm = () => {
 
         login(data)
             .then((result) => {
-                console.log(result);
-
                 handleLogin(result);
                 navigate("/", { replace: true });
             })
@@ -69,10 +67,6 @@ export const LoginForm = () => {
                     {errors.email && (
                         <p className={styles["error"]}>Email is required!</p>
                     )}
-                    {/* 
-        <p className={styles["error"]}>
-            Invalid email!
-        </p> */}
                 </div>
                 <div className={styles["field"]}>
                     <label className={styles["label"]} htmlFor="password">
@@ -92,10 +86,6 @@ export const LoginForm = () => {
                     {errors.password && (
                         <p className={styles["error"]}>Password is required!</p>
                     )}
-                    {/* 
-        <p className={styles["error"]}>
-            Password should be at least 6 characters!
-        </p> */}
                 </div>
             </div>
             <div className={styles["action"]}>
