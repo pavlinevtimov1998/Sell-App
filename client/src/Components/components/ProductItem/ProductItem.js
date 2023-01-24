@@ -14,17 +14,20 @@ export const ProductItem = ({ product }) => {
     const createdAt = dateParser(product.createdAt);
 
     return (
-        <Link className={styles["item"]}>
-            <div className={styles["img-container"]}>
+        <div className={styles["item"]}>
+            <Link
+                to={`/details/${product._id}`}
+                className={styles["img-container"]}
+            >
                 <img
                     className={styles["img"]}
                     src={product.images[0]}
                     alt={product.title}
                 />
-            </div>
-            <div className={styles["title-container"]}>
+            </Link>
+            <Link className={styles["title-container"]}>
                 <h3 className={styles["title"]}>{product.title}</h3>
-            </div>
+            </Link>
             <div className={styles["info"]}>
                 <p className={styles["location"]}>Town: {product.town}</p>
                 <p className={styles["created-at"]}>Created at: {createdAt}</p>
@@ -45,6 +48,6 @@ export const ProductItem = ({ product }) => {
                     </svg>
                 </button>
             </div>
-        </Link>
+        </div>
     );
 };
