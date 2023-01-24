@@ -2,7 +2,7 @@ const Category = require("../Models/Category");
 const Subcategory = require("../Models/Subcategory");
 
 const getAllCategories = () =>
-    Category.find().populate({ path: "subcategory", select: "title" });
+    Category.find().populate({ path: "subcategories", select: "title" });
 
 async function categoriesActionHandler(body, file, isEdit, id) {
     if (!file) {
@@ -33,7 +33,7 @@ const editCategory = (title, id) => Category.findByIdAndUpdate(id, { title });
 
 async function createSubcategory(body) {
     const subcategory = await Subcategory.create(body);
-    
+
     await Category.findByIdAndUpdate(
         { _id: body.category },
         { $push: { subcategories: subcategory._id } }
