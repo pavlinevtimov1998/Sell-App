@@ -77,10 +77,15 @@ header.hide {
 
 .login {
     color: #fff;
+    transition: all 0.3s ease;
 }
 
 .login:hover {
     color: darkgray;
+}
+
+.sign-up-link {
+    padding: 5px 16px;
 }
 
 .profile-btn {

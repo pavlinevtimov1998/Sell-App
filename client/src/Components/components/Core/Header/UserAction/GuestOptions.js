@@ -8,7 +8,10 @@ export const GuestOptions = () => {
             <Link to="/login" className={styles["login"]}>
                 <span>Login</span>
             </Link>
-            <Link to="/register" className={styles["toggle"]}>
+            <Link
+                to="/register"
+                className={`${styles["toggle"]} ${styles["sign-up-link"]}`}
+            >
                 <span>Sign up</span>
             </Link>
         </article>

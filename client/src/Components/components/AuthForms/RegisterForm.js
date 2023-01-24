@@ -61,9 +61,9 @@ export const RegisterForm = () => {
                 </div>
             </div>
             <div className={styles["action"]}>
-                <div className={styles["password-link"]}>
+                {/* <div className={styles["password-link"]}>
                     <a href="/">Forgot password?</a>
-                </div>
+                </div> */}
                 <div className={styles["btn-container"]}>
                     <button className={styles["btn"]} type="submit">
                         <svg

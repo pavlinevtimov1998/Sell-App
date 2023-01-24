@@ -18,7 +18,7 @@ export const Header = () => {
         <header className={`${styles["header"]} ${styles[headerClass]}`}>
             <nav className={styles["nav-bar"]}>
                 <article className={styles["header-logo"]}>
-                    <Link href="/" className={styles["logo"]}>
+                    <Link to="/" className={styles["logo"]}>
                         <img src="/logo.png" alt="LOGO" />
                     </Link>
                 </article>
