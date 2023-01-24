@@ -8,7 +8,6 @@ export function useFetch(fetchData) {
     useEffect(() => {
         fetchData()
             .then((result) => {
-                console.log(result);
                 setData(result);
                 setIsLoading(false);
             })
