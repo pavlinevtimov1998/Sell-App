@@ -16,7 +16,7 @@ export const ProductItem = ({ product }) => {
     return (
         <div className={styles["item"]}>
             <Link
-                to={`/details/${product._id}`}
+                to={`/product/${product._id}`}
                 className={styles["img-container"]}
             >
                 <img
@@ -25,7 +25,10 @@ export const ProductItem = ({ product }) => {
                     alt={product.title}
                 />
             </Link>
-            <Link className={styles["title-container"]}>
+            <Link
+                to={`/product/${product._id}`}
+                className={styles["title-container"]}
+            >
                 <h3 className={styles["title"]}>{product.title}</h3>
             </Link>
             <div className={styles["info"]}>

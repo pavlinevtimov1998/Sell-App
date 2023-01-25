@@ -1,0 +1,155 @@
+/* User info */
+
+.info-container {
+    width: 30%;
+    height: 50%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    box-shadow: 0px 0px 15px -5px rgb(0 0 0 / 11%);
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.user-info {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user-photo {
+    width: 20%;
+}
+
+.user-photo img {
+    width: 100%;
+    height: 100%;
+}
+
+.info {
+    overflow: hidden;
+}
+
+.email {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* --------------- */
+
+/* Details */
+
+.prod-info {
+    width: 900px;
+    padding: 28px;
+    background-color: white;
+    border-radius: 13px;
+    box-shadow: 0px 0px 15px -5px rgb(0 0 0 / 11%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 32px;
+}
+
+.description {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.border {
+    width: 100%;
+    height: 1px;
+    background-color: darkgray;
+    margin: 10px auto 10px;
+}
+
+.action {
+    position: absolute;
+    bottom: 8px;
+    right: 29px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: center;
+}
+
+.action a {
+    color: red;
+    font-weight: 500;
+    display: flex;
+}
+
+.action a span {
+    font-size: 18px;
+}
+
+.action button {
+    background-color: unset;
+    font-weight: 500;
+    display: flex;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.action button:hover {
+    cursor: pointer;
+}
+
+.action button span {
+    font-size: 24px;
+    margin-top: 1px;
+}
+
+.icon {
+    font-size: 28px;
+}
+
+.report-icon {
+    font-size: 22px;
+}
+
+.edit {
+    color: blue;
+}
+
+.edit:hover {
+    color: rgb(90, 90, 255);
+}
+
+.delete {
+    color: red;
+}
+
+.delete:hover {
+    color: rgb(255, 90, 90);
+}
+
+/* --------------- */
+
+.content {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+    color: #002f34;
+    padding-top: 10%;
+}
+
+.wrapper {
+    display: flex;
+    width: 90%;
+    height: 550px;
+    margin: auto;
+    justify-content: space-between;
+}
