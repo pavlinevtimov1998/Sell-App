@@ -1,4 +1,4 @@
-const config = require("../config/config");
+const { COOKIE_NAME } = require("../config/config");
 
 exports.catchAsyncError = function (func) {
     return (req, res, next) => {
@@ -14,8 +14,8 @@ exports.catchAsyncError = function (func) {
 
                 return next({ message, status: 400 });
             } else if (err.message == "Token expired!") {
-                res.clearCookie(config.COOKIE_NAME);
-                return next({ message: "Unauthorized!", status: 401 });
+                res.clearCookie(COOKIE_NAME);
+                return next({ message: "Token expired!", status: 401 });
             } else {
                 return next(err);
             }
