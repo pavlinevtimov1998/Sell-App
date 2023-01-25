@@ -90,10 +90,6 @@ export const RegisterForm = () => {
     };
 
     const canSubmit = () => {
-        emailValidator();
-        passwordValidator();
-        rePassValidator();
-
         const hasEmpty = Object.values(data).find((value) => value === "");
 
         if (hasEmpty !== undefined) {
@@ -107,6 +103,10 @@ export const RegisterForm = () => {
             });
             return false;
         }
+
+        emailValidator();
+        passwordValidator();
+        rePassValidator();
 
         const isInvalid = Object.values(errors).reduce(
             (a, v) => Object.assign(a, v),
@@ -165,7 +165,7 @@ export const RegisterForm = () => {
                     {errors.email.required && (
                         <p className={styles["error"]}>Email is required!</p>
                     )}
-                    {errors.email.isNotValid && (
+                    {errors.email.isNotValid && !errors.email.required && (
                         <p className={styles["error"]}>Invalid email!</p>
                     )}
                 </div>
