@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext";
+import { register } from "../../../Services/userService";
 
 import styles from "./AuthForms.module.css";
 
@@ -28,18 +29,16 @@ export const RegisterForm = () => {
     });
 
     const emailValidator = (e) => {
-        requiredValidator(e.target.name, data[e.target.name]);
-
         if (
             data.email !== "" &&
-            !/[a-zA-Z0-9]{6,25}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
+            !/[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
         ) {
             setErrors((state) => ({
                 ...state,
                 email: { required: false, isNotValid: true },
             }));
         } else if (
-            /[a-zA-Z0-9]{6,25}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
+            /[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
         ) {
             setErrors((state) => ({
                 ...state,
@@ -62,11 +61,7 @@ export const RegisterForm = () => {
         }
     };
 
-    const passwordValidator = (e) => {
-        requiredValidator(e.target.name, data[e.target.name]);
-
-        console.log(data.password.length);
-
+    const passwordValidator = () => {
         if (data.password.length < 6 && data.password !== "") {
             setErrors((state) => ({
                 ...state,
@@ -80,9 +75,7 @@ export const RegisterForm = () => {
         }
     };
 
-    const rePassValidator = (e) => {
-        requiredValidator(e.target.name, data[e.target.name]);
-
+    const rePassValidator = () => {
         if (data.rePassword !== data.password) {
             setErrors((state) => ({
                 ...state,
@@ -96,15 +89,14 @@ export const RegisterForm = () => {
         }
     };
 
-    const onChangeHandler = (e) =>
-        setData((state) => ({ ...state, [e.target.name]: e.target.value }));
+    const canSubmit = () => {
+        emailValidator();
+        passwordValidator();
+        rePassValidator();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+        const hasEmpty = Object.values(data).find((value) => value === "");
 
-        const a = Object.values(data).find((value) => value === "");
-
-        if (a !== undefined) {
+        if (hasEmpty !== undefined) {
             Object.entries(data).forEach(([key, value]) => {
                 if (value === "") {
                     return setErrors((state) => ({
@@ -113,18 +105,39 @@ export const RegisterForm = () => {
                     }));
                 }
             });
-            return;
+            return false;
         }
 
-        const isInvalid = Object.values(errors).map((value) =>
-            Object.values(value).includes(true)
+        const isInvalid = Object.values(errors).reduce(
+            (a, v) => Object.assign(a, v),
+            {}
         );
 
-        if (isInvalid.includes(true)) {
-            console.log(isInvalid);
+        if (Object.values(isInvalid).includes(true)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const onChangeHandler = (e) =>
+        setData((state) => ({ ...state, [e.target.name]: e.target.value }));
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        if (!canSubmit()) {
             return;
         }
 
+        register(data)
+            .then((result) => {
+                handleLogin(result);
+                navigate("/", { replace: true });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -144,7 +157,10 @@ export const RegisterForm = () => {
                         id="email"
                         value={data.email}
                         onChange={onChangeHandler}
-                        onBlur={emailValidator}
+                        onBlur={(e) => {
+                            emailValidator();
+                            requiredValidator(e.target.name, data.email);
+                        }}
                     />
                     {errors.email.required && (
                         <p className={styles["error"]}>Email is required!</p>
@@ -164,7 +180,10 @@ export const RegisterForm = () => {
                         id="password"
                         value={data.password}
                         onChange={onChangeHandler}
-                        onBlur={passwordValidator}
+                        onBlur={(e) => {
+                            passwordValidator();
+                            requiredValidator(e.target.name, data.password);
+                        }}
                     />
                     {errors.password.required && (
                         <p className={styles["error"]}>Password is required!</p>
@@ -187,7 +206,10 @@ export const RegisterForm = () => {
                         id="rePassword"
                         value={data.rePassword}
                         onChange={onChangeHandler}
-                        onBlur={rePassValidator}
+                        onBlur={(e) => {
+                            rePassValidator();
+                            requiredValidator(e.target.name, data.rePassword);
+                        }}
                     />
                     {errors.rePassword.required && (
                         <p className={styles["error"]}>Password is required!</p>

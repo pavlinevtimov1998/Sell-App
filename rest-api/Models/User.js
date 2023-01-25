@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
             unique: true,
             validate: {
                 validator: function () {
-                    return /[a-zA-Z0-9]{6,25}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(
+                    return /[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(
                         this.email
                     );
                 },
