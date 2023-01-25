@@ -1,8 +1,134 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthContext";
+
 import styles from "./AuthForms.module.css";
 
 export const RegisterForm = () => {
+    const { handleLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        rePassword: "",
+    });
+    const [errors, setErrors] = useState({
+        email: {
+            required: false,
+            isNotValid: false,
+        },
+        password: {
+            required: false,
+            minLength: false,
+        },
+        rePassword: {
+            required: false,
+            isNotMatch: false,
+        },
+    });
+
+    const emailValidator = (e) => {
+        requiredValidator(e.target.name, data[e.target.name]);
+
+        if (
+            data.email !== "" &&
+            !/[a-zA-Z0-9]{6,25}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
+        ) {
+            setErrors((state) => ({
+                ...state,
+                email: { required: false, isNotValid: true },
+            }));
+        } else if (
+            /[a-zA-Z0-9]{6,25}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
+        ) {
+            setErrors((state) => ({
+                ...state,
+                email: { required: false, isNotValid: false },
+            }));
+        }
+    };
+
+    const requiredValidator = (name, value) => {
+        if (value === "") {
+            setErrors((state) => ({
+                ...state,
+                [name]: { ...state[name], required: true },
+            }));
+        } else {
+            setErrors((state) => ({
+                ...state,
+                [name]: { ...state[name], required: false },
+            }));
+        }
+    };
+
+    const passwordValidator = (e) => {
+        requiredValidator(e.target.name, data[e.target.name]);
+
+        console.log(data.password.length);
+
+        if (data.password.length < 6 && data.password !== "") {
+            setErrors((state) => ({
+                ...state,
+                password: { ...state.password, minLength: true },
+            }));
+        } else {
+            setErrors((state) => ({
+                ...state,
+                password: { ...state.password, minLength: false },
+            }));
+        }
+    };
+
+    const rePassValidator = (e) => {
+        requiredValidator(e.target.name, data[e.target.name]);
+
+        if (data.rePassword !== data.password) {
+            setErrors((state) => ({
+                ...state,
+                rePassword: { ...state.rePassword, isNotMatch: true },
+            }));
+        } else {
+            setErrors((state) => ({
+                ...state,
+                rePassword: { ...state.rePassword, isNotMatch: false },
+            }));
+        }
+    };
+
+    const onChangeHandler = (e) =>
+        setData((state) => ({ ...state, [e.target.name]: e.target.value }));
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const a = Object.values(data).find((value) => value === "");
+
+        if (a !== undefined) {
+            Object.entries(data).forEach(([key, value]) => {
+                if (value === "") {
+                    return setErrors((state) => ({
+                        ...state,
+                        [key]: { ...state[key], required: true },
+                    }));
+                }
+            });
+            return;
+        }
+
+        const isInvalid = Object.values(errors).map((value) =>
+            Object.values(value).includes(true)
+        );
+
+        if (isInvalid.includes(true)) {
+            console.log(isInvalid);
+            return;
+        }
+
+    };
+
     return (
-        <form className={styles["form"]}>
+        <form className={styles["form"]} onSubmit={onSubmit}>
             <div className={styles["title"]}>
                 <h3>Register</h3>
             </div>
@@ -16,13 +142,16 @@ export const RegisterForm = () => {
                         type="email"
                         name="email"
                         id="email"
+                        value={data.email}
+                        onChange={onChangeHandler}
+                        onBlur={emailValidator}
                     />
-                    {/* <p className={styles["error"]}>
-                Email is required!
-            </p>
-            <p className={styles["error"]}>
-                Invalid email!
-            </p> */}
+                    {errors.email.required && (
+                        <p className={styles["error"]}>Email is required!</p>
+                    )}
+                    {errors.email.isNotValid && (
+                        <p className={styles["error"]}>Invalid email!</p>
+                    )}
                 </div>
                 <div className={styles["field"]}>
                     <label className={styles["label"]} htmlFor="password">
@@ -33,31 +162,42 @@ export const RegisterForm = () => {
                         type="password"
                         name="password"
                         id="password"
+                        value={data.password}
+                        onChange={onChangeHandler}
+                        onBlur={passwordValidator}
                     />
-                    {/* <p className={styles["error"]}>
-                Password is required!
-            </p>
-            <p className={styles["error"]}>
-                Password should be at least 6 characters!
-            </p> */}
+                    {errors.password.required && (
+                        <p className={styles["error"]}>Password is required!</p>
+                    )}
+                    {errors.password.minLength && (
+                        <p className={styles["error"]}>
+                            Password should be at least 6 characters!
+                        </p>
+                    )}
                 </div>
 
                 <div className={styles["field"]}>
-                    <label className={styles["label"]} htmlFor="password">
+                    <label className={styles["label"]} htmlFor="rePassword">
                         Repeat Password
                     </label>
                     <input
                         className={styles["pass-input"]}
                         type="password"
-                        name="password"
-                        id="password"
+                        name="rePassword"
+                        id="rePassword"
+                        value={data.rePassword}
+                        onChange={onChangeHandler}
+                        onBlur={rePassValidator}
                     />
-                    {/* <p className={styles["error"]}>
-                Password is required!
-            </p>
-            <p className={styles["error"]}>
-                Password should be at least 6 characters!
-            </p> */}
+                    {errors.rePassword.required && (
+                        <p className={styles["error"]}>Password is required!</p>
+                    )}
+                    {errors.rePassword.isNotMatch &&
+                        !errors.rePassword.required && (
+                            <p className={styles["error"]}>
+                                Passwords don't match!
+                            </p>
+                        )}
                 </div>
             </div>
             <div className={styles["action"]}>
