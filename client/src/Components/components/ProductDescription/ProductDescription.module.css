@@ -1,0 +1,107 @@
+.prod-info {
+    width: 90%;
+    padding: 28px;
+    background-color: #fff;
+    border-radius: 13px;
+    box-shadow: 0px 0px 15px -5px rgb(0 0 0 / 11%);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 20px auto;
+}
+
+.created-at {
+    font-size: 12px;
+    font-weight: 500;
+    color: #7f9799;
+}
+
+.title,
+.price,
+.description {
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 2rem;
+}
+
+.description {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.border {
+    width: 100%;
+    height: 1px;
+    background-color: darkgray;
+    margin: 20px auto 10px;
+}
+
+.action {
+    width: 100%;
+    height: 10px;
+    position: relative;
+}
+
+.report-btn,
+.owner-btns {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.owner-btns {
+    gap: 10px;
+}
+
+.report-btn {
+    color: red;
+    fill: red;
+    font-weight: 500;
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    gap: 5px;
+}
+
+.report-btn:hover {
+    color: rgb(255, 90, 90);
+    fill: rgb(255, 90, 90);
+}
+
+.edit,
+.delete {
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+}
+
+.edit {
+    color: blue;
+    fill: blue;
+}
+
+.edit:hover {
+    color: rgb(90, 90, 255);
+    fill: rgb(90, 90, 255);
+}
+
+.delete {
+    color: red;
+    fill: red;
+}
+
+.delete:hover {
+    color: rgb(255, 90, 90);
+    fill: rgb(255, 90, 90);
+}
