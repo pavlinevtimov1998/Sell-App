@@ -9,6 +9,7 @@ import { Carousel } from "../../components/Carousel/Carousel";
 import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { ProductDescription } from "../../components/ProductDescription/ProductDescription";
+import { Map } from "../../components/Map/Map";
 
 export const DetailsPage = () => {
     const { productId } = useParams();
@@ -45,7 +46,9 @@ export const DetailsPage = () => {
                             </div>
                             <div className={styles["location"]}>
                                 <h3>location:</h3>
-                                <div>{data.town}</div>
+                            </div>
+                            <div className={styles["map"]}>
+                                <Map location={data.location} />
                             </div>
                         </article>
                     </section>

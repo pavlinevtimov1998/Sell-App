@@ -2,7 +2,7 @@
 
 .info-container {
     width: 30%;
-    height: 50%;
+    height: 80%;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -40,6 +40,11 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
 }
 
 /* --------------- */
