@@ -19,9 +19,8 @@ const productSchema = new mongoose.Schema(
             trim: true,
             minLength: [25, "Description should be at least 25 characters!"],
         },
-        town: {
-            type: String,
-            required: [true, "Town is required!"],
+        location: {
+            type: mongoose.Types.ObjectId,
             ref: "Town",
         },
         phoneNumber: {
