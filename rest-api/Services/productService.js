@@ -11,10 +11,12 @@ const getProducts = (title, category) =>
 const getProductsCount = () => Product.find().count();
 
 const getOneProduct = (productId) =>
-    Product.findById(productId).populate({
-        path: "_ownerId",
-        select: "-password -__v",
-    });
+    Product.findById(productId)
+        .populate({
+            path: "_ownerId",
+            select: "-password -__v",
+        })
+        .populate({ path: "location" });
 
 async function createProduct(body, files) {
     const product = await Product.create(body);
