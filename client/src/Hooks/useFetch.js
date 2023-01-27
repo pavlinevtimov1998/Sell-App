@@ -1,20 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { ErrorContext } from "../Contexts/ErrorContext";
 
 export function useFetch(fetchData, deps = []) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { setError } = useContext(ErrorContext);
 
     useEffect(() => {
         fetchData()
             .then((result) => {
-                setData(result);
+                if (result) {
+                    setData(result);
+                }
                 setIsLoading(false);
             })
-            .catch((err) => setError(err));
+            .catch((error) => {
+                setError((state) => ({
+                    hasError: true,
+                    message: error.message,
+                }));
+            });
+            
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setError, ...deps]);
 
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, deps);
-
-    return { isLoading, data, error };
+    return { isLoading, data };
 }
