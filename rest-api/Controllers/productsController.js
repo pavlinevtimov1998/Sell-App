@@ -4,6 +4,7 @@ const { isUser } = require("../Middlewares/guards.js");
 const productsService = require("../Services/productService.js");
 const { catchAsyncError } = require("../Utils/errorParser");
 const { upload } = require("../Utils/imageUpload.js");
+const { GOOGLE_KEY } = require("../config/config");
 
 productsController.get(
     "/",
@@ -52,7 +53,7 @@ productsController.get(
 
         const product = await productsService.getOneProduct(productId);
 
-        res.status(200).json(product);
+        res.status(200).json({ product, GOOGLE_KEY });
     })
 );
 
