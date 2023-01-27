@@ -18,8 +18,6 @@ export const DetailsPage = () => {
         [productId]
     );
 
-    console.log(data);
-
     return (
         <MainLayout>
             {isLoading ? (
@@ -27,7 +25,7 @@ export const DetailsPage = () => {
             ) : (
                 <main className={styles["content"]}>
                     <section className={styles["wrapper"]}>
-                        <Carousel images={data.images} />
+                        <Carousel images={data.product.images} />
                         <article className={styles["info-container"]}>
                             <h3 className={styles["user-name"]}>Seller Info</h3>
                             <div className={styles["user-info"]}>
@@ -40,7 +38,7 @@ export const DetailsPage = () => {
                                 </div>
                                 <div className={styles["info"]}>
                                     <p className={styles["email"]}>
-                                        {data._ownerId.email}
+                                        {data.product._ownerId.email}
                                     </p>
                                 </div>
                             </div>
@@ -48,11 +46,14 @@ export const DetailsPage = () => {
                                 <h3>location:</h3>
                             </div>
                             <div className={styles["map"]}>
-                                <Map location={data.location} />
+                                <Map
+                                    location={data.product.location}
+                                    GOOGLE_KEY={data.GOOGLE_KEY}
+                                />
                             </div>
                         </article>
                     </section>
-                    <ProductDescription data={data} />
+                    <ProductDescription data={data.product} />
                 </main>
             )}
         </MainLayout>
