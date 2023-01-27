@@ -7,6 +7,7 @@ export const emailValidator = (data, setErrors) => {
             ...state,
             email: { required: false, isNotValid: true },
         }));
+        return false;
     } else if (
         /[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
     ) {
@@ -28,6 +29,7 @@ export const requiredValidator = (name, value, setErrors) => {
             ...state,
             [name]: { ...state[name], required: false },
         }));
+        return true;
     }
 };
 
@@ -39,6 +41,7 @@ export const passwordValidator = (data, setErrors) => {
             ...state,
             password: { ...state.password, minLength: true },
         }));
+        return false;
     }
 
     if (data.password.length >= 6) {
@@ -46,22 +49,23 @@ export const passwordValidator = (data, setErrors) => {
             ...state,
             password: { ...state.password, minLength: false },
         }));
+        return true;
     }
 };
 
 export const rePassValidator = (data, setErrors) => {
-    console.log("rePass", data.rePassword, data.password);
     if (data.rePassword !== data.password) {
-        console.log("asd");
         setErrors((state) => ({
             ...state,
             rePassword: { ...state.rePassword, isNotMatch: true },
         }));
+        return false;
     } else {
         setErrors((state) => ({
             ...state,
             rePassword: { ...state.rePassword, isNotMatch: false },
         }));
+        return true;
     }
 };
 
@@ -80,16 +84,11 @@ export const canSubmit = (data, errors, setErrors) => {
         return false;
     }
 
-    emailValidator(data, setErrors);
-    passwordValidator(data, setErrors);
-    rePassValidator(data, setErrors);
-
-    const isInvalid = Object.values(errors).reduce(
-        (a, v) => Object.assign(a, v),
-        {}
-    );
-    console.log(Object.values(isInvalid));
-    if (Object.values(isInvalid).includes(true)) {
+    if (
+        !emailValidator(data, setErrors) ||
+        !passwordValidator(data, setErrors) ||
+        !rePassValidator(data, setErrors)
+    ) {
         return false;
     }
 
