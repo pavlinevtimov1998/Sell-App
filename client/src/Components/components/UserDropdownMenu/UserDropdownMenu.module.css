@@ -4,6 +4,7 @@
     top: 25px;
     left: -35px;
     min-width: 210px;
+    max-width: 210px;
     background-color: #fff;
     border-radius: 8px;
     transition: all 0.4s ease-in-out;
@@ -37,14 +38,29 @@
     color: #002f34;
 }
 
-.username {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.user {
+    text-align: center;
     padding: 18px 5px;
     width: 100%;
     border-bottom: #002f34 solid 2px;
 }
+
+.greet {
+    width: 100%;
+    color: #002f34;
+    display: flex;
+    flex-direction: column;
+}
+
+.greet:nth-child(1) {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.email {
+    font-weight: 600;
+}
+
 .logout {
     border-top: #002f34 solid 2px;
     padding-bottom: 10px;
