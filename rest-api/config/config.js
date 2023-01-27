@@ -12,6 +12,7 @@ const config = {
             api_key: process.env.API_KEY, // enter your cloud key from cloudinary account
             api_secret: process.env.API_SECRET, // enter your cloud secret from cloudinary account
         },
+        GOOGLE_KEY: process.env.GOOGLE_KEY,
         CORS: {
             origin: "http://localhost:3000",
         },
@@ -27,6 +28,7 @@ const config = {
             api_key: process.env.API_KEY,
             api_secret: process.env.API_SECRET,
         },
+        GOOGLE_KEY: process.env.GOOGLE_KEY,
         CORS: {
             origin: "http://localhost:3000",
         },
@@ -42,6 +44,7 @@ const config = {
             api_key: process.env.API_KEY, // enter your cloud key from cloudinary account
             api_secret: process.env.API_SECRET, // enter your cloud secret from cloudinary account
         },
+        GOOGLE_KEY: process.env.GOOGLE_KEY,
         CORS: {
             origin: "http://localhost:3000",
         },
