@@ -15,6 +15,7 @@ export const emailValidator = (data, setErrors) => {
             ...state,
             email: { required: false, isNotValid: false },
         }));
+        return true;
     }
 };
 
@@ -34,7 +35,6 @@ export const requiredValidator = (name, value, setErrors) => {
 };
 
 export const passwordValidator = (data, setErrors) => {
-    console.log("password", data.password);
     if (data.password.length < 6 && data.password !== "") {
         console.log("asd");
         setErrors((state) => ({
