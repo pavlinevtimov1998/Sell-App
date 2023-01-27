@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 import styles from "./UserDropdownMenu.module.css";
+import { trim } from "../../../Utils/util";
 
 export const UserDropdownMenu = ({ isDropdownVisible }) => {
     const { userData } = useContext(AuthContext);
@@ -15,8 +16,13 @@ export const UserDropdownMenu = ({ isDropdownVisible }) => {
             }`}
         >
             <div className={styles["drop-down"]}>
-                <div className={styles["username"]}>
-                    <h3>Hello, {userData.email}</h3>
+                <div className={styles["user"]}>
+                    <h3 className={styles["greet"]}>
+                        <span>Hello, </span>
+                        <span className={styles["email"]}>
+                            {trim(userData.email, 16)}
+                        </span>
+                    </h3>
                 </div>
                 <ul className={styles["user-links"]}>
                     <li>
