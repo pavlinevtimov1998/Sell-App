@@ -1,17 +1,18 @@
 const API_URL = "http://localhost:3030/api";
 
 async function request(url, options) {
-    const response = await fetch(`${API_URL}${url}`, options);
+    try {
+        const response = await fetch(`${API_URL}${url}`, options);
 
-    if (!response.ok) {
-        if (response.status === 401) {
-            const result = await response.json();
-
-            throw result;
+        if (!response.ok) {
+            throw await response.json();
         }
-    }
 
-    return response.json();
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
 
 function createOptions(method = "GET", data) {
