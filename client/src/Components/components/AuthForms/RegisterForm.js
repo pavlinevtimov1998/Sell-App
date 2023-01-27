@@ -5,6 +5,8 @@ import { register } from "../../../Services/userService";
 
 import styles from "./AuthForms.module.css";
 
+import * as validators from "../../../Utils/validators";
+
 export const RegisterForm = () => {
     const { handleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -28,105 +30,13 @@ export const RegisterForm = () => {
         },
     });
 
-    const emailValidator = (e) => {
-        if (
-            data.email !== "" &&
-            !/[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
-        ) {
-            setErrors((state) => ({
-                ...state,
-                email: { required: false, isNotValid: true },
-            }));
-        } else if (
-            /[a-zA-Z0-9]{5,35}@[a-zA-Z]{2,10}\.[a-z]{1,6}/g.test(data.email)
-        ) {
-            setErrors((state) => ({
-                ...state,
-                email: { required: false, isNotValid: false },
-            }));
-        }
-    };
-
-    const requiredValidator = (name, value) => {
-        if (value === "") {
-            setErrors((state) => ({
-                ...state,
-                [name]: { ...state[name], required: true },
-            }));
-        } else {
-            setErrors((state) => ({
-                ...state,
-                [name]: { ...state[name], required: false },
-            }));
-        }
-    };
-
-    const passwordValidator = () => {
-        if (data.password.length < 6 && data.password !== "") {
-            setErrors((state) => ({
-                ...state,
-                password: { ...state.password, minLength: true },
-            }));
-        } else {
-            setErrors((state) => ({
-                ...state,
-                password: { ...state.password, minLength: false },
-            }));
-        }
-    };
-
-    const rePassValidator = () => {
-        if (data.rePassword !== data.password) {
-            setErrors((state) => ({
-                ...state,
-                rePassword: { ...state.rePassword, isNotMatch: true },
-            }));
-        } else {
-            setErrors((state) => ({
-                ...state,
-                rePassword: { ...state.rePassword, isNotMatch: false },
-            }));
-        }
-    };
-
-    const canSubmit = () => {
-        const hasEmpty = Object.values(data).find((value) => value === "");
-
-        if (hasEmpty !== undefined) {
-            Object.entries(data).forEach(([key, value]) => {
-                if (value === "") {
-                    return setErrors((state) => ({
-                        ...state,
-                        [key]: { ...state[key], required: true },
-                    }));
-                }
-            });
-            return false;
-        }
-
-        emailValidator();
-        passwordValidator();
-        rePassValidator();
-
-        const isInvalid = Object.values(errors).reduce(
-            (a, v) => Object.assign(a, v),
-            {}
-        );
-
-        if (Object.values(isInvalid).includes(true)) {
-            return false;
-        }
-
-        return true;
-    };
-
     const onChangeHandler = (e) =>
         setData((state) => ({ ...state, [e.target.name]: e.target.value }));
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (!canSubmit()) {
+        if (!validators.canSubmit(data, errors, setErrors)) {
             return;
         }
 
@@ -158,8 +68,12 @@ export const RegisterForm = () => {
                         value={data.email}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            emailValidator();
-                            requiredValidator(e.target.name, data.email);
+                            validators.emailValidator(data, setErrors);
+                            validators.requiredValidator(
+                                e.target.name,
+                                data.email,
+                                setErrors
+                            );
                         }}
                     />
                     {errors.email.required && (
@@ -181,8 +95,12 @@ export const RegisterForm = () => {
                         value={data.password}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            passwordValidator();
-                            requiredValidator(e.target.name, data.password);
+                            validators.passwordValidator(data, setErrors);
+                            validators.requiredValidator(
+                                e.target.name,
+                                data.password,
+                                setErrors
+                            );
                         }}
                     />
                     {errors.password.required && (
@@ -207,8 +125,12 @@ export const RegisterForm = () => {
                         value={data.rePassword}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            rePassValidator();
-                            requiredValidator(e.target.name, data.rePassword);
+                            validators.rePassValidator(data, setErrors);
+                            validators.requiredValidator(
+                                e.target.name,
+                                data.rePassword,
+                                setErrors
+                            );
                         }}
                     />
                     {errors.rePassword.required && (
