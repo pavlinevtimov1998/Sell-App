@@ -1,6 +1,6 @@
 .error-container {
     position: fixed;
-    right: 50px;
+    right: -300px;
     top: 15%;
     background-color: #fff;
     width: 240px;
