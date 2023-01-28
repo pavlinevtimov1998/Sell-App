@@ -34,8 +34,13 @@
     padding-left: 20px;
 }
 
-.user-links li a {
+.link {
     color: #002f34;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    color: darkgray;
 }
 
 .user {
@@ -43,6 +48,7 @@
     padding: 18px 5px;
     width: 100%;
     border-bottom: #002f34 solid 2px;
+    cursor: default;
 }
 
 .greet {
