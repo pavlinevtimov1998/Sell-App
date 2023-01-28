@@ -15,7 +15,7 @@ export const MainWrapper = () => {
             errorRef.current.style.right = "40px";
             id = setInterval(() => {
                 setError((state) => ({ ...state, hasError: false }));
-            }, 5000);
+            }, 6000);
         } else {
             errorRef.current.style.right = "-300px";
             id && clearInterval(id);
@@ -24,8 +24,11 @@ export const MainWrapper = () => {
 
     return (
         <ErrorContext.Provider value={{ setError }}>
+
             <ErrorMessage message={error.message} errorRef={errorRef} />
-            <AppRouter />;
+
+            <AppRouter />
+            
         </ErrorContext.Provider>
     );
 };
