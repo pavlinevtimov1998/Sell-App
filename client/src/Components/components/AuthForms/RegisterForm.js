@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../../../Contexts/AuthContext";
+import { ErrorContext } from "../../../Contexts/ErrorContext";
+
 import { register } from "../../../Services/userService";
 
 import styles from "./AuthForms.module.css";
@@ -10,12 +13,13 @@ import * as validators from "../../../Utils/validators";
 export const RegisterForm = () => {
     const { handleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { setError } = useContext(ErrorContext);
     const [data, setData] = useState({
         email: "",
         password: "",
         rePassword: "",
     });
-    const [errors, setErrors] = useState({
+    const [errors, setFormErrors] = useState({
         email: {
             required: false,
             isNotValid: false,
@@ -36,18 +40,23 @@ export const RegisterForm = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (!validators.canSubmit(data, errors, setErrors)) {
+        if (!validators.canSubmit(data, errors, setFormErrors)) {
             return;
         }
 
         register(data)
             .then((result) => {
-                handleLogin(result);
-                navigate("/", { replace: true });
+                if (result) {
+                    handleLogin(result);
+                    navigate("/", { replace: true });
+                }
             })
-            .catch((err) => {
-                console.log(err);
-            });
+            .catch((error) =>
+                setError({
+                    hasError: true,
+                    message: error.message,
+                })
+            );
     };
 
     return (
@@ -68,11 +77,11 @@ export const RegisterForm = () => {
                         value={data.email}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.emailValidator(data, setErrors);
+                            validators.emailValidator(data, setFormErrors);
                             validators.requiredValidator(
                                 e.target.name,
                                 data.email,
-                                setErrors
+                                setFormErrors
                             );
                         }}
                     />
@@ -95,11 +104,11 @@ export const RegisterForm = () => {
                         value={data.password}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.passwordValidator(data, setErrors);
+                            validators.passwordValidator(data, setFormErrors);
                             validators.requiredValidator(
                                 e.target.name,
                                 data.password,
-                                setErrors
+                                setFormErrors
                             );
                         }}
                     />
@@ -125,11 +134,11 @@ export const RegisterForm = () => {
                         value={data.rePassword}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.rePassValidator(data, setErrors);
+                            validators.rePassValidator(data, setFormErrors);
                             validators.requiredValidator(
                                 e.target.name,
                                 data.rePassword,
-                                setErrors
+                                setFormErrors
                             );
                         }}
                     />
