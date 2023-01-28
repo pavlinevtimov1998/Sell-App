@@ -26,37 +26,37 @@ export const UserDropdownMenu = ({ isDropdownVisible }) => {
                 </div>
                 <ul className={styles["user-links"]}>
                     <li>
-                        <Link to="/users/messages">
+                        <Link className={styles["link"]} to="/users/messages">
                             <span>Messages</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/users/profile">
+                        <Link className={styles["link"]} to="/users/profile">
                             <span>My Posts</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link className={styles["link"]} to="/">
                             <span>Your Bag</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link className={styles["link"]} to="/">
                             <span>Payments</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/delivery">
+                        <Link className={styles["link"]} to="/delivery">
                             <span>Delivery</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/users/settings">
+                        <Link className={styles["link"]} to="/users/settings">
                             <span>Settings</span>
                         </Link>
                     </li>
                     <li className={styles["logout"]}>
-                        <Link to="/logout">
+                        <Link className={styles["link"]} to="/logout">
                             <span>Logout</span>
                         </Link>
                     </li>
