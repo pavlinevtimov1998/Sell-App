@@ -36,15 +36,12 @@ export const requiredValidator = (name, value, setErrors) => {
 
 export const passwordValidator = (data, setErrors) => {
     if (data.password.length < 6 && data.password !== "") {
-        console.log("asd");
         setErrors((state) => ({
             ...state,
             password: { ...state.password, minLength: true },
         }));
         return false;
-    }
-
-    if (data.password.length >= 6) {
+    } else {
         setErrors((state) => ({
             ...state,
             password: { ...state.password, minLength: false },
