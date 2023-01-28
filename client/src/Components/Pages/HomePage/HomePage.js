@@ -4,10 +4,10 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { Categories } from "../../components/Categories/Categories";
 import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { ProductsList } from "../../components/ProductsList/ProductsList";
 
 import { getAll } from "../../../Services/categoriesService";
 import { getLastProducts } from "../../../Services/productsService";
-import { ProductsList } from "../../components/ProductsList/ProductsList";
 
 const getData = () => Promise.all([getAll(), getLastProducts()]);
 
