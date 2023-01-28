@@ -88,11 +88,14 @@ header.hide {
     padding: 5px 16px;
 }
 
+.profile-btn-wrapper {
+    position: relative;
+}
+
 .profile-btn {
     display: flex;
     gap: 8px;
     align-items: center;
-    position: relative;
     font-size: 16px;
     z-index: 10;
     color: #fff;
@@ -100,10 +103,7 @@ header.hide {
     transition: all 0.3s ease;
 }
 
-.user-icon {
-    width: 14px;
-}
-
+.user-icon,
 .arrow-icon {
     width: 14px;
 }
