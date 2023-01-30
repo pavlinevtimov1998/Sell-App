@@ -4,4 +4,5 @@ const endpoinds = {
     getAllCategories: "/categories",
 };
 
-export const getAll = () => apiService.getRequest(endpoinds.getAllCategories);
+export const getAllCategories = () =>
+    apiService.getRequest(endpoinds.getAllCategories);
