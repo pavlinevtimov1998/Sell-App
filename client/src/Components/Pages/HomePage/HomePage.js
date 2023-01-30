@@ -6,10 +6,10 @@ import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { ProductsList } from "../../components/ProductsList/ProductsList";
 
-import { getAll } from "../../../Services/categoriesService";
+import { getAllCategories } from "../../../Services/categoriesService";
 import { getLastProducts } from "../../../Services/productsService";
 
-const getData = () => Promise.all([getAll(), getLastProducts()]);
+const getData = () => Promise.all([getAllCategories(), getLastProducts()]);
 
 export const HomePage = () => {
     const { isLoading, data } = useFetch(getData);
