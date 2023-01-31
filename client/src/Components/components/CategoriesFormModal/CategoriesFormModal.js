@@ -1,6 +1,13 @@
 import styles from "./CategoriesFormModal.module.css";
 
-export const CategoriesFormModal = ({ isModalOpen, categories }) => {
+import { CategoryModalItem } from "./CategoryModalItem/CategoryModalItem";
+
+export const CategoriesFormModal = ({
+    isModalOpen,
+    categories,
+    closeCategoriesModal,
+    chooseCategoryHandler,
+}) => {
     return (
         <div
             className={`${styles["categories-modal-wrapper"]} ${
@@ -8,26 +15,37 @@ export const CategoriesFormModal = ({ isModalOpen, categories }) => {
             }`}
         >
             <section className={styles["categories-modal"]}>
-                <header className={styles["modal-header"]}>
-                    <h2 className={styles["modal-title"]}>Categories</h2>
-                </header>
-                <div className={styles["categories"]}>
-                    {categories.map((c) => (
-                        <button
-                            key={c._id}
-                            value={c.title}
-                            className={styles["category-btn"]}
+                <div className={styles["close-btn-container"]}>
+                    <button
+                        onClick={closeCategoriesModal}
+                        type="button"
+                        className={styles["close-btn"]}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 384 512"
+                            width={25}
+                            height={20}
                         >
-                            <span className={styles["category-title"]}>
-                                {c.title}
-                            </span>
-                            <img
-                                className={styles["category-img"]}
-                                src={c.image}
-                                alt={c.title}
+                            <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
+                        </svg>
+                    </button>
+                </div>
+                <div className={styles["content-container"]}>
+                    <header className={styles["modal-header"]}>
+                        <h2 className={styles["modal-title"]}>
+                            Choose Category
+                        </h2>
+                    </header>
+                    <div className={styles["categories"]}>
+                        {categories.map((c) => (
+                            <CategoryModalItem
+                                chooseCategoryHandler={chooseCategoryHandler}
+                                key={c._id}
+                                category={c}
                             />
-                        </button>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
         </div>
