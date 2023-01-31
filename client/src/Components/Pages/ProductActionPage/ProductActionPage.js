@@ -17,7 +17,7 @@ export const ProductActionPage = ({ action }) => {
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
         title: "",
-        category: "",
+        category: { text: "", img: "" },
         subcategory: "",
         description: "",
         price: "",
@@ -61,7 +61,10 @@ export const ProductActionPage = ({ action }) => {
     ) => {
         setInputData((state) => ({
             ...state,
-            category: `${categoryTitle}, ${subcategoryTitle}`,
+            category: {
+                text: `${categoryTitle}, ${subcategoryTitle}`,
+                img: image,
+            },
         }));
     };
 
@@ -95,9 +98,9 @@ export const ProductActionPage = ({ action }) => {
                             </div>
                             <div className={styles["category"]}>
                                 <label htmlFor="category">Category</label>
-
                                 <CategorySelectBtn
                                     categories={categories}
+                                    
                                     chooseCategoryHandler={
                                         chooseCategoryHandler
                                     }
@@ -234,11 +237,9 @@ export const ProductActionPage = ({ action }) => {
                         </div>
                         <div className={styles["btn-container"]}>
                             <button type="submit">
-                                <mat-icon>edit</mat-icon>
                                 <span>Edit</span>
                             </button>
                             <button type="submit">
-                                <mat-icon>add_circle</mat-icon>
                                 <span>Add</span>
                             </button>
                         </div>
