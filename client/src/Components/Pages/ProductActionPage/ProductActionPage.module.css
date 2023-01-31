@@ -65,13 +65,6 @@ select:focus {
     outline: none;
 }
 
-mat-select {
-    padding: 10px;
-    background-color: #f2f4f5;
-    border-radius: 5px;
-    width: 50%;
-}
-
 .photos-container {
     display: flex;
     gap: 20px;
@@ -113,23 +106,6 @@ mat-select {
     margin-top: 5px;
 }
 
-#description {
-    background-color: #f2f4f5;
-    width: 60%;
-    height: 180px;
-    padding: 20px;
-}
-
-#number,
-#name {
-    width: 50%;
-}
-
-#location,
-#price {
-    width: 30%;
-}
-
 .btn-container {
     align-items: flex-end;
     margin-bottom: 100px;
@@ -157,33 +133,6 @@ mat-select {
     font-weight: 600;
 }
 
-.select-wrapper {
-    max-width: 350px;
-    background-color: #f2f4f5;
-    border-radius: 5px;
-}
-
-.select-btn {
-    width: 100%;
-    padding: 15px 20px;
-}
-
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    color: #002f34;
-    fill: #002f34;
-}
-
-.content p {
-    font-size: 1rem;
-}
-
-.select-icon {
-    width: 14px;
-}
 
 .input-error {
     border-left: red solid 4px;

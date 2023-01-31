@@ -1,0 +1,27 @@
+.select-wrapper {
+    max-width: 350px;
+    background-color: #f2f4f5;
+    border-radius: 5px;
+}
+
+.select-btn {
+    width: 100%;
+    padding: 15px 20px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #002f34;
+    fill: #002f34;
+}
+
+.content p {
+    font-size: 1rem;
+}
+
+.select-icon {
+    width: 14px;
+}
