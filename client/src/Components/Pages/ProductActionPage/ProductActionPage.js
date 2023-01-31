@@ -57,6 +57,19 @@ export const ProductActionPage = ({ action }) => {
 
     const openCategoriesModal = () => setIsModalOpen(true);
 
+    const closeCategoriesModal = () => setIsModalOpen(false);
+
+    const chooseCategoryHandler = (
+        e,
+        { categoryTitle, image, subcategoryTitle }
+    ) => {
+        setInputData((state) => ({
+            ...state,
+            category: `${categoryTitle}, ${subcategoryTitle}`,
+        }));
+        closeCategoriesModal();
+    };
+
     return (
         <MainLayout>
             {isLoading ? (
@@ -116,6 +129,8 @@ export const ProductActionPage = ({ action }) => {
                             <CategoriesFormModal
                                 isModalOpen={isModalOpen}
                                 categories={categories}
+                                closeCategoriesModal={closeCategoriesModal}
+                                chooseCategoryHandler={chooseCategoryHandler}
                             />
                         </div>
                         {action === "create" && (
