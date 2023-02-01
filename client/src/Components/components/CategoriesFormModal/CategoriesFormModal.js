@@ -4,15 +4,11 @@ import styles from "./CategoriesFormModal.module.css";
 
 import { CategoryModalItem } from "./CategoryModalItem/CategoryModalItem";
 
-export const CategoriesFormModal = ({ isModalOpen, closeCategoriesModal }) => {
+export const CategoriesFormModal = ({ closeCategoriesModal }) => {
     const { categories } = useContext(FormContext);
 
     return (
-        <div
-            className={`${styles["categories-modal-wrapper"]} ${
-                styles[isModalOpen ? "open" : "hide"]
-            }`}
-        >
+        <div className={styles["categories-modal-wrapper"]}>
             <section className={styles["categories-modal"]}>
                 <div className={styles["close-btn-container"]}>
                     <button
