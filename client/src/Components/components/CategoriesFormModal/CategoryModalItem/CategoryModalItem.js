@@ -43,7 +43,6 @@ export const CategoryModalItem = ({ category, closeCategoriesModal }) => {
                     {category.subcategories.map((s) => (
                         <SubcategoryModalItem
                             key={s._id}
-                            toggleSubcategoryOptions={toggleSubcategoryOptions}
                             closeCategoriesModal={closeCategoriesModal}
                             subcategory={s}
                             category={category}
