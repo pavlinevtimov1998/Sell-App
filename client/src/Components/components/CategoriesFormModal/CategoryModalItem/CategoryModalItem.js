@@ -4,15 +4,19 @@ import styles from "./CategoryModalItem.module.css";
 
 import { SubcategoryModalItem } from "../SubcategoryModalItem/SubcategoryModalItem";
 
-export const CategoryModalItem = ({ category, chooseCategoryHandler }) => {
+export const CategoryModalItem = ({
+    category,
+    chooseCategoryHandler,
+    closeCategoriesModal,
+}) => {
     const [isSubcatOpen, setIsSubcatOpen] = useState(false);
 
-    const openSubcategoryOptions = () => setIsSubcatOpen((state) => !state);
+    const toggleSubcategoryOptions = () => setIsSubcatOpen((state) => !state);
 
     return (
         <div className={styles["btn-container"]}>
             <button
-                onClick={openSubcategoryOptions}
+                onClick={toggleSubcategoryOptions}
                 value={category.title}
                 type="button"
                 className={styles["category-btn"]}
@@ -42,8 +46,10 @@ export const CategoryModalItem = ({ category, chooseCategoryHandler }) => {
                 <ul className={styles["subcategories-list"]}>
                     {category.subcategories.map((s) => (
                         <SubcategoryModalItem
-                            chooseCategoryHandler={chooseCategoryHandler}
                             key={s._id}
+                            toggleSubcategoryOptions={toggleSubcategoryOptions}
+                            closeCategoriesModal={closeCategoriesModal}
+                            chooseCategoryHandler={chooseCategoryHandler}
                             subcategory={s}
                             category={category}
                         />
