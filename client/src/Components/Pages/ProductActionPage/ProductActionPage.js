@@ -17,9 +17,7 @@ export const ProductActionPage = ({ action }) => {
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
         title: "",
-        category: { text: "", img: "" },
-        subcategory: "",
-        description: "",
+        category: { title: "", image: "" },
         price: "",
         location: "",
         contacts: "",
@@ -55,19 +53,6 @@ export const ProductActionPage = ({ action }) => {
         }
     }, [data]);
 
-    const chooseCategoryHandler = (
-        e,
-        { categoryTitle, image, subcategoryTitle }
-    ) => {
-        setInputData((state) => ({
-            ...state,
-            category: {
-                text: `${categoryTitle}, ${subcategoryTitle}`,
-                img: image,
-            },
-        }));
-    };
-
     return (
         <MainLayout>
             {isLoading ? (
@@ -100,10 +85,7 @@ export const ProductActionPage = ({ action }) => {
                                 <label htmlFor="category">Category</label>
                                 <CategorySelectBtn
                                     categories={categories}
-                                    
-                                    chooseCategoryHandler={
-                                        chooseCategoryHandler
-                                    }
+                                    inputData={inputData}
                                 />
 
                                 <p className={styles["error"]}>
