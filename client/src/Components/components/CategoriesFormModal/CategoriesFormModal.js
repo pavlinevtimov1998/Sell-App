@@ -40,6 +40,7 @@ export const CategoriesFormModal = ({
                     <div className={styles["categories"]}>
                         {categories.map((c) => (
                             <CategoryModalItem
+                                closeCategoriesModal={closeCategoriesModal}
                                 chooseCategoryHandler={chooseCategoryHandler}
                                 key={c._id}
                                 category={c}
