@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import { useFetch } from "../../../Hooks/useFetch";
+import { FormContext } from "../../../Contexts/FormContext";
 
 import styles from "./ProductActionPage.module.css";
 
 import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
-
-import { getAllCategories } from "../../../Services/categoriesService";
-import { useEffect, useState } from "react";
 import { CategorySelectBtn } from "../../components/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
-import { FormContext } from "../../../Contexts/FormContext";
+import * as validators from "../../../Utils/validators";
+import { getAllCategories } from "../../../Services/categoriesService";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 
@@ -20,6 +20,7 @@ export const ProductActionPage = ({ action }) => {
         price: "",
         location: "",
         contacts: "",
+        description: "",
     });
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [errors, setErrors] = useState({
@@ -30,16 +31,13 @@ export const ProductActionPage = ({ action }) => {
         category: {
             required: false,
         },
-        subcategory: {
-            required: false,
-        },
         description: {
             required: false,
             minLength: false,
         },
         price: {
             required: false,
-            minPrice: false,
+            minNum: false,
         },
         location: {
             required: false,
@@ -52,6 +50,12 @@ export const ProductActionPage = ({ action }) => {
             setCategories(data);
         }
     }, [data]);
+
+    const onChangeHandler = (e) =>
+        setInputData((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
 
     const chooseCategoryHandler = (category) => setSelectedCategory(category);
 
@@ -92,21 +96,43 @@ export const ProductActionPage = ({ action }) => {
                                         type="text"
                                         name="title"
                                         placeholder="Example: iPhone 14 with guarantee..."
+                                        value={inputData.title}
+                                        onChange={onChangeHandler}
+                                        onBlur={(e) => {
+                                            validators.lengthValidator(
+                                                6,
+                                                e.target.name,
+                                                inputData.title,
+                                                setErrors
+                                            );
+                                            validators.requiredValidator(
+                                                e.target.name,
+                                                inputData.title,
+                                                setErrors
+                                            );
+                                        }}
                                     />
-                                    <p className={styles["error"]}>
-                                        Title is required!
-                                    </p>
-                                    <p className={styles["error"]}>
-                                        Title should be at least 6 characters!
-                                    </p>
+                                    {errors.title.required && (
+                                        <p className={styles["error"]}>
+                                            Title is required!
+                                        </p>
+                                    )}
+                                    {errors.title.minLength && (
+                                        <p className={styles["error"]}>
+                                            Title should be at least 6
+                                            characters!
+                                        </p>
+                                    )}
                                 </div>
                                 <div className={styles["category"]}>
                                     <label htmlFor="category">Category</label>
                                     <CategorySelectBtn />
 
-                                    <p className={styles["error"]}>
-                                        Category is required!
-                                    </p>
+                                    {errors.category.required && (
+                                        <p className={styles["error"]}>
+                                            Category is required!
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             {action === "create" && (
@@ -191,14 +217,33 @@ export const ProductActionPage = ({ action }) => {
                                     name="description"
                                     id="description"
                                     placeholder="Write some description..."
+                                    value={inputData.description}
+                                    onChange={onChangeHandler}
+                                    onBlur={(e) => {
+                                        validators.lengthValidator(
+                                            25,
+                                            e.target.name,
+                                            inputData.description,
+                                            setErrors
+                                        );
+                                        validators.requiredValidator(
+                                            e.target.name,
+                                            inputData.description,
+                                            setErrors
+                                        );
+                                    }}
                                 />
-                                <p className={styles["error"]}>
-                                    Description is required!
-                                </p>
-                                <p className={styles["error"]}>
-                                    Description should be at least 25
-                                    characters!
-                                </p>
+                                {errors.description.required && (
+                                    <p className={styles["error"]}>
+                                        Description is required!
+                                    </p>
+                                )}
+                                {errors.description.minLength && (
+                                    <p className={styles["error"]}>
+                                        Description should be at least 25
+                                        characters!
+                                    </p>
+                                )}
                             </div>
                             <div
                                 className={`${styles["price"]} ${styles["field"]}`}
@@ -210,13 +255,33 @@ export const ProductActionPage = ({ action }) => {
                                     name="price"
                                     placeholder="Add price"
                                     id="price"
+                                    value={inputData.price}
+                                    onChange={onChangeHandler}
+                                    onBlur={(e) => {
+                                        validators.minNumberValidator(
+                                            0.01,
+                                            e.target.name,
+                                            inputData.price,
+                                            setErrors
+                                        );
+                                        validators.requiredValidator(
+                                            e.target.name,
+                                            inputData.price,
+                                            setErrors
+                                        );
+                                    }}
                                 />
-                                <p className={styles["error"]}>
-                                    Price is required!
-                                </p>
-                                <p className={styles["error"]}>
-                                    Price should be minimum 0.01$!
-                                </p>
+
+                                {errors.price.required && (
+                                    <p className={styles["error"]}>
+                                        Price is required!
+                                    </p>
+                                )}
+                                {errors.price.minNum && (
+                                    <p className={styles["error"]}>
+                                        Price should be minimum 0.01$!
+                                    </p>
+                                )}
                             </div>
                             <div
                                 className={`${styles["location"]} ${styles["field"]}`}
@@ -228,10 +293,22 @@ export const ProductActionPage = ({ action }) => {
                                     name="location"
                                     placeholder="Town"
                                     id="location"
+                                    value={inputData.location}
+                                    onChange={onChangeHandler}
+                                    onBlur={(e) =>
+                                        validators.requiredValidator(
+                                            e.target.name,
+                                            inputData.location,
+                                            setErrors
+                                        )
+                                    }
                                 />
-                                <p className={styles["error"]}>
-                                    Location is required!
-                                </p>
+
+                                {errors.location.required && (
+                                    <p className={styles["error"]}>
+                                        Location is required!
+                                    </p>
+                                )}
                             </div>
                             <div
                                 className={`${styles["contacts"]} ${styles["field"]}`}
@@ -243,7 +320,21 @@ export const ProductActionPage = ({ action }) => {
                                         type="number"
                                         name="number"
                                         id="number"
+                                        value={inputData.price}
+                                        onChange={onChangeHandler}
+                                        onBlur={(e) =>
+                                            validators.requiredValidator(
+                                                e.target.name,
+                                                inputData.price,
+                                                setErrors
+                                            )
+                                        }
                                     />
+                                    {errors.location.required && (
+                                        <p className={styles["error"]}>
+                                            Phone number is required!
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             <div className={styles["btn-container"]}>
