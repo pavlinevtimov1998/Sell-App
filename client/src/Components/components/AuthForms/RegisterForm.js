@@ -104,7 +104,12 @@ export const RegisterForm = () => {
                         value={data.password}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.passwordValidator(data, setFormErrors);
+                            validators.lengthValidator(
+                                6,
+                                e.target.name,
+                                data.password,
+                                setFormErrors
+                            );
                             validators.requiredValidator(
                                 e.target.name,
                                 data.password,
