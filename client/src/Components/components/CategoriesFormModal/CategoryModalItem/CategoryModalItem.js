@@ -4,11 +4,7 @@ import styles from "./CategoryModalItem.module.css";
 
 import { SubcategoryModalItem } from "../SubcategoryModalItem/SubcategoryModalItem";
 
-export const CategoryModalItem = ({
-    category,
-    chooseCategoryHandler,
-    closeCategoriesModal,
-}) => {
+export const CategoryModalItem = ({ category, closeCategoriesModal }) => {
     const [isSubcatOpen, setIsSubcatOpen] = useState(false);
 
     const toggleSubcategoryOptions = () => setIsSubcatOpen((state) => !state);
@@ -49,7 +45,6 @@ export const CategoryModalItem = ({
                             key={s._id}
                             toggleSubcategoryOptions={toggleSubcategoryOptions}
                             closeCategoriesModal={closeCategoriesModal}
-                            chooseCategoryHandler={chooseCategoryHandler}
                             subcategory={s}
                             category={category}
                         />

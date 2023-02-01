@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FormContext } from "../../../../Contexts/FormContext";
 import { CategoriesFormModal } from "../CategoriesFormModal";
 import styles from "./CategorySelectBtn.module.css";
 
-export const CategorySelectBtn = ({ categories, inputData }) => {
+export const CategorySelectBtn = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [data, setData] = useState(null);
-
-    const chooseCategoryHandler = (category) => setData(category);
-
-    const clearCategoryData = () => setData(null);
+    const { clearCategoryHandler, selectedCategory } = useContext(FormContext);
 
     const openCategoriesModal = () => setIsModalOpen(true);
 
@@ -18,28 +15,28 @@ export const CategorySelectBtn = ({ categories, inputData }) => {
         <>
             <div
                 className={`${styles["select-wrapper"]} ${
-                    styles[data ? "selected" : ""]
+                    styles[selectedCategory ? "selected" : ""]
                 }`}
             >
-                {data ? (
+                {selectedCategory ? (
                     <div className={styles["selected-category"]}>
                         <div className={styles["category-content"]}>
                             <img
                                 className={styles["category-img"]}
-                                src={data.category.image}
-                                alt={data.category.title}
+                                src={selectedCategory.category.image}
+                                alt={selectedCategory.category.title}
                             />
                             <div className={styles["title-container"]}>
                                 <p className={styles["subcategory-title"]}>
-                                    {data.subcategory}
+                                    {selectedCategory.subcategory}
                                 </p>
                                 <p className={styles["category-title"]}>
-                                    {data.category.title}
+                                    {selectedCategory.category.title}
                                 </p>
                             </div>
                         </div>
                         <button
-                            onClick={clearCategoryData}
+                            onClick={clearCategoryHandler}
                             type="button"
                             className={styles["clear-btn"]}
                         >
@@ -69,9 +66,7 @@ export const CategorySelectBtn = ({ categories, inputData }) => {
 
             <CategoriesFormModal
                 isModalOpen={isModalOpen}
-                categories={categories}
                 closeCategoriesModal={closeCategoriesModal}
-                chooseCategoryHandler={chooseCategoryHandler}
             />
         </>
     );

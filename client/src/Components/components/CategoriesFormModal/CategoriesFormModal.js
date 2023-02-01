@@ -1,13 +1,12 @@
+import { useContext } from "react";
+import { FormContext } from "../../../Contexts/FormContext";
 import styles from "./CategoriesFormModal.module.css";
 
 import { CategoryModalItem } from "./CategoryModalItem/CategoryModalItem";
 
-export const CategoriesFormModal = ({
-    isModalOpen,
-    categories,
-    closeCategoriesModal,
-    chooseCategoryHandler,
-}) => {
+export const CategoriesFormModal = ({ isModalOpen, closeCategoriesModal }) => {
+    const { categories } = useContext(FormContext);
+
     return (
         <div
             className={`${styles["categories-modal-wrapper"]} ${
@@ -41,7 +40,6 @@ export const CategoriesFormModal = ({
                         {categories.map((c) => (
                             <CategoryModalItem
                                 closeCategoriesModal={closeCategoriesModal}
-                                chooseCategoryHandler={chooseCategoryHandler}
                                 key={c._id}
                                 category={c}
                             />
