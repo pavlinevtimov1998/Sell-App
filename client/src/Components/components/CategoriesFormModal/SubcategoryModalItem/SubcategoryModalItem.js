@@ -4,17 +4,23 @@ export const SubcategoryModalItem = ({
     subcategory,
     category,
     chooseCategoryHandler,
+    closeCategoriesModal,
+    toggleSubcategoryOptions,
 }) => {
     return (
         <li className={styles["item"]}>
             <button
-                onClick={(e) =>
-                    chooseCategoryHandler(e, {
-                        categoryTitle: category.title,
-                        image: category.image,
-                        subcategoryTitle: subcategory.title,
-                    })
-                }
+                onClick={() => {
+                    chooseCategoryHandler({
+                        category: {
+                            title: category.title,
+                            image: category.image,
+                        },
+                        subcategory: subcategory.title,
+                    });
+                    toggleSubcategoryOptions();
+                    closeCategoriesModal();
+                }}
                 type="button"
                 className={styles["subcategory-btn"]}
             >
