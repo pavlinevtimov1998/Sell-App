@@ -25,6 +25,7 @@ export const requiredValidator = (name, value, setErrors) => {
             ...state,
             [name]: { ...state[name], required: true },
         }));
+        return false;
     } else {
         setErrors((state) => ({
             ...state,
@@ -34,17 +35,33 @@ export const requiredValidator = (name, value, setErrors) => {
     }
 };
 
-export const passwordValidator = (data, setErrors) => {
-    if (data.password.length < 6 && data.password !== "") {
+export const lengthValidator = (neededLength, name, value, setErrors) => {
+    if (value.length < neededLength && value !== "") {
         setErrors((state) => ({
             ...state,
-            password: { ...state.password, minLength: true },
+            [name]: { ...state[name], minLength: true },
         }));
         return false;
     } else {
         setErrors((state) => ({
             ...state,
-            password: { ...state.password, minLength: false },
+            [name]: { ...state[name], minLength: false },
+        }));
+        return true;
+    }
+};
+
+export const minNumberValidator = (min, name, value, setErrors) => {
+    if (+value < min && value !== "") {
+        setErrors((state) => ({
+            ...state,
+            [name]: { ...state[name], minNum: true },
+        }));
+        return false;
+    } else {
+        setErrors((state) => ({
+            ...state,
+            [name]: { ...state[name], minNum: false },
         }));
         return true;
     }
@@ -83,7 +100,7 @@ export const canSubmit = (data, errors, setErrors) => {
 
     if (
         !emailValidator(data, setErrors) ||
-        !passwordValidator(data, setErrors) ||
+        !lengthValidator(data, setErrors) ||
         !rePassValidator(data, setErrors)
     ) {
         return false;
