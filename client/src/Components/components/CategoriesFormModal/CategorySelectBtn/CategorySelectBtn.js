@@ -64,10 +64,11 @@ export const CategorySelectBtn = () => {
                 )}
             </div>
 
-            <CategoriesFormModal
-                isModalOpen={isModalOpen}
-                closeCategoriesModal={closeCategoriesModal}
-            />
+            {isModalOpen && (
+                <CategoriesFormModal
+                    closeCategoriesModal={closeCategoriesModal}
+                />
+            )}
         </>
     );
 };
