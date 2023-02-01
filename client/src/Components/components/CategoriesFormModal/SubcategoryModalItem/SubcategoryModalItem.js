@@ -21,7 +21,6 @@ export const SubcategoryModalItem = ({
                         },
                         subcategory: subcategory.title,
                     });
-                    toggleSubcategoryOptions();
                     closeCategoriesModal();
                 }}
                 type="button"
