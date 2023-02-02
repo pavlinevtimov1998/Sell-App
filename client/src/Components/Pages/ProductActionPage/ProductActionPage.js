@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFetch } from "../../../Hooks/useFetch";
 import { FormContext } from "../../../Contexts/FormContext";
 
@@ -9,6 +9,7 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { CategorySelectBtn } from "../../components/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
 import * as validators from "../../../Utils/validators";
 import { getAllCategories } from "../../../Services/categoriesService";
+import { createProduct } from "../../../Services/productsService";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 
@@ -18,8 +19,9 @@ export const ProductActionPage = ({ action }) => {
     const [inputData, setInputData] = useState({
         title: "",
         price: "",
+        images: [],
         location: "",
-        contacts: "",
+        phoneNumber: "",
         description: "",
     });
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,6 +32,9 @@ export const ProductActionPage = ({ action }) => {
         },
         category: {
             required: false,
+        },
+        images: {
+            required: true,
         },
         description: {
             required: false,
@@ -42,8 +47,9 @@ export const ProductActionPage = ({ action }) => {
         location: {
             required: false,
         },
-        contacts: "",
+        phoneNumber: "",
     });
+    const inputRef = useRef(null);
 
     useEffect(() => {
         if (data) {
@@ -61,8 +67,32 @@ export const ProductActionPage = ({ action }) => {
 
     const clearCategoryHandler = () => setSelectedCategory(null);
 
+    const addImages = () => {
+        inputRef.current.click();
+    };
+
+    const imagesHandler = (e) =>
+        setInputData((state) => ({
+            ...state,
+            [e.target.name]: e.target.files,
+        }));
+
     const submitHandler = (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        Object.entries(inputData).forEach(([key, value]) => {
+            if (key === "images") {
+                [...value].forEach((img) =>
+                    formData.append("images", img, img.name)
+                );
+            }
+            formData.append(key, value);
+        });
+        formData.append("category", selectedCategory.category.title);
+        formData.append("subcategory", selectedCategory.subcategory);
+
+        createProduct(formData).then((res) => console.log(res));
     };
 
     return (
@@ -141,67 +171,30 @@ export const ProductActionPage = ({ action }) => {
                                 >
                                     <h4>Photos</h4>
                                     <div className={styles["photos-container"]}>
-                                        <div>
+                                        <div className={styles["image-field"]}>
                                             <input
+                                                className={styles["img-input"]}
                                                 type="file"
                                                 accept="image/png, image/jpeg"
-                                                placeholder="Add photo"
+                                                multiple
+                                                name="images"
+                                                ref={inputRef}
+                                                onChange={imagesHandler}
                                             />
                                             <button
                                                 type="button"
-                                                className={
-                                                    styles["image-upload"]
-                                                }
+                                                className={styles["img-btn"]}
+                                                onClick={addImages}
                                             >
                                                 <span
                                                     className={
-                                                        styles["img-name"]
+                                                        styles[
+                                                            "img-btn-content"
+                                                        ]
                                                     }
                                                 >
-                                                    Add photo
-                                                </span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="file"
-                                                accept="image/png, image/jpeg"
-                                                placeholder="Add photo"
-                                            />
-                                            <button
-                                                type="button"
-                                                className={
-                                                    styles["image-upload"]
-                                                }
-                                            >
-                                                <mat-icon>upload_file</mat-icon>
-                                                <span
-                                                    className={
-                                                        styles["img-name"]
-                                                    }
-                                                >
-                                                    Add photo
-                                                </span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="file"
-                                                accept="image/png, image/jpeg"
-                                                placeholder="Add photo"
-                                            />
-                                            <button
-                                                type="button"
-                                                className={
-                                                    styles["image-upload"]
-                                                }
-                                            >
-                                                <span
-                                                    className={
-                                                        styles["img-name"]
-                                                    }
-                                                >
-                                                    Add photo
+                                                    Click here to add one or
+                                                    more photos ...
                                                 </span>
                                             </button>
                                         </div>
@@ -318,19 +311,19 @@ export const ProductActionPage = ({ action }) => {
                                     <label htmlFor="number">Phone number</label>
                                     <input
                                         type="number"
-                                        name="number"
+                                        name="phoneNumber"
                                         id="number"
-                                        value={inputData.price}
+                                        value={inputData.phoneNumber}
                                         onChange={onChangeHandler}
                                         onBlur={(e) =>
                                             validators.requiredValidator(
                                                 e.target.name,
-                                                inputData.price,
+                                                inputData.phoneNumber,
                                                 setErrors
                                             )
                                         }
                                     />
-                                    {errors.location.required && (
+                                    {errors.phoneNumber.required && (
                                         <p className={styles["error"]}>
                                             Phone number is required!
                                         </p>
