@@ -15,15 +15,17 @@ async function request(url, options) {
     }
 }
 
-function createOptions(method = "GET", data) {
+function createOptions(method = "GET", data, isMultipart) {
     const options = {
         method,
         credentials: "include",
         headers: {},
     };
 
-    if (data) {
-        options.headers["Content-Type"] = "application/json";
+    if (isMultipart) {
+        options["body"] = data;
+    } else if (data && !isMultipart) {
+        options.headers["Content-Type"] = "aplication/json";
         options["body"] = JSON.stringify(data);
     }
 
@@ -32,8 +34,8 @@ function createOptions(method = "GET", data) {
 
 export const getRequest = (url) => request(url, createOptions("GET"));
 
-export const postRequest = (url, data) =>
-    request(url, createOptions("POST", data));
+export const postRequest = (url, data, isMultipart) =>
+    request(url, createOptions("POST", data, isMultipart));
 
 export const patchRequest = (url, data) =>
     request(url, createOptions("PATCH", data));
