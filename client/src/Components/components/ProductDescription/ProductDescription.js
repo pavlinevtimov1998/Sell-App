@@ -1,6 +1,8 @@
 import styles from "./ProductDescription.module.css";
 
 export const ProductDescription = ({ data }) => {
+    const hasNewLine = data.description.includes("\n");
+
     return (
         <section className={styles["prod-info"]}>
             <article className={styles["created-at"]}>
@@ -14,7 +16,17 @@ export const ProductDescription = ({ data }) => {
             </article>
             <article className={styles["description"]}>
                 <h3>Description</h3>
-                <p>{data.description}</p>
+                <ul>
+                    {hasNewLine ? (
+                        data.description.split("\n").map((line, i) => (
+                            <li key={i}>
+                                <br /> {line}
+                            </li>
+                        ))
+                    ) : (
+                        <p>{data.description}</p>
+                    )}
+                </ul>
             </article>
             <div className={styles["border"]} />
             {/* <article className={styles["action"]}>
