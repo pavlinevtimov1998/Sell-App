@@ -6,7 +6,6 @@ export const SubcategoryModalItem = ({
     subcategory,
     category,
     closeCategoriesModal,
-    toggleSubcategoryOptions,
 }) => {
     const { chooseCategoryHandler } = useContext(FormContext);
 
