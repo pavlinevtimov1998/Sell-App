@@ -1,0 +1,46 @@
+.more-info-field {
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.post-type,
+.condition-type {
+}
+
+.post-type-label,
+.condition-label {
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 3px;
+}
+
+.post-type-options,
+.condition-options {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.type-option,
+.condition-option {
+    background-color: #d5d7d8;
+    width: 160px;
+    height: 35px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.type-option:hover,
+.condition-option:hover {
+    background-color: #b0c8ff;
+}
+
+.selected {
+    background-color: #b0c8ff;
+}
