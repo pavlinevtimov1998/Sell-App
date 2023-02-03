@@ -1,18 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useFetch } from "../../../Hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 import { FormContext } from "../../../Contexts/FormContext";
+import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 import styles from "./ProductActionPage.module.css";
 
 import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { CategorySelectBtn } from "../../components/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
-import * as validators from "../../../Utils/validators";
+import { CategorySelectBtn } from "../../components/ProductForm/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
+import { ProductTypeOptions } from "../../components/ProductForm/ProductTypeOptions/ProductTypeOptions";
 import { getAllCategories } from "../../../Services/categoriesService";
 import { createProduct } from "../../../Services/productsService";
-import { useNavigate } from "react-router-dom";
-import { ErrorContext } from "../../../Contexts/ErrorContext";
-import { ProductTypeOptions } from "../../components/ProductForm/ProductTypeOptions/ProductTypeOptions";
+import * as validators from "../../../Utils/validators";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 

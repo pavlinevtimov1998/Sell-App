@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { FormContext } from "../../../Contexts/FormContext";
+import { FormContext } from "../../../../Contexts/FormContext";
+
 import styles from "./CategoriesFormModal.module.css";
 
 import { CategoryModalItem } from "./CategoryModalItem/CategoryModalItem";

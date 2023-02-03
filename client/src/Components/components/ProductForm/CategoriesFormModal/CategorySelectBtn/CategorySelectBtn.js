@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { FormContext } from "../../../../Contexts/FormContext";
+import { FormContext } from "../../../../../Contexts/FormContext";
 import { CategoriesFormModal } from "../CategoriesFormModal";
+
 import styles from "./CategorySelectBtn.module.css";
 
 export const CategorySelectBtn = () => {
