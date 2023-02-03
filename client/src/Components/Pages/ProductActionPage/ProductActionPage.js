@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useFetch } from "../../../Hooks/useFetch";
 import { FormContext } from "../../../Contexts/FormContext";
 
@@ -10,22 +10,25 @@ import { CategorySelectBtn } from "../../components/CategoriesFormModal/Category
 import * as validators from "../../../Utils/validators";
 import { getAllCategories } from "../../../Services/categoriesService";
 import { createProduct } from "../../../Services/productsService";
+import { useNavigate } from "react-router-dom";
+import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 
 export const ProductActionPage = ({ action }) => {
-    const { isLoading, data } = useFetch(getAllCategories);
+    const { isLoading, setIsLoading, data } = useFetch(getAllCategories);
+    const { setErrors } = useContext(ErrorContext);
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
         title: "",
         price: "",
-        images: [],
+        images: "",
         location: "",
         phoneNumber: "",
         description: "",
     });
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [errors, setErrors] = useState({
+    const [errors, setFormErrors] = useState({
         title: {
             required: false,
             minLength: false,
@@ -34,7 +37,7 @@ export const ProductActionPage = ({ action }) => {
             required: false,
         },
         images: {
-            required: true,
+            required: false,
         },
         description: {
             required: false,
@@ -47,9 +50,12 @@ export const ProductActionPage = ({ action }) => {
         location: {
             required: false,
         },
-        phoneNumber: "",
+        phoneNumber: {
+            required: false,
+        },
     });
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (data) {
@@ -80,6 +86,19 @@ export const ProductActionPage = ({ action }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
+        if (
+            validators.hasEmpty(
+                {
+                    ...inputData,
+                    category: selectedCategory?.category?.title || "",
+                },
+                errors,
+                setFormErrors
+            )
+        ) {
+            return;
+        }
+
         const formData = new FormData();
         Object.entries(inputData).forEach(([key, value]) => {
             if (key === "images") {
@@ -89,12 +108,21 @@ export const ProductActionPage = ({ action }) => {
             }
             formData.append(key, value);
         });
-        formData.append("category", selectedCategory.category.title);
+        formData.append("category", selectedCategory.category?.title);
         formData.append("subcategory", selectedCategory.subcategory);
 
-        createProduct(formData).then((res) => console.log(res));
+        setIsLoading(true);
+        createProduct(formData)
+            .then((res) => {
+                console.log(res);
+                navigate(res._id, { replace: true });
+            })
+            .catch((err) =>
+                setErrors({ message: err.message, hasError: true })
+            );
     };
 
+    //TODO: ADD MORE CREATE CHOICES AND BETTER STYLES!
     return (
         <MainLayout>
             {isLoading ? (
@@ -133,12 +161,12 @@ export const ProductActionPage = ({ action }) => {
                                                 6,
                                                 e.target.name,
                                                 inputData.title,
-                                                setErrors
+                                                setFormErrors
                                             );
                                             validators.requiredValidator(
                                                 e.target.name,
                                                 inputData.title,
-                                                setErrors
+                                                setFormErrors
                                             );
                                         }}
                                     />
@@ -198,6 +226,11 @@ export const ProductActionPage = ({ action }) => {
                                                 </span>
                                             </button>
                                         </div>
+                                        {errors.images.required && (
+                                            <p className={styles["error"]}>
+                                                Images are required!
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -217,12 +250,12 @@ export const ProductActionPage = ({ action }) => {
                                             25,
                                             e.target.name,
                                             inputData.description,
-                                            setErrors
+                                            setFormErrors
                                         );
                                         validators.requiredValidator(
                                             e.target.name,
                                             inputData.description,
-                                            setErrors
+                                            setFormErrors
                                         );
                                     }}
                                 />
@@ -255,12 +288,12 @@ export const ProductActionPage = ({ action }) => {
                                             0.01,
                                             e.target.name,
                                             inputData.price,
-                                            setErrors
+                                            setFormErrors
                                         );
                                         validators.requiredValidator(
                                             e.target.name,
                                             inputData.price,
-                                            setErrors
+                                            setFormErrors
                                         );
                                     }}
                                 />
@@ -292,7 +325,7 @@ export const ProductActionPage = ({ action }) => {
                                         validators.requiredValidator(
                                             e.target.name,
                                             inputData.location,
-                                            setErrors
+                                            setFormErrors
                                         )
                                     }
                                 />
@@ -319,7 +352,7 @@ export const ProductActionPage = ({ action }) => {
                                             validators.requiredValidator(
                                                 e.target.name,
                                                 inputData.phoneNumber,
-                                                setErrors
+                                                setFormErrors
                                             )
                                         }
                                     />
