@@ -21,9 +21,9 @@ export function useFetch(fetchData, deps = []) {
                     message: error.message,
                 }));
             });
-            
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setError, ...deps]);
 
-    return { isLoading, data };
+    return { isLoading, setIsLoading, data };
 }
