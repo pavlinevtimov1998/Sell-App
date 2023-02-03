@@ -40,7 +40,14 @@ export const RegisterForm = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (!validators.canSubmit(data, errors, setFormErrors)) {
+        if (
+            (validators.hasEmpty(data, errors, setFormErrors),
+            !validators.rePassValidator(
+                data.password,
+                data.rePassword,
+                setFormErrors
+            ))
+        ) {
             return;
         }
 
@@ -139,7 +146,11 @@ export const RegisterForm = () => {
                         value={data.rePassword}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.rePassValidator(data, setFormErrors);
+                            validators.rePassValidator(
+                                data.password,
+                                data.rePassword,
+                                setFormErrors
+                            );
                             validators.requiredValidator(
                                 e.target.name,
                                 data.rePassword,
