@@ -13,6 +13,7 @@ import { getAllCategories } from "../../../Services/categoriesService";
 import { createProduct } from "../../../Services/productsService";
 import * as validators from "../../../Utils/validators";
 import { FormButton } from "../../components/FormButton/FormButton";
+import { ImagesField } from "../../components/ProductForm/ImagesField/ImagesField";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 
@@ -59,7 +60,7 @@ export const ProductActionPage = ({ action }) => {
             required: false,
         },
     });
-    const inputRef = useRef(null);
+    const imagesInputRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -86,7 +87,7 @@ export const ProductActionPage = ({ action }) => {
         });
     };
     const addImages = () => {
-        inputRef.current.click();
+        imagesInputRef.current.click();
     };
 
     const imagesHandler = (e) =>
@@ -146,6 +147,9 @@ export const ProductActionPage = ({ action }) => {
                         categories,
                         selectedCategory,
                         selectTypeAndCondition,
+                        addImages,
+                        imagesHandler,
+                        imagesInputRef,
                     }}
                 >
                     <section className={styles["section"]}>
@@ -158,7 +162,9 @@ export const ProductActionPage = ({ action }) => {
                                 className={styles["form"]}
                             >
                                 <div className={styles["offer-field"]}>
-                                    <h4>What do you offer?</h4>
+                                    <h4 className={styles["form-field-title"]}>
+                                        What do you offer?
+                                    </h4>
                                     <div className={styles["title"]}>
                                         <label
                                             className={styles["label"]}
@@ -206,7 +212,10 @@ export const ProductActionPage = ({ action }) => {
                                         >
                                             Category
                                         </label>
-                                        <CategorySelectBtn />
+                                        <CategorySelectBtn
+                                            error={errors.images.required}
+                                            className={styles["images-field"]}
+                                        />
 
                                         {errors.category.required && (
                                             <p className={styles["error"]}>
@@ -215,60 +224,13 @@ export const ProductActionPage = ({ action }) => {
                                         )}
                                     </div>
                                 </div>
-                                {action === "create" && (
-                                    <div className={styles["images-field"]}>
-                                        <h4>Photos</h4>
-                                        <div
-                                            className={
-                                                styles["photos-container"]
-                                            }
-                                        >
-                                            <div
-                                                className={
-                                                    styles["image-input-field"]
-                                                }
-                                            >
-                                                <input
-                                                    className={
-                                                        styles["img-input"]
-                                                    }
-                                                    type="file"
-                                                    accept="image/png, image/jpeg"
-                                                    multiple
-                                                    name="images"
-                                                    ref={inputRef}
-                                                    onChange={imagesHandler}
-                                                />
-                                                <button
-                                                    type="button"
-                                                    className={
-                                                        styles["img-btn"]
-                                                    }
-                                                    onClick={addImages}
-                                                >
-                                                    <span
-                                                        className={
-                                                            styles[
-                                                                "img-btn-content"
-                                                            ]
-                                                        }
-                                                    >
-                                                        Click here to add one or
-                                                        more photos ...
-                                                    </span>
-                                                </button>
-                                            </div>
-                                            {errors.images.required && (
-                                                <p className={styles["error"]}>
-                                                    Images are required!
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
+
+                                {action === "create" && <ImagesField />}
 
                                 <div className={styles["description-field"]}>
-                                    <h4>Description</h4>
+                                    <h4 className={styles["form-field-title"]}>
+                                        Description
+                                    </h4>
                                     <textarea
                                         className={styles["description-input"]}
                                         name="description"
@@ -304,7 +266,9 @@ export const ProductActionPage = ({ action }) => {
                                 </div>
                                 <ProductTypeOptions />
                                 <div className={styles["price-field"]}>
-                                    <h4>Price</h4>
+                                    <h4 className={styles["form-field-title"]}>
+                                        Price
+                                    </h4>
                                     <input
                                         className={styles["price-input"]}
                                         type="number"
@@ -340,7 +304,9 @@ export const ProductActionPage = ({ action }) => {
                                     )}
                                 </div>
                                 <div className={styles["location-field"]}>
-                                    <h4>Location</h4>
+                                    <h4 className={styles["form-field-title"]}>
+                                        Location
+                                    </h4>
                                     <input
                                         className={styles["location-input"]}
                                         type="text"
@@ -365,7 +331,9 @@ export const ProductActionPage = ({ action }) => {
                                     )}
                                 </div>
                                 <div className={styles["contacts-field"]}>
-                                    <h4>Contact</h4>
+                                    <h4 className={styles["form-field-title"]}>
+                                        Contact
+                                    </h4>
                                     <div className={styles["phone"]}>
                                         <label
                                             className={styles["label"]}
