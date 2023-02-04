@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FormContext } from "../../../../Contexts/FormContext";
+
 import styles from "./ProductTypeOptions.module.css";
 
 export const ProductTypeOptions = () => {
     const [type, setType] = useState({ selected: "" });
     const [condition, setCondition] = useState({ selected: "" });
+    const { selectTypeAndCondition } = useContext(FormContext);
 
-    const changeType = (e) =>
+    const changeType = (e) => {
         setType((state) => ({
             selected: e.target.name === state.selected ? "" : e.target.name,
         }));
 
-    const changeCondition = (e) =>
+        selectTypeAndCondition("type", e.target.name);
+    };
+
+    const changeCondition = (e) => {
         setCondition((state) => ({
             selected: e.target.name === state.selected ? "" : e.target.name,
         }));
+
+        selectTypeAndCondition("condition", e.target.name);
+    };
 
     return (
         <div className={styles["more-info-field"]}>
