@@ -12,6 +12,7 @@ import { ProductTypeOptions } from "../../components/ProductForm/ProductTypeOpti
 import { getAllCategories } from "../../../Services/categoriesService";
 import { createProduct } from "../../../Services/productsService";
 import * as validators from "../../../Utils/validators";
+import { FormButton } from "../../components/FormButton/FormButton";
 
 // const getData = (action) => action === "create" ? getAllCategories() : ''
 
@@ -28,6 +29,10 @@ export const ProductActionPage = ({ action }) => {
         description: "",
     });
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [typeAndCondition, setTypeAndCondition] = useState({
+        type: "",
+        condition: "",
+    });
     const [errors, setFormErrors] = useState({
         title: {
             required: false,
@@ -73,6 +78,13 @@ export const ProductActionPage = ({ action }) => {
 
     const clearCategoryHandler = () => setSelectedCategory(null);
 
+    const selectTypeAndCondition = (name, value) => {
+        setTypeAndCondition((state) => {
+            return state[name] === value
+                ? { ...state, [name]: "" }
+                : { ...state, [name]: value };
+        });
+    };
     const addImages = () => {
         inputRef.current.click();
     };
@@ -133,6 +145,7 @@ export const ProductActionPage = ({ action }) => {
                         clearCategoryHandler,
                         categories,
                         selectedCategory,
+                        selectTypeAndCondition,
                     }}
                 >
                     <section className={styles["section"]}>
@@ -156,7 +169,7 @@ export const ProductActionPage = ({ action }) => {
                                         <input
                                             type="text"
                                             name="title"
-                                            className={styles["title-input"]}
+                                            className={`${styles["title-input"]} ${styles[""]}`}
                                             placeholder="Example: iPhone 14 with guarantee..."
                                             value={inputData.title}
                                             onChange={onChangeHandler}
@@ -382,34 +395,21 @@ export const ProductActionPage = ({ action }) => {
                                         )}
                                     </div>
                                 </div>
-                                <div className={styles["btns-container"]}>
-                                    {action === "create" ? (
-                                        <button
-                                            className={styles["btn"]}
-                                            type="submit"
+                                <div className={styles["btn-container"]}>
+                                    <FormButton
+                                        content={
+                                            action === "create" ? "Add" : "Edit"
+                                        }
+                                    >
+                                        <svg
+                                            width={20}
+                                            height={20}
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 448 512"
                                         >
-                                            <span
-                                                className={
-                                                    styles["sub-btn-content"]
-                                                }
-                                            >
-                                                Add
-                                            </span>
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className={styles["btn"]}
-                                            type="submit"
-                                        >
-                                            <span
-                                                className={
-                                                    styles["sub-btn-content"]
-                                                }
-                                            >
-                                                Edit
-                                            </span>
-                                        </button>
-                                    )}
+                                            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                                        </svg>
+                                    </FormButton>
                                 </div>
                             </form>
                         </div>
