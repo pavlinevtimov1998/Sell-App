@@ -91,36 +91,13 @@
 
 .img-btn-content {
     color: #002f34;
-    /* font-weight: 600; */
     font-size: 18px;
     letter-spacing: 0.2px;
 }
 
-.btns-container {
+.btn-container {
     align-items: flex-end;
     margin-bottom: 100px;
-}
-
-.btn {
-    display: flex;
-    background-color: #002f34;
-    border-radius: 6px;
-    border: solid 6px #002f34;
-    gap: 3px;
-    padding: 10px 50px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background-color: white;
-    color: #002f34;
-}
-
-.sub-btn-content {
-    font-size: 22px;
-    font-weight: 600;
 }
 
 .input-error {
@@ -129,9 +106,12 @@
 
 .error {
     color: red;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    font-weight: 500;
 }
 
-.btns-container {
+.btn-container {
     width: 100%;
     background-color: white;
     padding: 30px;
