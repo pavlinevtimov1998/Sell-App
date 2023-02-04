@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { useFetch } from "../../../Hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 import styles from "./DetailsPage.module.css";
 
@@ -16,6 +17,10 @@ export const DetailsPage = () => {
         () => getOneProduct(productId),
         [productId]
     );
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
     return (
         <>

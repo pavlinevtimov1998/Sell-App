@@ -7,11 +7,16 @@ import { ProductsList } from "../../components/ProductsList/ProductsList";
 
 import { getAllCategories } from "../../../Services/categoriesService";
 import { getLastProducts } from "../../../Services/productsService";
+import { useEffect } from "react";
 
 const getData = () => Promise.all([getAllCategories(), getLastProducts()]);
 
 export const HomePage = () => {
     const { isLoading, data } = useFetch(getData);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
     return (
         <>

@@ -18,7 +18,6 @@ export const useLocalStorage = () => {
     const removeUserData = () => {
         localStorage.removeItem(KEY);
         setUserData(null);
-        console.log(userData);
     };
 
     return { userData, addUserData, removeUserData };
