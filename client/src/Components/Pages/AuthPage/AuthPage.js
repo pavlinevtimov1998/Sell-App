@@ -1,12 +1,11 @@
 import styles from "./AuthPage.module.css";
 
-import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { RegisterForm } from "../../components/AuthForms/RegisterForm";
 import { LoginForm } from "../../components/AuthForms/LoginForm";
 
 export const AuthPage = ({ action }) => {
     return (
-        <MainLayout>
+        <>
             <section className={styles["auth-section"]}>
                 <article className={styles["form-wraper"]}>
                     {action === "register" ? <RegisterForm /> : <LoginForm />}
@@ -40,6 +39,6 @@ export const AuthPage = ({ action }) => {
                     </article>
                 </article>
             </section>
-        </MainLayout>
+        </>
     );
 };
