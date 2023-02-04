@@ -5,6 +5,7 @@ import { AuthPage } from "../../Pages/AuthPage/AuthPage";
 import { Logout } from "../Logout/Logout";
 import { DetailsPage } from "../../Pages/DetailsPage/DetailsPage";
 import { ProductActionPage } from "../../Pages/ProductActionPage/ProductActionPage";
+import { ErrorPage } from "../../Pages/ErrorPage/ErrorPage";
 
 export const AppRouter = () => {
     return (
@@ -24,6 +25,8 @@ export const AppRouter = () => {
                 path="/register"
             />
             <Route element={<Logout />} path="/logout" />
+
+            <Route element={<ErrorPage />} path="*" />
         </Routes>
     );
 };
