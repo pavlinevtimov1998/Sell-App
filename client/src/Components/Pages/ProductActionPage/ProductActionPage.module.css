@@ -26,18 +26,18 @@
     align-items: center;
 }
 
+.form-field-title {
+    margin-bottom: 15px;
+}
+
 .offer-field,
-.images-field,
 .description-field,
 .price-field,
 .location-field,
 .contacts-field {
     width: 100%;
-    background-color: white;
+    background-color: #fff;
     padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
@@ -49,6 +49,7 @@
     flex-direction: column;
     gap: 5px;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .label {
@@ -73,33 +74,6 @@
     height: 250px;
 }
 
-.img-input {
-    display: none;
-}
-
-.image-input-field {
-    width: 100%;
-}
-
-.img-btn {
-    background-color: #ebf1ff;
-    width: 100%;
-    height: 140px;
-    border-radius: 16px;
-    border: 2px solid #e6e6e6;
-}
-
-.img-btn-content {
-    color: #002f34;
-    font-size: 18px;
-    letter-spacing: 0.2px;
-}
-
-.btn-container {
-    align-items: flex-end;
-    margin-bottom: 100px;
-}
-
 .input-error {
     border-left: red solid 4px;
 }
@@ -116,6 +90,8 @@
     background-color: white;
     padding: 30px;
     display: flex;
+    align-items: flex-end;
+    margin-bottom: 100px;
     flex-direction: column;
     gap: 20px;
     border-radius: 8px;
