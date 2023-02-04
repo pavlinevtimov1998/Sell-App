@@ -6,7 +6,6 @@ import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 import styles from "./ProductActionPage.module.css";
 
-import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { CategorySelectBtn } from "../../components/ProductForm/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
 import { ProductTypeOptions } from "../../components/ProductForm/ProductTypeOptions/ProductTypeOptions";
@@ -124,7 +123,7 @@ export const ProductActionPage = ({ action }) => {
     };
 
     return (
-        <MainLayout>
+        <>
             {isLoading ? (
                 <Spinner />
             ) : (
@@ -417,6 +416,6 @@ export const ProductActionPage = ({ action }) => {
                     </section>
                 </FormContext.Provider>
             )}
-        </MainLayout>
+        </>
     );
 };
