@@ -14,6 +14,7 @@ import { createProduct } from "../../../Services/productsService";
 import * as validators from "../../../Utils/validators";
 import { FormButton } from "../../components/FormButton/FormButton";
 import { ImagesField } from "../../components/ProductForm/ImagesField/ImagesField";
+import { LocationField } from "../../components/ProductForm/LocationField/LocationField";
 
 export const ProductActionPage = ({ action }) => {
     const { isLoading, data } = useFetch(getAllCategories);
@@ -331,35 +332,20 @@ export const ProductActionPage = ({ action }) => {
                                         </p>
                                     )}
                                 </div>
-                                <div className={styles["location-field"]}>
-                                    <h4 className={styles["form-field-title"]}>
-                                        Location
-                                    </h4>
-                                    <input
-                                        className={`${
-                                            styles["location-input"]
-                                        } ${inputError("location")}`}
-                                        type="text"
-                                        name="location"
-                                        placeholder="Town"
-                                        id="location"
-                                        value={inputData.location}
-                                        onChange={onChangeHandler}
-                                        onBlur={(e) =>
-                                            validators.requiredValidator(
-                                                e.target.name,
-                                                inputData.location,
-                                                setFormErrors
-                                            )
-                                        }
-                                    />
 
-                                    {errors.location.required && (
-                                        <p className="error">
-                                            Location is required!
-                                        </p>
+                                <LocationField
+                                    value={inputData.location}
+                                    inputError={inputError}
+                                    requiredValidator={validators.requiredValidator.bind(
+                                        null,
+                                        "location",
+                                        inputData.location,
+                                        setFormErrors
                                     )}
-                                </div>
+                                    error={errors.location.required}
+                                    onChangeHandler={onChangeHandler}
+                                />
+
                                 <div className={styles["contacts-field"]}>
                                     <h4 className={styles["form-field-title"]}>
                                         Contact
