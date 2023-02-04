@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext";
+import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 import { login } from "../../../Services/userService";
 
@@ -10,27 +11,41 @@ export const LoginForm = () => {
     const { handleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const [data, setData] = useState({ email: "", password: "" });
-    const [errors, setErrors] = useState({ email: false, password: false });
+    const [errors, setFormErrors] = useState({ email: false, password: false });
+    const [submitError, setSubmitError] = useState({
+        email: false,
+        password: false,
+    });
+    const { setError } = useContext(ErrorContext);
 
     const onChangeHandler = (e) =>
         setData((state) => ({ ...state, [e.target.name]: e.target.value }));
 
     const validator = (e) => {
         if (e.target.value === "") {
-            setErrors((errors) => ({
+            setFormErrors((errors) => ({
                 ...errors,
                 [e.target.name]: true,
             }));
         } else {
-            setErrors((errors) => ({
+            setFormErrors((errors) => ({
                 ...errors,
                 [e.target.name]: false,
             }));
         }
+        setSubmitError({ email: false, password: false });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        if (data.email === "" || data.password === "") {
+            setFormErrors((state) => ({
+                email: data.email === "",
+                password: data.password === "",
+            }));
+            return;
+        }
 
         login(data)
             .then((result) => {
@@ -38,6 +53,8 @@ export const LoginForm = () => {
                 navigate("/", { replace: true });
             })
             .catch((err) => {
+                setSubmitError({ email: true, password: true });
+                setError({ message: err.message, hasError: true });
                 console.log(err);
             });
     };
@@ -54,7 +71,7 @@ export const LoginForm = () => {
                     </label>
                     <input
                         className={`${styles["email-input"]} ${
-                            errors.email ? styles["input-error"] : ""
+                            submitError.email && styles["input-error"]
                         }`}
                         type="email"
                         name="email"
@@ -74,7 +91,7 @@ export const LoginForm = () => {
                     </label>
                     <input
                         className={`${styles["pass-input"]} ${
-                            errors.password ? styles["input-error"] : ""
+                            submitError.password && styles["input-error"]
                         }`}
                         type="password"
                         name="password"
