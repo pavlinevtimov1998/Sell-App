@@ -6,20 +6,19 @@ import styles from "./DetailsPage.module.css";
 import { getOneProduct } from "../../../Services/productsService";
 
 import { Carousel } from "../../components/Carousel/Carousel";
-import { MainLayout } from "../../components/Core/MainLayout/MainLayout";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { ProductDescription } from "../../components/ProductDescription/ProductDescription";
 import { Map } from "../../components/Map/Map";
 
 export const DetailsPage = () => {
     const { productId } = useParams();
-    const { isLoading, data, error } = useFetch(
+    const { isLoading, data } = useFetch(
         () => getOneProduct(productId),
         [productId]
     );
 
     return (
-        <MainLayout>
+        <>
             {isLoading ? (
                 <Spinner />
             ) : (
@@ -56,6 +55,6 @@ export const DetailsPage = () => {
                     <ProductDescription data={data.product} />
                 </main>
             )}
-        </MainLayout>
+        </>
     );
 };
