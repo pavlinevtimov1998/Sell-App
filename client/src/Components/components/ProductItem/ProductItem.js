@@ -10,7 +10,7 @@ export const ProductItem = ({ product }) => {
     return (
         <div className={styles["item"]}>
             <Link
-                to={`/product/${product._id}`}
+                to={`/details/${product._id}`}
                 className={styles["img-container"]}
             >
                 <img
@@ -20,7 +20,7 @@ export const ProductItem = ({ product }) => {
                 />
             </Link>
             <Link
-                to={`/product/${product._id}`}
+                to={`/details/${product._id}`}
                 className={styles["title-container"]}
             >
                 <h3 className={styles["title"]}>{product.title}</h3>
