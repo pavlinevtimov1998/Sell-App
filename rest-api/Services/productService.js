@@ -116,6 +116,11 @@ async function isOwnProduct(productId, userId) {
     return product;
 }
 
+const getTowns = (city) =>
+    Town.find({})
+        .regex("city", new RegExp(`^${city}`, "i"))
+        .select("city");
+
 module.exports = {
     getProducts,
     getProductsCount,
@@ -124,4 +129,5 @@ module.exports = {
     editProduct,
     editProductImages,
     deleteProduct,
+    getTowns,
 };
