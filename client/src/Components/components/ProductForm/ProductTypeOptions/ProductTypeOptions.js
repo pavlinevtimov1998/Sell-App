@@ -1,12 +1,10 @@
-import { useContext, useState } from "react";
-import { FormContext } from "../../../../Contexts/FormContext";
+import { useState } from "react";
 
 import styles from "./ProductTypeOptions.module.css";
 
-export const ProductTypeOptions = () => {
+export const ProductTypeOptions = ({ selectTypeAndCondition, error }) => {
     const [type, setType] = useState({ selected: "" });
     const [condition, setCondition] = useState({ selected: "" });
-    const { selectTypeAndCondition } = useContext(FormContext);
 
     const changeType = (e) => {
         setType((state) => ({
@@ -59,6 +57,7 @@ export const ProductTypeOptions = () => {
                         Non-business
                     </button>
                 </div>
+                {error.type && <p className="error">Type is requried!</p>}
             </div>
             <div className={styles["condition-type"]}>
                 <p className={styles["condition-label"]}>Condition</p>
@@ -90,6 +89,9 @@ export const ProductTypeOptions = () => {
                         Used
                     </button>
                 </div>
+                {error.condition && (
+                    <p className="error">Condition is requried!</p>
+                )}
             </div>
         </div>
     );
