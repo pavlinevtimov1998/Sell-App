@@ -1,14 +1,8 @@
-import styles from "./ProductItem.module.css";
-
 import { Link } from "react-router-dom";
 
-const dateParser = (date) => {
-    const day = new Date(date).getDate();
-    const year = new Date(date).getFullYear();
-    const month = new Date(date).getMonth() + 1;
+import styles from "./ProductItem.module.css";
 
-    return `${year}/${month}/${day}`;
-};
+import { dateParser } from "../../../Utils/util";
 
 export const ProductItem = ({ product }) => {
     const createdAt = dateParser(product.createdAt);
