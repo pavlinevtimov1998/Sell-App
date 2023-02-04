@@ -31,9 +31,7 @@ export const ImagesField = ({ error }) => {
                         </span>
                     </button>
                 </div>
-                {error && (
-                    <p className={styles["error"]}>Images are required!</p>
-                )}
+                {error && <p className="error">Images are required!</p>}
             </div>
         </div>
     );
