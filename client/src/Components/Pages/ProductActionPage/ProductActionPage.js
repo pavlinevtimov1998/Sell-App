@@ -15,10 +15,9 @@ import * as validators from "../../../Utils/validators";
 import { FormButton } from "../../components/FormButton/FormButton";
 import { ImagesField } from "../../components/ProductForm/ImagesField/ImagesField";
 
-// const getData = (action) => action === "create" ? getAllCategories() : ''
-
 export const ProductActionPage = ({ action }) => {
-    const { isLoading, setIsLoading, data } = useFetch(getAllCategories);
+    const { isLoading, data } = useFetch(getAllCategories);
+    const [isSubmited, setIsSubmited] = useState(false);
     const { setErrors } = useContext(ErrorContext);
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
@@ -42,6 +41,9 @@ export const ProductActionPage = ({ action }) => {
         category: {
             required: false,
         },
+        subcategory: {
+            required: false,
+        },
         images: {
             required: false,
         },
@@ -57,6 +59,12 @@ export const ProductActionPage = ({ action }) => {
             required: false,
         },
         phoneNumber: {
+            required: false,
+        },
+        type: {
+            required: false,
+        },
+        condition: {
             required: false,
         },
     });
@@ -75,7 +83,10 @@ export const ProductActionPage = ({ action }) => {
             [e.target.name]: e.target.value,
         }));
 
-    const chooseCategoryHandler = (category) => setSelectedCategory(category);
+    const chooseCategoryHandler = (category) => {
+        setSelectedCategory(category);
+        setFormErrors((state) => ({ ...state, category: { required: false } }));
+    };
 
     const clearCategoryHandler = () => setSelectedCategory(null);
 
@@ -85,35 +96,39 @@ export const ProductActionPage = ({ action }) => {
                 ? { ...state, [name]: "" }
                 : { ...state, [name]: value };
         });
+        setFormErrors((state) => ({ ...state, [name]: { required: false } }));
     };
     const addImages = () => {
         imagesInputRef.current.click();
     };
 
-    const imagesHandler = (e) =>
+    const imagesHandler = (e) => {
         setInputData((state) => ({
             ...state,
             [e.target.name]: e.target.files,
         }));
+        setFormErrors((state) => ({ ...state, images: { required: false } }));
+    };
+
+    const inputError = (name) =>
+        Object.values(errors[name]).includes(true) ? "input-error" : "";
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if (
-            validators.hasEmpty(
-                {
-                    ...inputData,
-                    category: selectedCategory?.category?.title || "",
-                },
-                errors,
-                setFormErrors
-            )
-        ) {
+        const allData = {
+            ...inputData,
+            category: selectedCategory?.category?.title || "",
+            subcategory: selectedCategory?.subcategory || "",
+            ...typeAndCondition,
+        };
+
+        if (validators.hasEmpty(allData, errors, setFormErrors)) {
             return;
         }
 
         const formData = new FormData();
-        Object.entries(inputData).forEach(([key, value]) => {
+        Object.entries(allData).forEach(([key, value]) => {
             if (key === "images") {
                 [...value].forEach((img) =>
                     formData.append("images", img, img.name)
@@ -121,18 +136,17 @@ export const ProductActionPage = ({ action }) => {
             }
             formData.append(key, value);
         });
-        formData.append("category", selectedCategory.category?.title);
-        formData.append("subcategory", selectedCategory.subcategory);
 
-        setIsLoading(true);
+        setIsSubmited(true);
         createProduct(formData)
             .then((res) => {
                 console.log(res);
-                navigate(res._id, { replace: true });
+                navigate(`/details/${res._id}`, { replace: true });
             })
-            .catch((err) =>
-                setErrors({ message: err.message, hasError: true })
-            );
+            .catch((err) => {
+                setIsSubmited(false);
+                setErrors({ message: err.message, hasError: true });
+            });
     };
 
     return (
@@ -175,7 +189,9 @@ export const ProductActionPage = ({ action }) => {
                                         <input
                                             type="text"
                                             name="title"
-                                            className={`${styles["title-input"]} ${styles[""]}`}
+                                            className={`${
+                                                styles["title-input"]
+                                            } ${inputError("title")}`}
                                             placeholder="Example: iPhone 14 with guarantee..."
                                             value={inputData.title}
                                             onChange={onChangeHandler}
@@ -194,12 +210,12 @@ export const ProductActionPage = ({ action }) => {
                                             }}
                                         />
                                         {errors.title.required && (
-                                            <p className={styles["error"]}>
+                                            <p className="error">
                                                 Title is required!
                                             </p>
                                         )}
                                         {errors.title.minLength && (
-                                            <p className={styles["error"]}>
+                                            <p className="error">
                                                 Title should be at least 6
                                                 characters!
                                             </p>
@@ -212,27 +228,30 @@ export const ProductActionPage = ({ action }) => {
                                         >
                                             Category
                                         </label>
-                                        <CategorySelectBtn
-                                            error={errors.images.required}
-                                            className={styles["images-field"]}
-                                        />
+                                        <CategorySelectBtn />
 
                                         {errors.category.required && (
-                                            <p className={styles["error"]}>
+                                            <p className="error">
                                                 Category is required!
                                             </p>
                                         )}
                                     </div>
                                 </div>
 
-                                {action === "create" && <ImagesField />}
+                                {action === "create" && (
+                                    <ImagesField
+                                        error={errors.images.required}
+                                    />
+                                )}
 
                                 <div className={styles["description-field"]}>
                                     <h4 className={styles["form-field-title"]}>
                                         Description
                                     </h4>
                                     <textarea
-                                        className={styles["description-input"]}
+                                        className={`${
+                                            styles["description-input"]
+                                        } ${inputError("description")}`}
                                         name="description"
                                         id="description"
                                         placeholder="Write some description..."
@@ -253,24 +272,34 @@ export const ProductActionPage = ({ action }) => {
                                         }}
                                     />
                                     {errors.description.required && (
-                                        <p className={styles["error"]}>
+                                        <p className={"error"}>
                                             Description is required!
                                         </p>
                                     )}
                                     {errors.description.minLength && (
-                                        <p className={styles["error"]}>
+                                        <p className="error">
                                             Description should be at least 25
                                             characters!
                                         </p>
                                     )}
                                 </div>
-                                <ProductTypeOptions />
+                                <ProductTypeOptions
+                                    selectTypeAndCondition={
+                                        selectTypeAndCondition
+                                    }
+                                    error={{
+                                        type: errors.type.required,
+                                        condition: errors.condition.required,
+                                    }}
+                                />
                                 <div className={styles["price-field"]}>
                                     <h4 className={styles["form-field-title"]}>
                                         Price
                                     </h4>
                                     <input
-                                        className={styles["price-input"]}
+                                        className={`${
+                                            styles["price-input"]
+                                        } ${inputError("price")}`}
                                         type="number"
                                         name="price"
                                         placeholder="Add price"
@@ -293,12 +322,12 @@ export const ProductActionPage = ({ action }) => {
                                     />
 
                                     {errors.price.required && (
-                                        <p className={styles["error"]}>
+                                        <p className="error">
                                             Price is required!
                                         </p>
                                     )}
                                     {errors.price.minNum && (
-                                        <p className={styles["error"]}>
+                                        <p className="error">
                                             Price should be minimum 0.01$!
                                         </p>
                                     )}
@@ -308,7 +337,9 @@ export const ProductActionPage = ({ action }) => {
                                         Location
                                     </h4>
                                     <input
-                                        className={styles["location-input"]}
+                                        className={`${
+                                            styles["location-input"]
+                                        } ${inputError("location")}`}
                                         type="text"
                                         name="location"
                                         placeholder="Town"
@@ -325,7 +356,7 @@ export const ProductActionPage = ({ action }) => {
                                     />
 
                                     {errors.location.required && (
-                                        <p className={styles["error"]}>
+                                        <p className="error">
                                             Location is required!
                                         </p>
                                     )}
@@ -342,7 +373,9 @@ export const ProductActionPage = ({ action }) => {
                                             Phone number
                                         </label>
                                         <input
-                                            className={styles["phone-input"]}
+                                            className={`${
+                                                styles["phone-input"]
+                                            } ${inputError("phoneNumber")}`}
                                             type="number"
                                             name="phoneNumber"
                                             id="number"
@@ -357,27 +390,36 @@ export const ProductActionPage = ({ action }) => {
                                             }
                                         />
                                         {errors.phoneNumber.required && (
-                                            <p className={styles["error"]}>
+                                            <p className="error">
                                                 Phone number is required!
                                             </p>
                                         )}
                                     </div>
                                 </div>
                                 <div className={styles["btn-container"]}>
-                                    <FormButton
-                                        content={
-                                            action === "create" ? "Add" : "Edit"
-                                        }
-                                    >
-                                        <svg
-                                            width={20}
-                                            height={20}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
+                                    {isSubmited && (
+                                        <span
+                                            className={styles["loader"]}
+                                        ></span>
+                                    )}
+                                    {!isSubmited && (
+                                        <FormButton
+                                            content={
+                                                action === "create"
+                                                    ? "Add"
+                                                    : "Edit"
+                                            }
                                         >
-                                            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                        </svg>
-                                    </FormButton>
+                                            <svg
+                                                width={20}
+                                                height={20}
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512"
+                                            >
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                                            </svg>
+                                        </FormButton>
+                                    )}
                                 </div>
                             </form>
                         </div>
