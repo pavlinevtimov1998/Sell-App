@@ -10,6 +10,7 @@ export const CategoriesFormModal = ({ closeCategoriesModal }) => {
 
     return (
         <div className={styles["categories-modal-wrapper"]}>
+            <div className={styles["outside-click"]} onClick={closeCategoriesModal} />
             <section className={styles["categories-modal"]}>
                 <div className={styles["close-btn-container"]}>
                     <button

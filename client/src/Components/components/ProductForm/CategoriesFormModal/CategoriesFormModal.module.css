@@ -4,14 +4,25 @@
     left: 0;
     width: 100%;
     min-height: 100vh;
-    z-index: 1000;
+    z-index: 110;
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 }
 
+.outside-click {
+    width: 100%;
+    min-height: 100vh;
+    z-index: 111;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 .categories-modal {
+    position: relative;
+    z-index: 120;
     width: 80%;
     background-color: #fff;
 }
