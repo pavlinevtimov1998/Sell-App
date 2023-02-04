@@ -47,6 +47,18 @@ productsController.post(
 );
 
 productsController.get(
+    "/towns",
+    isUser("Unauthorized!"),
+    catchAsyncError(async (req, res) => {
+        const { city } = req.query;
+
+        const towns = await productsService.getTowns(city);
+
+        res.status(200).json(towns);
+    })
+);
+
+productsController.get(
     "/:productId",
     catchAsyncError(async (req, res) => {
         const productId = req.params.productId;
