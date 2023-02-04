@@ -1,6 +1,8 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../../../Contexts/AuthContext";
+
 import { logout } from "../../../Services/userService";
 
 export const Logout = () => {
@@ -9,12 +11,12 @@ export const Logout = () => {
 
     useEffect(() => {
         logout()
-            .then((result) => {
+            .then(() => {
                 handleLogout();
                 navigate("/", { replace: true });
             })
             .catch((err) => {
-                if (err.message === "Token expired!") {
+                if (err.message.includes("Token expired!")) {
                     handleLogout();
                 }
                 navigate("/", { replace: true });
