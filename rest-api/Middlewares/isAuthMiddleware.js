@@ -20,6 +20,8 @@ exports.isAuth = async (req, res, next) => {
         next();
     } catch (err) {
         res.clearCookie(config.COOKIE_NAME);
-        res.status(401).json({ message: "Token expired!" });
+        res.status(401).json({
+            message: "Token expired! Please log in again.",
+        });
     }
 };
