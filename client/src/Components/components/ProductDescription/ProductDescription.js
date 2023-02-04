@@ -1,12 +1,14 @@
+import { dateParser } from "../../../Utils/util";
 import styles from "./ProductDescription.module.css";
 
 export const ProductDescription = ({ data }) => {
     const hasNewLine = data.description.includes("\n");
+    const createdAt = dateParser(data.createdAt);
 
     return (
         <section className={styles["prod-info"]}>
             <article className={styles["created-at"]}>
-                <p>Added on {data.createdAt}</p>
+                <p>Added on {createdAt}</p>
             </article>
             <article className={styles["title"]}>
                 <h2>{data.title}</h2>
