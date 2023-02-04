@@ -15,7 +15,7 @@ async function request(url, options) {
     }
 }
 
-function createOptions(method = "GET", data, isMultipart) {
+function createOptions(method = "GET", data, isMultipart = false) {
     const options = {
         method,
         credentials: "include",
@@ -25,7 +25,7 @@ function createOptions(method = "GET", data, isMultipart) {
     if (isMultipart) {
         options["body"] = data;
     } else if (data && !isMultipart) {
-        options.headers["Content-Type"] = "aplication/json";
+        options.headers["Content-Type"] = "application/json";
         options["body"] = JSON.stringify(data);
     }
 
