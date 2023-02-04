@@ -160,7 +160,6 @@ export const ProductActionPage = ({ action }) => {
                         clearCategoryHandler,
                         categories,
                         selectedCategory,
-                        selectTypeAndCondition,
                         addImages,
                         imagesHandler,
                         imagesInputRef,

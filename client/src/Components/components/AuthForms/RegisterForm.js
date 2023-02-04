@@ -89,7 +89,7 @@ export const RegisterForm = () => {
                         value={data.email}
                         onChange={onChangeHandler}
                         onBlur={(e) => {
-                            validators.emailValidator(data, setFormErrors);
+                            validators.emailValidator(data.email, setFormErrors);
                             validators.requiredValidator(
                                 e.target.name,
                                 data.email,
@@ -175,9 +175,6 @@ export const RegisterForm = () => {
                 </div>
             </div>
             <div className={styles["action"]}>
-                {/* <div className={styles["password-link"]}>
-                    <a href="/">Forgot password?</a>
-                </div> */}
                 <div className={styles["btn-container"]}>
                     <FormButton content="Register">
                         <svg

@@ -2,7 +2,11 @@ import { createContext } from "react";
 
 import { useLocalStorage } from "../Hooks/useLocalStorage";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({
+    userData: {},
+    handleLogin: () => {},
+    handleLogout: () => {},
+});
 
 export const AuthProvider = ({ children }) => {
     const { userData, addUserData, removeUserData } = useLocalStorage();
