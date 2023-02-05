@@ -5,12 +5,13 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 import { MainLayout } from "../Core/MainLayout/MainLayout";
-import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
+import { MessageModal } from "../MessageModal/MessageModal";
 import { AppRouter } from "../Router/Router";
 
 export const MainWrapper = () => {
     const [error, setError] = useState({ message: "", hasError: false });
-    const errorRef = useRef();
+    const [message, setMessage] = useState({ message: "", hasMessage: false });
+    const messageRef = useRef();
     const { handleLogout } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -18,16 +19,21 @@ export const MainWrapper = () => {
         let id;
 
         if (error.hasError) {
-            errorRef.current.style.right = "40px";
+            messageRef.current.style.right = "40px";
             id = setInterval(() => {
                 setError((state) => ({ ...state, hasError: false }));
             }, 5000);
+        } else if (message.hasMessage) {
+            messageRef.current.style.right = "40px";
+            id = setInterval(() => {
+                setMessage((state) => ({ ...state, hasMessage: false }));
+            }, 5000);
         } else {
-            errorRef.current.style.right = "-300px";
+            messageRef.current.style.right = "-300px";
         }
 
         return () => clearInterval(id);
-    }, [error]);
+    }, [error.hasError, message.hasMessage]);
 
     useEffect(() => {
         if (error.hasError && error.message.includes("Token expired!")) {
@@ -38,12 +44,15 @@ export const MainWrapper = () => {
     }, [error]);
 
     return (
-        <ErrorContext.Provider value={{ setError }}>
+        <ErrorContext.Provider value={{ setError, setMessage }}>
             <MainLayout>
-                <ErrorMessage message={error.message} errorRef={errorRef} />
+                <MessageModal
+                    message={error.hasError ? error.message : message.message}
+                    messageRef={messageRef}
+                    hasError={error.hasError}
+                />
 
                 <AppRouter />
-
             </MainLayout>
         </ErrorContext.Provider>
     );

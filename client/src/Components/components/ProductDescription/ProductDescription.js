@@ -11,7 +11,7 @@ import styles from "./ProductDescription.module.css";
 
 export const ProductDescription = ({ data }) => {
     const { userData } = useContext(AuthContext);
-    const { setError } = useContext(ErrorContext);
+    const { setError, setMessage } = useContext(ErrorContext);
     const navigate = useNavigate();
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -22,7 +22,13 @@ export const ProductDescription = ({ data }) => {
     const deleteProductHandler = () => {
         setIsDeleting(true);
         deleteProduct(data._id)
-            .then((result) => navigate("/", { replace: true }))
+            .then((result) => {
+                setMessage({
+                    message: "Successfull deleting!",
+                    hasMessage: true,
+                });
+                navigate("/", { replace: true });
+            })
             .catch((error) =>
                 setError({ message: error.message, hasError: true })
             );

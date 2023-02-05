@@ -1,4 +1,4 @@
-.error-container {
+.container {
     position: fixed;
     right: -300px;
     top: 15%;
@@ -7,27 +7,44 @@
     min-height: 65px;
     padding: 15px;
     border-radius: 20px;
-    color: rgb(255, 65, 65);
     transition: all 1s ease;
     box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px,
         rgb(0 0 0 / 30%) 0px 3px 7px -3px;
 }
 
-.error-title {
+.container.error {
+    color: rgb(255, 65, 65);
+}
+
+.container.success {
+    color: rgb(10, 237, 10);
+}
+
+.title {
     display: flex;
     align-items: center;
     gap: 6px;
     padding-bottom: 5px;
-    border-bottom: solid 2px rgb(255, 65, 65);
     font-weight: 600;
 }
 
-.error-icon {
+.title.error {
+    border-bottom: solid 2px rgb(255, 65, 65);
+}
+
+.title.success {
+    border-bottom: solid 2px rgb(10, 237, 10);
+}
+
+.icon {
     width: 25px;
+}
+
+.icon.error {
     fill: rgb(255, 65, 65);
 }
 
-.error-message {
+.message {
     padding: 5px 0;
     font-size: 14px;
     font-weight: 500;
