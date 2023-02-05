@@ -50,7 +50,10 @@ export const LocationField = ({
                     onBlur={(e) => requiredValidator()}
                 />
                 {towns.length > 0 && (
-                    <div className={styles["towns-container"]}>
+                    <div
+                        style={{ overflow: towns.length > 6 && "scroll" }}
+                        className={styles["towns-container"]}
+                    >
                         <ul className={styles["towns-list"]}>
                             {towns.map((t) => (
                                 <li
