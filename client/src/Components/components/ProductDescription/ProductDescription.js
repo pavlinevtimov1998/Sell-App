@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
+
 import { dateParser } from "../../../Utils/util";
+
 import styles from "./ProductDescription.module.css";
 
 export const ProductDescription = ({ data }) => {
@@ -11,17 +13,25 @@ export const ProductDescription = ({ data }) => {
 
     return (
         <section className={styles["prod-info"]}>
-            <article className={styles["created-at"]}>
-                <p>Added on {createdAt}</p>
-            </article>
-            <article className={styles["title"]}>
-                <h2>{data.title}</h2>
-            </article>
+            <header className={styles["header"]}>
+                <p className={styles["created-at"]}>Added on {createdAt}</p>
+                <h1 className={styles["title"]}>{data.title}</h1>
+            </header>
             <article className={styles["price"]}>
-                <h1>{data.price}$</h1>
+                <h3>{data.price} $</h3>
             </article>
-            <article className={styles["description"]}>
-                <h3>Description</h3>
+            <article className={styles["type-container"]}>
+                <p className={styles["type"]}>
+                    <span className={styles["type-content"]}>{data.type}</span>
+                </p>
+                <p className={styles["type"]}>
+                    <span className={styles["type-content"]}>
+                        {data.condition}
+                    </span>
+                </p>
+            </article>
+            <article className={styles["description-container"]}>
+                <h3 className={styles["description-title"]} >Description</h3>
                 <ul>
                     {hasNewLine ? (
                         data.description.split("\n").map((line, i) => (
