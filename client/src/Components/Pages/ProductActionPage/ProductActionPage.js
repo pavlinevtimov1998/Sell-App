@@ -15,6 +15,7 @@ import * as validators from "../../../Utils/validators";
 import { FormButton } from "../../components/FormButton/FormButton";
 import { ImagesField } from "../../components/ProductForm/ImagesField/ImagesField";
 import { LocationField } from "../../components/ProductForm/LocationField/LocationField";
+import { SpinnerSmall } from "../../components/SpinnerSmall/SpinnerSmall";
 
 export const ProductActionPage = ({ action }) => {
     const { isLoading, data } = useFetch(getAllCategories);
@@ -383,9 +384,7 @@ export const ProductActionPage = ({ action }) => {
                                 </div>
                                 <div className={styles["btn-container"]}>
                                     {isSubmited && (
-                                        <span
-                                            className={styles["loader"]}
-                                        ></span>
+                                        <SpinnerSmall width={50} height={50} />
                                     )}
                                     {!isSubmited && (
                                         <FormButton

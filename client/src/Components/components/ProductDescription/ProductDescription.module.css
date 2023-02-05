@@ -1,6 +1,6 @@
 .prod-info {
     width: 90%;
-    padding: 28px;
+    padding: 20px 30px;
     background-color: #fff;
     border-radius: 13px;
     box-shadow: 0px 0px 15px -5px rgb(0 0 0 / 11%);
@@ -51,7 +51,6 @@
 .description-title {
     font-size: 1.4rem;
     text-transform: uppercase;
-
 }
 
 .border {
@@ -63,15 +62,14 @@
 
 .action {
     width: 100%;
-    height: 10px;
-    position: relative;
+    max-height: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .report-btn,
 .owner-btns {
     display: flex;
-    position: absolute;
-    right: 0;
 }
 
 .owner-btns {

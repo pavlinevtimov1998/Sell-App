@@ -8,6 +8,10 @@ async function request(url, options) {
             throw await response.json();
         }
 
+        if (response.status === 204) {
+            return {};
+        }
+
         return await response.json();
     } catch (err) {
         console.log(err);
