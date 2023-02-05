@@ -19,7 +19,7 @@ import { LocationField } from "../../components/ProductForm/LocationField/Locati
 export const ProductActionPage = ({ action }) => {
     const { isLoading, data } = useFetch(getAllCategories);
     const [isSubmited, setIsSubmited] = useState(false);
-    const { setErrors } = useContext(ErrorContext);
+    const { setError } = useContext(ErrorContext);
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
         title: "",
@@ -146,7 +146,7 @@ export const ProductActionPage = ({ action }) => {
             })
             .catch((err) => {
                 setIsSubmited(false);
-                setErrors({ message: err.message, hasError: true });
+                setError({ message: err.message, hasError: true });
             });
     };
 
