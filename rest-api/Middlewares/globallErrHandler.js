@@ -4,7 +4,7 @@ exports.globalErrorHandler = (err, req, res, next) => {
             message: "Cannot upload more than 5 images!",
         });
     }
-
+    console.log(err);
     res.status(err.status || 500).json({
         message: err.message || "Something went wrong!",
     });
