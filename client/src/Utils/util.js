@@ -4,7 +4,22 @@ export const trim = (text, index) =>
 export const dateParser = (date) => {
     const day = new Date(date).getDate();
     const year = new Date(date).getFullYear();
-    const month = new Date(date).getMonth() + 1;
+    const month = new Date(date).getMonth();
 
-    return `${year}/${month}/${day}`;
+    return `${day} ${monthList[month]} ${year}`;
 };
+
+const monthList = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+];
