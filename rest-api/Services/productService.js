@@ -19,13 +19,15 @@ const getOneProduct = (productId) =>
         .populate({ path: "location" });
 
 async function createProduct(body, files) {
-    const town = await Town.findOne({ city: body.location });
+    const town = await Town.find()
+        .regex("city", new RegExp(`^${body.location}`, "i"))
+        .select("city");
 
-    if (!town) {
+    if (town.length === 0) {
         throw { message: "Incorrect location!" };
     }
 
-    body.location = town._id;
+    body.location = town[0]._id;
     const product = await Product.create({ ...body, images: [] });
     const imagesUrl = await getImagesUrl(files);
 
