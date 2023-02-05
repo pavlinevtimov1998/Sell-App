@@ -34,6 +34,22 @@ const productSchema = new mongoose.Schema(
             min: [0.01, "Price should be at least 0.01$!"],
             trim: true,
         },
+        type: {
+            type: String,
+            required: [true, "Post type is required!"],
+            enum: {
+                values: ["business", "non-business"],
+                message: "{VALUE} type is not supported!",
+            },
+        },
+        condition: {
+            type: String,
+            required: [true, "Condition type is required!"],
+            enum: {
+                values: ["new", "used"],
+                message: "{VALUE} condition is not supported!",
+            },
+        },
         favorites: [
             {
                 type: mongoose.Types.ObjectId,
@@ -57,6 +73,14 @@ const productSchema = new mongoose.Schema(
     },
     { timestamps: { createdAt: "createdAt" } }
 );
+
+productSchema.pre("save", function (next) {
+    this.type = this.type[0].toLocaleUpperCase() + this.type.slice(1);
+    this.condition =
+        this.condition[0].toLocaleUpperCase() + this.condition.slice(1);
+    console.log(this.type, this.condition);
+    next();
+});
 
 const Product = mongoose.model("Product", productSchema);
 
