@@ -22,7 +22,7 @@ export const Carousel = ({ images }) => {
     const onDotClick = (index) => setSelectedIndex(index);
 
     return (
-        <article className={styles["carousel"]}>
+        <section className={styles["carousel"]}>
             <div className={styles["carousel-container"]}>
                 {images.map((img, i) => (
                     <div
@@ -78,6 +78,6 @@ export const Carousel = ({ images }) => {
                     </svg>
                 </button>
             </div>
-        </article>
+        </section>
     );
 };
