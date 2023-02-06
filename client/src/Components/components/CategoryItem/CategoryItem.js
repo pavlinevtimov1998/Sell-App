@@ -1,15 +1,14 @@
+import { useDropdown } from "../../../Hooks/useDropdown";
+
 import styles from "./CategoryItem.module.css";
 
-import { useState } from "react";
 import { SubcategoriesDropdown } from "../SubcategoriesDropdown/SubcategoriesDropdown";
 import { Link } from "react-router-dom";
 
 export const CategoryItem = ({ category, subcategories }) => {
-    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const { isDropdownVisible, setIsMouseEnter } = useDropdown(500);
 
-    const toggleSubcategoryMenu = () => {
-        setIsDropdownVisible((state) => !state);
-    };
+    const toggleSubcategoryMenu = () => setIsMouseEnter((state) => !state);
 
     const isVisible = isDropdownVisible ? "open" : "hide";
 
