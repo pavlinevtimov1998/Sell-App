@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { UserDropdownMenu } from "../../../UserDropdownMenu/UserDropdownMenu";
@@ -7,9 +7,24 @@ import styles from "../Header.module.css";
 
 export const UserOptions = () => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const [isMouseEnter, setIsMouseEnter] = useState(false);
+
+    useEffect(() => {
+        let id;
+
+        if (isMouseEnter) {
+            setIsDropdownVisible(true);
+        } else {
+            id = setTimeout(() => {
+                setIsDropdownVisible(false);
+            }, 500);
+        }
+
+        return () => clearTimeout(id);
+    }, [isMouseEnter]);
 
     const toggleDropdown = () => {
-        setIsDropdownVisible((state) => !state);
+        setIsMouseEnter((state) => !state);
     };
 
     return (
