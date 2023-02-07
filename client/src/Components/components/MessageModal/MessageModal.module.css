@@ -1,5 +1,6 @@
 .container {
     position: fixed;
+    z-index: 1000;
     right: -300px;
     top: 15%;
     background-color: #fff;
