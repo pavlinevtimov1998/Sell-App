@@ -109,6 +109,7 @@ productsController.patch(
 
 productsController.delete(
     "/:productId",
+    isUser("Unauthorized!"),
     catchAsyncError(async (req, res) => {
         const userId = req.user._id;
         const productId = req.params.productId;
