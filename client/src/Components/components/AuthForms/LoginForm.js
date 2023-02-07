@@ -13,15 +13,13 @@ export const LoginForm = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({ email: "", password: "" });
     const [errors, setFormErrors] = useState({ email: false, password: false });
-    const [submitError, setSubmitError] = useState({
-        email: false,
-        password: false,
-    });
     const { setMessage } = useContext(ErrorContext);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
+
+    const hasError = (name) => errors[name];
 
     const onChangeHandler = (e) =>
         setData((state) => ({ ...state, [e.target.name]: e.target.value }));
@@ -38,7 +36,6 @@ export const LoginForm = () => {
                 [e.target.name]: false,
             }));
         }
-        setSubmitError({ email: false, password: false });
     };
 
     const onSubmit = (e) => {
@@ -63,7 +60,6 @@ export const LoginForm = () => {
                 navigate("/", { replace: true });
             })
             .catch((err) => {
-                setSubmitError({ email: true, password: true });
                 setMessage({
                     message: err.message,
                     hasError: true,
@@ -84,7 +80,7 @@ export const LoginForm = () => {
                     </label>
                     <input
                         className={`${styles["email-input"]} ${
-                            submitError.email && styles["input-error"]
+                            hasError("email") && "input-error"
                         }`}
                         type="email"
                         name="email"
@@ -95,7 +91,7 @@ export const LoginForm = () => {
                     />
 
                     {errors.email && (
-                        <p className={styles["error"]}>Email is required!</p>
+                        <p className={"error"}>Email is required!</p>
                     )}
                 </div>
                 <div className={styles["field"]}>
@@ -104,7 +100,7 @@ export const LoginForm = () => {
                     </label>
                     <input
                         className={`${styles["pass-input"]} ${
-                            submitError.password && styles["input-error"]
+                            hasError("password") && "input-error"
                         }`}
                         type="password"
                         name="password"
@@ -114,7 +110,7 @@ export const LoginForm = () => {
                         onBlur={validator}
                     />
                     {errors.password && (
-                        <p className={styles["error"]}>Password is required!</p>
+                        <p className={"error"}>Password is required!</p>
                     )}
                 </div>
             </div>
