@@ -14,7 +14,7 @@ import { FormButton } from "../FormButton/FormButton";
 export const RegisterForm = () => {
     const { handleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { setError } = useContext(ErrorContext);
+    const { setMessage } = useContext(ErrorContext);
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -60,13 +60,19 @@ export const RegisterForm = () => {
             .then((result) => {
                 if (result) {
                     handleLogin(result);
+                    setMessage({
+                        message: "Successfull register!",
+                        hasError: false,
+                        hasMessage: true,
+                    });
                     navigate("/", { replace: true });
                 }
             })
             .catch((error) =>
-                setError({
-                    hasError: true,
+                setMessage({
                     message: error.message,
+                    hasError: true,
+                    hasMessage: true,
                 })
             );
     };

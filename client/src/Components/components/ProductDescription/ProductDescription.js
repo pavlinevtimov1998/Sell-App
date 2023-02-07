@@ -9,7 +9,7 @@ import { SpinnerSmall } from "../SpinnerSmall/SpinnerSmall";
 import styles from "./ProductDescription.module.css";
 
 export const ProductDescription = ({ product, isOwner }) => {
-    const { setError, setMessage } = useContext(ErrorContext);
+    const { setMessage } = useContext(ErrorContext);
     const navigate = useNavigate();
     const [isDeleting, setIsDeleting] = useState(false);
 
@@ -22,12 +22,17 @@ export const ProductDescription = ({ product, isOwner }) => {
             .then((result) => {
                 setMessage({
                     message: "Successfull deleting!",
+                    hasError: false,
                     hasMessage: true,
                 });
                 navigate("/", { replace: true });
             })
             .catch((error) =>
-                setError({ message: error.message, hasError: true })
+                setMessage({
+                    message: error.message,
+                    hasError: true,
+                    hasMessage: true,
+                })
             );
     };
 

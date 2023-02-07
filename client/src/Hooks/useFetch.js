@@ -6,7 +6,7 @@ import { ErrorContext } from "../Contexts/ErrorContext";
 export function useFetch(fetchData, deps = []) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const { setError } = useContext(ErrorContext);
+    const { setMessage } = useContext(ErrorContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,16 +18,17 @@ export function useFetch(fetchData, deps = []) {
                 setIsLoading(false);
             })
             .catch((error) => {
-                setError((state) => ({
-                    hasError: true,
+                setMessage((state) => ({
                     message: error.message,
+                    hasError: true,
+                    hasMessage: true,
                 }));
                 setIsLoading(false);
                 navigate("/404", { replace: true });
             });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setError, ...deps]);
+    }, [setMessage, ...deps]);
 
     return { isLoading, setIsLoading, data };
 }

@@ -17,7 +17,7 @@ export const LoginForm = () => {
         email: false,
         password: false,
     });
-    const { setError } = useContext(ErrorContext);
+    const { setMessage } = useContext(ErrorContext);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -55,12 +55,20 @@ export const LoginForm = () => {
         login(data)
             .then((result) => {
                 handleLogin(result);
+                setMessage({
+                    message: "Successfull login!",
+                    hasError: false,
+                    hasMessage: true,
+                });
                 navigate("/", { replace: true });
             })
             .catch((err) => {
                 setSubmitError({ email: true, password: true });
-                setError({ message: err.message, hasError: true });
-                console.log(err);
+                setMessage({
+                    message: err.message,
+                    hasError: true,
+                    hasMessage: true,
+                });
             });
     };
 

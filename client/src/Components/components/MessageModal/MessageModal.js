@@ -1,6 +1,6 @@
 import styles from "./MessageModal.module.css";
 
-export const MessageModal = ({ message, messageRef, hasError }) => {
+export const MessageModal = ({ message, messageRef, hasError, hasMessage }) => {
     const className = hasError ? "error" : "success";
 
     return (

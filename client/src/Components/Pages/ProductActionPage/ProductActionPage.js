@@ -20,7 +20,7 @@ import { SpinnerSmall } from "../../components/SpinnerSmall/SpinnerSmall";
 export const ProductActionPage = ({ action }) => {
     const { isLoading, data } = useFetch(getAllCategories);
     const [isSubmited, setIsSubmited] = useState(false);
-    const { setError } = useContext(ErrorContext);
+    const { setMessage } = useContext(ErrorContext);
     const [categories, setCategories] = useState([]);
     const [inputData, setInputData] = useState({
         title: "",
@@ -147,7 +147,11 @@ export const ProductActionPage = ({ action }) => {
             })
             .catch((err) => {
                 setIsSubmited(false);
-                setError({ message: err.message, hasError: true });
+                setMessage({
+                    message: err.message,
+                    hasError: true,
+                    hasMessage: true,
+                });
             });
     };
 
