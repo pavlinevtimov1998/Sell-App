@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { useLocalStorage } from "../Hooks/useLocalStorage";
 
 export const AuthContext = createContext({
-    userData: {},
+    userData: { email: "", _id: "", isAdmin: false },
     handleLogin: () => {},
     handleLogout: () => {},
 });

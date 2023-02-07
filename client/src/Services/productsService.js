@@ -5,6 +5,8 @@ const endpoints = {
     withId: (productId) => `/products/${productId}`,
     create: "/products",
     getTowns: (value) => `/products/towns?city=${value}`,
+    like: (productId) => `/products/like/${productId}`,
+    removeLike: (productId) => `/products/remove-like/${productId}`,
 };
 
 export const getLastProducts = () => apiService.getRequest(endpoints.getLast);
@@ -17,6 +19,11 @@ export const createProduct = (data) =>
 
 export const deleteProduct = (id) =>
     apiService.deleteRequest(endpoints.withId(id));
+
+export const likeProduct = (id) => apiService.patchRequest(endpoints.like(id));
+
+export const removeLike = (id) =>
+    apiService.patchRequest(endpoints.removeLike(id));
 
 export const getTowns = (value) =>
     apiService.getRequest(endpoints.getTowns(value));

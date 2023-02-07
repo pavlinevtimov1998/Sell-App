@@ -127,6 +127,9 @@ const getTowns = (city) =>
 const likeProduct = (userId, productId) =>
     Product.findByIdAndUpdate(productId, { $push: { favorites: userId } });
 
+const removeLike = (userId, productId) =>
+    Product.findByIdAndUpdate(productId, { $pull: { favorites: userId } });
+
 module.exports = {
     getProducts,
     getProductsCount,
@@ -137,4 +140,5 @@ module.exports = {
     deleteProduct,
     getTowns,
     likeProduct,
+    removeLike,
 };

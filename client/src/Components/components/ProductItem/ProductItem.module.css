@@ -56,11 +56,12 @@
     font-size: 16px;
 }
 
-.like-btn {
-}
-
 .like-icon {
     display: block;
     width: 20px;
     fill: #002f34;
+}
+
+.liked {
+    fill: red;
 }
