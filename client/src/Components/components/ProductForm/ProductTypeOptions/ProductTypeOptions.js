@@ -32,11 +32,11 @@ export const ProductTypeOptions = ({ selectTypeAndCondition, error }) => {
                         type="button"
                         className={`${styles["type-option"]} ${
                             styles[
-                                type.selected === "business" ? "selected" : ""
+                                type.selected === "Business" ? "selected" : ""
                             ]
                         }`}
                         title="Business"
-                        name="business"
+                        name="Business"
                         onClick={changeType}
                     >
                         Business
@@ -45,13 +45,13 @@ export const ProductTypeOptions = ({ selectTypeAndCondition, error }) => {
                         type="button"
                         className={`${styles["type-option"]} ${
                             styles[
-                                type.selected === "non-business"
+                                type.selected === "Non-business"
                                     ? "selected"
                                     : ""
                             ]
                         }`}
                         title="Non-business"
-                        name="non-business"
+                        name="Non-business"
                         onClick={changeType}
                     >
                         Non-business
@@ -65,12 +65,12 @@ export const ProductTypeOptions = ({ selectTypeAndCondition, error }) => {
                     <button
                         className={`${styles["condition-option"]} ${
                             styles[
-                                condition.selected === "new" ? "selected" : ""
+                                condition.selected === "New" ? "selected" : ""
                             ]
                         }`}
                         title="New"
                         type="button"
-                        name="new"
+                        name="New"
                         onClick={changeCondition}
                     >
                         New
@@ -78,12 +78,12 @@ export const ProductTypeOptions = ({ selectTypeAndCondition, error }) => {
                     <button
                         className={`${styles["condition-option"]} ${
                             styles[
-                                condition.selected === "used" ? "selected" : ""
+                                condition.selected === "Nsed" ? "selected" : ""
                             ]
                         }`}
                         title="Used"
                         type="button"
-                        name="used"
+                        name="Nsed"
                         onClick={changeCondition}
                     >
                         Used
