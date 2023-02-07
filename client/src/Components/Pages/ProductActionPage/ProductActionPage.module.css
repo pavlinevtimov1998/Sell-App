@@ -86,3 +86,23 @@
     border-radius: 8px;
     margin-bottom: 20px;
 }
+
+.btn {
+    display: flex;
+    align-items: center;
+    background-color: #002f34;
+    border-radius: 6px;
+    border: solid 4px #002f34;
+    gap: 5px;
+    padding: 8px 40px;
+    color: #fff;
+    fill: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    fill: #002f34;
+    color: #002f34;
+    background-color: #fff;
+}
