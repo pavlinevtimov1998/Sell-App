@@ -397,6 +397,7 @@ export const ProductActionPage = ({ action }) => {
                                                     ? "Add"
                                                     : "Edit"
                                             }
+                                            className={styles['btn']}
                                         >
                                             <svg
                                                 width={20}
