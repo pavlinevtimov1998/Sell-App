@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: [true, "Post type is required!"],
             enum: {
-                values: ["business", "non-business"],
+                values: ["Business", "Non-business"],
                 message: "{VALUE} type is not supported!",
             },
         },
@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: [true, "Condition type is required!"],
             enum: {
-                values: ["new", "used"],
+                values: ["New", "Used"],
                 message: "{VALUE} condition is not supported!",
             },
         },
@@ -73,14 +73,6 @@ const productSchema = new mongoose.Schema(
     },
     { timestamps: { createdAt: "createdAt" } }
 );
-
-productSchema.pre("save", function (next) {
-    this.type = this.type[0].toLocaleUpperCase() + this.type.slice(1);
-    this.condition =
-        this.condition[0].toLocaleUpperCase() + this.condition.slice(1);
-    console.log(this.type, this.condition);
-    next();
-});
 
 const Product = mongoose.model("Product", productSchema);
 
