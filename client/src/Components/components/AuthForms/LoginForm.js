@@ -115,7 +115,7 @@ export const LoginForm = () => {
                     <a href="/">Forgot password?</a>
                 </div>
                 <div className={styles["btn-container"]}>
-                    <FormButton content="Login">
+                    <FormButton content="Login" className={styles["btn"]}>
                         {
                             <svg
                                 width={20}
