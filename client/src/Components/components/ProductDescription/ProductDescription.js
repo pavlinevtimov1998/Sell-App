@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../Contexts/AuthContext";
 import { ErrorContext } from "../../../Contexts/ErrorContext";
 import { deleteProduct } from "../../../Services/productsService";
 
@@ -9,19 +8,17 @@ import { SpinnerSmall } from "../SpinnerSmall/SpinnerSmall";
 
 import styles from "./ProductDescription.module.css";
 
-export const ProductDescription = ({ data }) => {
-    const { userData } = useContext(AuthContext);
+export const ProductDescription = ({ product, isOwner }) => {
     const { setError, setMessage } = useContext(ErrorContext);
     const navigate = useNavigate();
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const hasNewLine = data.description.includes("\n");
-    const createdAt = dateParser(data.createdAt);
-    const isOwner = data._ownerId._id === userData?._id;
+    const hasNewLine = product.description.includes("\n");
+    const createdAt = dateParser(product.createdAt);
 
     const deleteProductHandler = () => {
         setIsDeleting(true);
-        deleteProduct(data._id)
+        deleteProduct(product._id)
             .then((result) => {
                 setMessage({
                     message: "Successfull deleting!",
@@ -38,18 +35,20 @@ export const ProductDescription = ({ data }) => {
         <section className={styles["prod-info"]}>
             <header className={styles["header"]}>
                 <p className={styles["created-at"]}>Added on {createdAt}</p>
-                <h1 className={styles["title"]}>{data.title}</h1>
+                <h1 className={styles["title"]}>{product.title}</h1>
             </header>
             <article className={styles["price"]}>
-                <h3>{data.price} $</h3>
+                <h3>{product.price} $</h3>
             </article>
             <article className={styles["type-container"]}>
                 <p className={styles["type"]}>
-                    <span className={styles["type-content"]}>{data.type}</span>
+                    <span className={styles["type-content"]}>
+                        {product.type}
+                    </span>
                 </p>
                 <p className={styles["type"]}>
                     <span className={styles["type-content"]}>
-                        {data.condition}
+                        {product.condition}
                     </span>
                 </p>
             </article>
@@ -57,18 +56,18 @@ export const ProductDescription = ({ data }) => {
                 <h3 className={styles["description-title"]}>Description</h3>
                 <ul>
                     {hasNewLine ? (
-                        data.description.split("\n").map((line, i) => (
+                        product.description.split("\n").map((line, i) => (
                             <li key={i}>
                                 <br /> {line}
                             </li>
                         ))
                     ) : (
-                        <p>{data.description}</p>
+                        <p>{product.description}</p>
                     )}
                 </ul>
             </article>
             <div className={styles["border"]} />
-            {userData && !isOwner && (
+            {!isOwner && (
                 <article className={styles["action"]}>
                     <a className={styles["report-btn"]} href="/">
                         <svg
