@@ -50,16 +50,6 @@
     margin-bottom: 28px;
 }
 
-.input-error {
-    border-left: red solid 2px;
-}
-
-.error {
-    color: red;
-    font-size: 12px;
-    font-weight: 500;
-}
-
 .btn {
     display: flex;
     align-items: center;
