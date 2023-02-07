@@ -39,6 +39,8 @@ export const RegisterForm = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
+    const hasError = (name) => Object.values(errors[name]).includes(true);
+
     const onChangeHandler = (e) =>
         setData((state) => ({ ...state, [e.target.name]: e.target.value }));
 
@@ -88,7 +90,9 @@ export const RegisterForm = () => {
                         Your email
                     </label>
                     <input
-                        className={styles["email-input"]}
+                        className={`${styles["email-input"]} ${
+                            hasError("email") && "input-error"
+                        }`}
                         type="email"
                         name="email"
                         id="email"
@@ -107,10 +111,10 @@ export const RegisterForm = () => {
                         }}
                     />
                     {errors.email.required && (
-                        <p className={styles["error"]}>Email is required!</p>
+                        <p className={"error"}>Email is required!</p>
                     )}
                     {errors.email.isNotValid && !errors.email.required && (
-                        <p className={styles["error"]}>Invalid email!</p>
+                        <p className={"error"}>Invalid email!</p>
                     )}
                 </div>
                 <div className={styles["field"]}>
@@ -118,7 +122,9 @@ export const RegisterForm = () => {
                         Password
                     </label>
                     <input
-                        className={styles["pass-input"]}
+                        className={`${styles["pass-input"]} ${
+                            hasError("password") && "input-error"
+                        }`}
                         type="password"
                         name="password"
                         id="password"
@@ -139,10 +145,10 @@ export const RegisterForm = () => {
                         }}
                     />
                     {errors.password.required && (
-                        <p className={styles["error"]}>Password is required!</p>
+                        <p className={"error"}>Password is required!</p>
                     )}
                     {errors.password.minLength && (
-                        <p className={styles["error"]}>
+                        <p className={"error"}>
                             Password should be at least 6 characters!
                         </p>
                     )}
@@ -153,7 +159,9 @@ export const RegisterForm = () => {
                         Repeat Password
                     </label>
                     <input
-                        className={styles["pass-input"]}
+                        className={`${styles["pass-input"]} ${
+                            hasError("rePassword") && "input-error"
+                        }`}
                         type="password"
                         name="rePassword"
                         id="rePassword"
@@ -173,13 +181,11 @@ export const RegisterForm = () => {
                         }}
                     />
                     {errors.rePassword.required && (
-                        <p className={styles["error"]}>Password is required!</p>
+                        <p className={"error"}>Password is required!</p>
                     )}
                     {errors.rePassword.isNotMatch &&
                         !errors.rePassword.required && (
-                            <p className={styles["error"]}>
-                                Passwords don't match!
-                            </p>
+                            <p className={"error"}>Passwords don't match!</p>
                         )}
                 </div>
             </div>
