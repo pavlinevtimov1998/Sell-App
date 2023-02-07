@@ -1,5 +1,6 @@
 const Product = require("../Models/Product");
 const Town = require("../Models/Town");
+
 const { getImagesUrl, deleteCloudinaryImage } = require("../Utils/imageUpload");
 
 const getProducts = (title, category) =>
@@ -123,6 +124,9 @@ const getTowns = (city) =>
         .regex("city", new RegExp(`^${city}`, "i"))
         .select("city");
 
+const likeProduct = (userId, productId) =>
+    Product.findByIdAndUpdate(productId, { $push: { favorites: userId } });
+
 module.exports = {
     getProducts,
     getProductsCount,
@@ -132,4 +136,5 @@ module.exports = {
     editProductImages,
     deleteProduct,
     getTowns,
+    likeProduct,
 };

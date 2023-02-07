@@ -120,4 +120,17 @@ productsController.delete(
     })
 );
 
+productsController.post(
+    "/like/:productId",
+    isUser("Unauthorized!"),
+    catchAsyncError(async (req, res) => {
+        const userId = req.user._id;
+        const productId = req.params.productId;
+
+        await productsService.likeProduct(userId, productId);
+
+        res.status(201).json({ message: "Successfull like!" });
+    })
+);
+
 module.exports = productsController;
