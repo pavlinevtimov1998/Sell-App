@@ -16,9 +16,7 @@ export const Logout = () => {
                 navigate("/", { replace: true });
             })
             .catch((err) => {
-                if (err.message.includes("Token expired!")) {
-                    handleLogout();
-                }
+                handleLogout();
                 navigate("/", { replace: true });
             });
     });
