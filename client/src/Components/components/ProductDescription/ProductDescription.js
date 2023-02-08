@@ -36,6 +36,8 @@ export const ProductDescription = ({ product, isOwner }) => {
             );
     };
 
+    const description = product.description.split("\r\n");
+
     return (
         <section className={styles["prod-info"]}>
             <header className={styles["header"]}>
@@ -61,11 +63,15 @@ export const ProductDescription = ({ product, isOwner }) => {
                 <h3 className={styles["description-title"]}>Description</h3>
                 <ul>
                     {hasNewLine ? (
-                        product.description.split("\n").map((line, i) => (
-                            <li key={i}>
-                                <br /> {line}
-                            </li>
-                        ))
+                        description.map((line, i) => {
+                            return (
+                                line && (
+                                    <li key={i}>
+                                        <br /> {line}
+                                    </li>
+                                )
+                            );
+                        })
                     ) : (
                         <p>{product.description}</p>
                     )}
