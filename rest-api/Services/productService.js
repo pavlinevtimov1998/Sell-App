@@ -7,17 +7,24 @@ const getProducts = (title, category) =>
     Product.find({
         title: { $regex: title, $options: "i" },
         category: { $regex: category, $options: "i" },
-    });
+    }).select("-description -phoneNumber -condition -type -updatedAt -__v");
 
 const getProductsCount = () => Product.find().count();
 
-const getOneProduct = (productId) =>
-    Product.findById(productId)
+const getOneProduct = async (productId) => {
+    const product = await Product.findById(productId)
         .populate({
             path: "_ownerId",
             select: "-password -__v",
         })
         .populate({ path: "location" });
+
+    const moreUserProducts = await Product.find({
+        _ownerId: product._ownerId._id,
+    }).select("-description -phoneNumber -condition -type -updatedAt -__v");
+
+    return { product, moreUserProducts };
+};
 
 async function createProduct(body, files) {
     const town = await Town.find()
