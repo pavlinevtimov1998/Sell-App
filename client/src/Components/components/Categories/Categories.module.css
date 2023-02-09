@@ -23,20 +23,8 @@
     margin-block: 50px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
     .categories {
-
-    }
-
-    .categories-header {
-
-    }
-
-    .categories-container {
-
-    }
-
-    .title {
-        
+        margin-top: 80px;
     }
 }
