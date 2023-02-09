@@ -3,7 +3,7 @@ import { ProductItem } from "../ProductItem/ProductItem";
 
 import styles from "./ProductsCarousel.module.css";
 
-export const ProductsCarousel = ({ products }) => {
+export const ProductsCarousel = ({ products, children }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const slidesNumber = () => {
@@ -33,41 +33,46 @@ export const ProductsCarousel = ({ products }) => {
     };
 
     return (
-        <div className={styles["products-carousel-container"]}>
-            <div className={styles["asd"]}>
-                <div
-                    className={styles["products-container"]}
-                    style={{
-                        transform: `translateX(-${currentSlide * 100}%)`,
-                    }}
-                >
-                    {products.map((p) => (
-                        <ProductItem key={p._id} product={p} />
-                    ))}
+        <section className={styles["more-products"]}>
+            <header className={styles["more-products-header"]}>
+                <h4 className={styles["more-products-title"]}>{children}</h4>
+            </header>
+            <div className={styles["products-carousel-container"]}>
+                <div className={styles["asd"]}>
+                    <div
+                        className={styles["products-container"]}
+                        style={{
+                            transform: `translateX(-${currentSlide * 100}%)`,
+                        }}
+                    >
+                        {products.map((p) => (
+                            <ProductItem key={p._id} product={p} />
+                        ))}
+                    </div>
+                </div>
+                <div className={styles["arrows"]}>
+                    <button type="button" onClick={left}>
+                        <svg
+                            width={30}
+                            height={30}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+                        </svg>
+                    </button>
+                    <button type="button" onClick={right}>
+                        <svg
+                            width={30}
+                            height={30}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div className={styles["arrows"]}>
-                <button type="button" onClick={left}>
-                    <svg
-                        width={20}
-                        height={20}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                    >
-                        <path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z" />
-                    </svg>
-                </button>
-                <button type="button" onClick={right}>
-                    <svg
-                        width={20}
-                        height={20}
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                    >
-                        <path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM281 385c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l71-71L136 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l182.1 0-71-71c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L393 239c9.4 9.4 9.4 24.6 0 33.9L281 385z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
+        </section>
     );
 };
