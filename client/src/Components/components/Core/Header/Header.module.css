@@ -1,6 +1,6 @@
 .header {
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     top: 0;
     left: 0;
     height: 72px;
@@ -12,17 +12,15 @@
     display: flex;
     justify-content: center;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transition: all 0.3s ease-in-out;
 }
 
 header.show {
-    opacity: 1;
     transform: translateY(0);
 }
 
 header.hide {
-    opacity: 0;
     transform: translateY(-100%);
-    transition: all 0.3s ease-in-out;
 }
 
 .nav-bar {
