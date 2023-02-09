@@ -37,6 +37,7 @@ export const RegisterForm = () => {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.title = "Register Page";
     }, []);
 
     const hasError = (name) => Object.values(errors[name]).includes(true);
