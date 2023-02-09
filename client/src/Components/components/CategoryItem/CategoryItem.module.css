@@ -1,6 +1,7 @@
 .item-wrapper {
     position: relative;
     transition: all 0.6s ease;
+    width: 16%;
 }
 
 .item-wrapper:hover {
@@ -9,6 +10,7 @@
 }
 
 .item {
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,4 +46,16 @@
 
 .arrow-down {
     width: 14px;
+}
+
+@media screen and (max-width: 900px) {
+    .item-wrapper {
+        width: 32%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .item-wrapper {
+        width: 50%;
+    }
 }
