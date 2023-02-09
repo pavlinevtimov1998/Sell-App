@@ -22,3 +22,21 @@
     margin: auto;
     margin-block: 50px;
 }
+
+@media screen and (max-width: 900px) {
+    .categories {
+
+    }
+
+    .categories-header {
+
+    }
+
+    .categories-container {
+
+    }
+
+    .title {
+        
+    }
+}
