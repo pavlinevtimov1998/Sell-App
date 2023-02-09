@@ -17,6 +17,7 @@ export const LoginForm = () => {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.title = "Login Page";
     }, []);
 
     const hasError = (name) => errors[name];
