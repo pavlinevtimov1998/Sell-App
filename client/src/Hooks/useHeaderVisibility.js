@@ -1,27 +1,29 @@
 import { useEffect, useState } from "react";
 
 export function useHeaderVisibility() {
-    const [prevScrollPosition, setPrevScrollPosition] = useState(0);
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollPosition = window.pageYOffset;
+        function handleScroll() {
+            let prevScrollPosition = 0;
 
-            setPrevScrollPosition(currentScrollPosition);
-            if (currentScrollPosition < prevScrollPosition) {
-                setIsHeaderVisible(true);
-            } else {
-                setIsHeaderVisible(false);
-            }
-        };
+            return function inner() {
+                const currentScrollPosition = window.pageYOffset;
 
-        window.addEventListener("scroll", handleScroll);
+                if (currentScrollPosition < prevScrollPosition) {
+                    prevScrollPosition = currentScrollPosition;
+                    setIsHeaderVisible(true);
+                } else {
+                    prevScrollPosition = currentScrollPosition;
+                    setIsHeaderVisible(false);
+                }
+            };
+        }
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [prevScrollPosition]);
+        window.addEventListener("scroll", handleScroll());
+
+        return () => window.removeEventListener("scroll", handleScroll());
+    }, []);
 
     return { isHeaderVisible };
 }
