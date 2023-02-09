@@ -78,15 +78,7 @@
     height: 300px;
 }
 
-.more-user-products {
-    width: 90%;
-    margin: auto;
-    padding: 10px;
-}
-
-.more-products-header {
-    padding-left: 10px;
-}
-
-.more-products-title {
+.bolder {
+    font-weight: 700;
+    font-size: 22px;
 }
