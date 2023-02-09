@@ -7,11 +7,13 @@ import styles from "./ProductItem.module.css";
 import { dateParser } from "../../../Utils/util";
 import { likeProduct, removeLike } from "../../../Services/productsService";
 import { SpinnerSmall } from "../SpinnerSmall/SpinnerSmall";
+import { ErrorContext } from "../../../Contexts/ErrorContext";
 
 export const ProductItem = ({ product, changeState }) => {
     const { userData } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
+    const { setMessage } = useContext(ErrorContext);
 
     useEffect(() => {
         if (userData && product.favorites.includes(userData._id)) {
@@ -34,7 +36,13 @@ export const ProductItem = ({ product, changeState }) => {
                 console.log(result);
                 changeState(product._id, userData._id, !isLiked);
             })
-            .catch((err) => console.log(err))
+            .catch((err) =>
+                setMessage({
+                    message: err.message,
+                    hasError: true,
+                    hasMessage: true,
+                })
+            )
             .finally(() => setIsLoading(false));
     };
 
