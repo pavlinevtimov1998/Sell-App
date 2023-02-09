@@ -14,7 +14,6 @@ import { DetailsMessage } from "../../components/DetailsMessage/DetailsMessage";
 import { FormButton } from "../../components/FormButton/FormButton";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { AuthContext } from "../../../Contexts/AuthContext";
-import { ProductItem } from "../../components/ProductItem/ProductItem";
 import { ProductsCarousel } from "../../components/ProductsCarousel/ProductsCarousel";
 
 export const DetailsPage = () => {
@@ -81,14 +80,18 @@ export const DetailsPage = () => {
                             </article>
                         </aside>
                     </div>
-                    <section className={styles["more-user-products"]}>
-                        <header className={styles["more-products-header"]}>
-                            <h4 className={styles["more-products-title"]}>
-                                More from {owner.email}
-                            </h4>
-                        </header>
-                        <ProductsCarousel products={moreUserProducts} />
-                    </section>
+
+                    <ProductsCarousel products={moreUserProducts}>
+                        More products from{" "}
+                        <span className={styles["bolder"]}>{owner.email}</span>
+                    </ProductsCarousel>
+
+                    <ProductsCarousel products={moreUserProducts}>
+                        More from{" "}
+                        <span className={styles["bolder"]}>
+                            {product.category} {">"} {product.subcategory}
+                        </span>
+                    </ProductsCarousel>
                 </main>
             )}
         </>
