@@ -1,8 +1,5 @@
 .search {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #f2f4f5;
     padding: 55px 0;
     color: #002f34;
@@ -10,29 +7,52 @@
 }
 
 .search-form {
+    margin: auto;
     display: flex;
     align-items: center;
     background-color: #fff;
     width: 80%;
+    height: 65px;
 }
 
 .product-search,
 .town-search {
-    width: 55%;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    color: #002f34;
+    fill: #002f34;
+}
+
+.icon-container {
+    width: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding-inline: 10px;
+}
+
+.location {
+    width: 20%;
+}
+
+.product-input,
+.location-input {
+    width: 88%;
+    height: 100%;
+    font-size: 16px;
+    padding-inline: 5px;
+}
+
+.product-input::placeholder,
+.location-input::placeholder {
+    font-size: 16px;
+    color: #002f34;
 }
 
 .town-search {
     width: 30%;
     border-inline: 2px solid #f2f4f5;
-}
-
-.btn-container {
-    width: 15%;
 }
 
 .search-btn {
@@ -58,55 +78,29 @@
     transition: all 0.3s ease;
 }
 
-.btn-container,
-.product-input,
-.location-input {
-    height: 70px;
+.btn-content {
 }
 
-.product-input,
-.location-input {
-    font-size: 16px;
-    font-weight: 600;
-    color: #002f34;
-}
-
-.product-input::placeholder,
-.location-input::placeholder {
-    font-size: 16px;
-    font-weight: 500;
-    color: #002f34;
-}
-
-.product-input,
-.location-input {
+.btn-container {
     flex: 1;
-}
-
-.search-btn span {
-    display: block;
-    font-size: 20px;
-    letter-spacing: 0.5px;
-}
-
-.location-icon {
-    width: 20px;
-    height: 20px;
-    fill: #002f34;
-}
-
-.search-icon,
-.search-icon-btn {
-    width: 35px;
-    height: 20px;
-}
-
-.search-icon {
-    fill: #002f34;
+    height: 100%;
 }
 
 @media screen and (max-width: 900px) {
-    .form-container {
+    .search-form {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .product-input::placeholder,
+    .location-input::placeholder {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .search {
         display: none;
     }
 }
