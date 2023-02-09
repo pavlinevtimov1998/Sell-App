@@ -26,6 +26,7 @@ export const DetailsPage = () => {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.title = "Details Page";
     }, []);
 
     const { product, moreUserProducts } = !isLoading && data;
