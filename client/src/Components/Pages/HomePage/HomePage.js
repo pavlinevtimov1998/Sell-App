@@ -16,6 +16,7 @@ export const HomePage = () => {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+        document.title = "Welcome Page";
     }, []);
 
     return (
