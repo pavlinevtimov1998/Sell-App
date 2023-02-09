@@ -14,6 +14,8 @@ import { DetailsMessage } from "../../components/DetailsMessage/DetailsMessage";
 import { FormButton } from "../../components/FormButton/FormButton";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { AuthContext } from "../../../Contexts/AuthContext";
+import { ProductItem } from "../../components/ProductItem/ProductItem";
+import { ProductsCarousel } from "../../components/ProductsCarousel/ProductsCarousel";
 
 export const DetailsPage = () => {
     const { productId } = useParams();
@@ -27,9 +29,9 @@ export const DetailsPage = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
-    const { product } = data || {};
-    const owner = product?._ownerId || {};
-    const isOwner = owner?._id === userData?._id;
+    const { product, moreUserProducts } = !isLoading && data;
+    const owner = !isLoading && product?._ownerId;
+    const isOwner = !isLoading && owner._id === userData?._id;
 
     return (
         <>
@@ -79,6 +81,14 @@ export const DetailsPage = () => {
                             </article>
                         </aside>
                     </div>
+                    <section className={styles["more-user-products"]}>
+                        <header className={styles["more-products-header"]}>
+                            <h4 className={styles["more-products-title"]}>
+                                More from {owner.email}
+                            </h4>
+                        </header>
+                        <ProductsCarousel products={moreUserProducts} />
+                    </section>
                 </main>
             )}
         </>
