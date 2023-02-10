@@ -7,7 +7,7 @@ import { ProductsList } from "../../components/ProductsList/ProductsList";
 
 import { getAllCategories } from "../../../Services/categoriesService";
 import { getLastProducts } from "../../../Services/productsService";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useResize } from "../../../Hooks/useResize";
 
 const getData = () => Promise.all([getAllCategories(), getLastProducts()]);
