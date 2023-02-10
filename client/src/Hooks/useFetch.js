@@ -28,7 +28,7 @@ export function useFetch(fetchData, deps = []) {
             });
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setMessage, ...deps]);
+    }, [...deps]);
 
     return { isLoading, setIsLoading, data };
 }
