@@ -117,10 +117,17 @@ header.hide {
     fill: #fff;
 }
 
-/* media */
+.mobile-nav {
+}
 
-@media screen and (max-width: 900px) {
-    .header-links {
-        display: none;
-    }
+.user-container {
+}
+
+.link-container {
+}
+
+.list {
+}
+.item {
+    
 }
