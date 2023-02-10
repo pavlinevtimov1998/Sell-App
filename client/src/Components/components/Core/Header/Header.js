@@ -19,7 +19,7 @@ export const Header = () => {
     let headerClass;
 
     if (!isMobile) {
-        headerClass = !isMobile && isHeaderVisible ? "show" : "hide";
+        headerClass = isHeaderVisible ? "show" : "hide";
     } else {
         headerClass = "show";
     }
