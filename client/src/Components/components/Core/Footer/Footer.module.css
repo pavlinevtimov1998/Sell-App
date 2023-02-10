@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100px 0 100px;
+    padding: 100px 0;
     border-top: 2px solid rgb(79, 79, 79);
     background-color: #f2f4f5;
     margin-top: 50px;
@@ -14,23 +14,60 @@
     justify-content: space-around;
 }
 
-.articles article ul {
+.list {
     display: flex;
     flex-direction: column;
     gap: 8px;
     font-size: 20px;
 }
 
-.articles article ul a {
+.list a {
     color: #002f34;
 }
 
-.social-media {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
+.linkedin {
+    fill: blue;
+    transition: all 0.3s ease;
 }
 
-.social-media {
-    color: blue;
+.github {
+    transition: all 0.3s ease;
+    fill: black;
+}
+
+.linkedin:hover {
+    fill: rgb(74, 74, 252);
+}
+
+.github:hover {
+    fill: rgb(34, 34, 34);
+}
+
+.list-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+    .footer {
+        padding-top: 50px;
+    }
+    .articles {
+        flex-direction: column-reverse;
+    }
+
+    .list > li {
+        text-align: center;
+    }
+
+    .social-media {
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+    }
+
+    .list-container {
+        margin-bottom: 30px;
+    }
 }
