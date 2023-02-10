@@ -111,6 +111,12 @@ header.hide {
     fill: darkgray;
 }
 
+/* mobile nav */
+
+.mobile-nav-btn {
+    fill: #fff;
+}
+
 /* media */
 
 @media screen and (max-width: 900px) {
