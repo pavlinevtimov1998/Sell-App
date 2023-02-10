@@ -16,7 +16,13 @@ export const Header = () => {
     const { userData } = useContext(AuthContext);
     const [isMobileNavVisible, setisMobileNavVisible] = useState(false);
 
-    const headerClass = isHeaderVisible ? "show" : "hide";
+    let headerClass;
+
+    if (!isMobile) {
+        headerClass = !isMobile && isHeaderVisible ? "show" : "hide";
+    } else {
+        headerClass = "show";
+    }
 
     const mobileNavHandler = () => setisMobileNavVisible((state) => !state);
 
