@@ -33,7 +33,11 @@ export const ProductItem = ({ product, changeState }) => {
         setIsLoading(true);
         promise()
             .then((result) => {
-                console.log(result);
+                setMessage({
+                    message: result.message,
+                    hasError: false,
+                    hasMessage: true,
+                });
                 changeState(product._id, userData._id, !isLiked);
             })
             .catch((err) =>
