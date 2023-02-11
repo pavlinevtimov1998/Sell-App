@@ -2,7 +2,8 @@
     position: absolute;
     z-index: 10;
     top: 170px;
-    left: -43px;
+    left: -35px;
+    width: 100%;
     min-width: 200px;
     background-color: #fff;
     border-radius: 8px;
@@ -37,4 +38,22 @@
 
 .subcategory:hover {
     color: #00606a;
+}
+/* 
+@media screen and (max-width: 900px) {
+    .subcategories-dropdown {
+        left: -45px;
+    }
+} */
+
+@media screen and (max-width: 900px) {
+    .subcategories-dropdown {
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .subcategories-dropdown {
+        left: -28px;
+    }
 }
