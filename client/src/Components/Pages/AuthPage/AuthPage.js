@@ -7,7 +7,7 @@ export const AuthPage = ({ action }) => {
     return (
         <>
             <section className={styles["auth-section"]}>
-                <article className={styles["form-wraper"]}>
+                <div className={styles["form-wraper"]}>
                     {action === "register" ? <RegisterForm /> : <LoginForm />}
 
                     <div className={styles["line-container"]}>
@@ -37,7 +37,7 @@ export const AuthPage = ({ action }) => {
                             </button>
                         </div>
                     </article>
-                </article>
+                </div>
             </section>
         </>
     );
