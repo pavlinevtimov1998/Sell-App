@@ -8,7 +8,7 @@ export const MobileNav = ({
     mobileNavHandler,
 }) => {
     const className = isMobileNavVisible ? "show" : "hide";
-    console.log(className);
+
     return (
         <aside className={`${styles["mobile-nav"]} ${styles[className]}`}>
             <button
