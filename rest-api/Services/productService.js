@@ -19,11 +19,16 @@ const getOneProduct = async (productId) => {
         })
         .populate({ path: "location" });
 
-    const moreUserProducts = await Product.find({
-        _ownerId: product._ownerId._id,
-    }).select("-description -phoneNumber -condition -type -updatedAt -__v");
+    const [moreUserProducts, moreCategoryProducts] = await Promise.all([
+        Product.find({
+            _ownerId: product._ownerId._id,
+        }).select("-description -phoneNumber -condition -type -updatedAt -__v"),
+        Product.find({ subcategory: product.subcategory }).select(
+            "-description -phoneNumber -condition -type -updatedAt -__v"
+        ),
+    ]);
 
-    return { product, moreUserProducts };
+    return { product, moreUserProducts, moreCategoryProducts };
 };
 
 async function createProduct(body, files) {
