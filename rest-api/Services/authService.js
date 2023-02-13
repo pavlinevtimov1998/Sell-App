@@ -41,6 +41,30 @@ async function login({ email, password }) {
     return removePass(user);
 }
 
+async function thirdPartyAuth(userData) {
+    const user = await User.findOne({ email: userData.email });
+    console.log(user);
+    if (user) {
+        if (user.thirdPartyId !== userData.id) {
+            throw {
+                message: "Unauthorized!",
+                status: 401,
+            };
+        }
+        return removePass(user);
+    } else {
+        const user = await User.create({
+            email: userData.email,
+            isAdmin: false,
+            image: userData.image,
+            isThirdParty: true,
+            thirdPartyId: userData.id,
+        });
+
+        return removePass(user);
+    }
+}
+
 const removeAccount = (userId) => User.findByIdAndDelete(userId);
 
 const getUserData = async (userId) => {
@@ -54,4 +78,5 @@ module.exports = {
     login,
     removeAccount,
     getUserData,
+    thirdPartyAuth,
 };

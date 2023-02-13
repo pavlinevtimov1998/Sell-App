@@ -63,10 +63,15 @@ productsController.get(
     catchAsyncError(async (req, res) => {
         const productId = req.params.productId;
 
-        const { product, moreUserProducts } =
+        const { product, moreUserProducts, moreCategoryProducts } =
             await productsService.getOneProduct(productId);
 
-        res.status(200).json({ product, moreUserProducts, GOOGLE_KEY });
+        res.status(200).json({
+            product,
+            moreUserProducts,
+            moreCategoryProducts,
+            GOOGLE_KEY,
+        });
     })
 );
 

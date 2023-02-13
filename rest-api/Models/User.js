@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema(
             },
         },
         password: {
-            required: true,
             trim: true,
             type: String,
             minLength: [6, "Password should be at least 6 characters!"],
@@ -41,18 +40,26 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        isThirdParty: {
+            type: Boolean,
+            default: false,
+        },
+        thirdPartyId: {
+            type: String,
+        },
     },
     { timestamps: { createdAt: "createdAt" } }
 );
 
 userSchema.pre("save", async function (next) {
-    const hashedPassword = await bcrypt.hash(
-        this.password,
-        Number(config.SALT)
-    );
+    if (!this.isThirdParty) {
+        const hashedPassword = await bcrypt.hash(
+            this.password,
+            Number(config.SALT)
+        );
 
-    this.password = hashedPassword;
-
+        this.password = hashedPassword;
+    }
     next();
 });
 

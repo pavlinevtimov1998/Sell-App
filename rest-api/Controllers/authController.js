@@ -17,6 +17,7 @@ authController.post(
             _id: user._id,
             email: user.email,
             isAdmin: user.isAdmin,
+            isThirdParty: user.isThirdParty,
         });
 
         res.cookie(COOKIE_NAME, token, { httpOnly: true });
@@ -35,6 +36,7 @@ authController.post(
             _id: user._id,
             email: user.email,
             isAdmin: user.isAdmin,
+            isThirdParty: user.isThirdParty,
         });
 
         res.cookie(COOKIE_NAME, token, { httpOnly: true });
@@ -68,6 +70,25 @@ authController.get(
         const userId = req.user._id;
 
         const user = await authService.getUserData(userId);
+
+        res.status(200).json(user);
+    })
+);
+
+authController.post(
+    "/third-party-auth",
+    isGuest("You are already logged in!"),
+    catchAsyncError(async (req, res) => {
+        const user = await authService.thirdPartyAuth(req.body);
+
+        const token = await getToken({
+            _id: user._id,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            isThirdParty: user.isThirdParty,
+        });
+
+        res.cookie(COOKIE_NAME, token, { httpOnly: true });
 
         res.status(200).json(user);
     })
