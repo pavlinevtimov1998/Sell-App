@@ -11,6 +11,7 @@
 .articles {
     display: flex;
     width: 100%;
+    max-width: 1250px;
     justify-content: space-around;
 }
 
@@ -49,6 +50,11 @@
     justify-content: center;
 }
 
+.social-media {
+    display: flex;
+    gap: 10px;
+}
+
 @media screen and (max-width: 500px) {
     .footer {
         padding-top: 50px;
@@ -59,12 +65,6 @@
 
     .list > li {
         text-align: center;
-    }
-
-    .social-media {
-        display: flex;
-        gap: 10px;
-        flex-direction: row;
     }
 
     .list-container {
