@@ -29,7 +29,8 @@ export const DetailsPage = () => {
         document.title = "Details Page";
     }, []);
 
-    const { product, moreUserProducts } = !isLoading && data;
+    const { product, moreUserProducts, moreCategoryProducts } =
+        !isLoading && data;
     const owner = !isLoading && product?._ownerId;
     const isOwner = !isLoading && owner._id === userData?._id;
 
@@ -87,7 +88,7 @@ export const DetailsPage = () => {
                         <span className={styles["bolder"]}>{owner.email}</span>
                     </ProductsCarousel>
 
-                    <ProductsCarousel products={moreUserProducts}>
+                    <ProductsCarousel products={moreCategoryProducts}>
                         More from{" "}
                         <span className={styles["bolder"]}>
                             {product.category} {">"} {product.subcategory}
