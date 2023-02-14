@@ -1,4 +1,3 @@
-
 .message-container {
     width: 100%;
     border-radius: 14px;
@@ -16,6 +15,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 15px;
 }
 
 .form-textarea {
@@ -47,4 +47,20 @@
     background-color: #fff;
     color: #002f34;
     fill: #002f34;
+}
+
+@media screen and (max-width: 900px) {
+    .message-form {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-btn {
+        width: 100%;
+    }
+
+    .message-container {
+        padding: 15px;
+    }
 }
