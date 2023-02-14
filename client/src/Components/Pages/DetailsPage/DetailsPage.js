@@ -15,6 +15,7 @@ import { FormButton } from "../../components/FormButton/FormButton";
 import { UserInfo } from "../../components/UserInfo/UserInfo";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { ProductsCarousel } from "../../components/ProductsCarousel/ProductsCarousel";
+import { useResize } from "../../../Hooks/useResize";
 
 export const DetailsPage = () => {
     const { productId } = useParams();
@@ -23,6 +24,7 @@ export const DetailsPage = () => {
         [productId]
     );
     const { userData } = useContext(AuthContext);
+    const { state: isSmaller } = useResize(900);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,6 +45,46 @@ export const DetailsPage = () => {
                     <div className={styles["wrapper"]}>
                         <div className={styles["main-column"]}>
                             <Carousel images={product.images} />
+                            {isSmaller && (
+                                <div className={styles["user-location-container"]}>
+                                    <article
+                                        className={styles["info-container"]}
+                                    >
+                                        <h3 className={styles["title"]}>
+                                            Seller Info
+                                        </h3>
+
+                                        <UserInfo user={owner} />
+
+                                        {userData && !isOwner && (
+                                            <FormButton
+                                                className={
+                                                    styles["message-btn"]
+                                                }
+                                                type="button"
+                                                content="Send Message"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 512 512"
+                                                    width={20}
+                                                    height={20}
+                                                >
+                                                    <path d="M447.1 0h-384c-35.25 0-64 28.75-64 63.1v287.1c0 35.25 28.75 63.1 64 63.1h96v83.98c0 9.836 11.02 15.55 19.12 9.7l124.9-93.68h144c35.25 0 64-28.75 64-63.1V63.1C511.1 28.75 483.2 0 447.1 0zM464 352c0 8.75-7.25 16-16 16h-160l-80 60v-60H64c-8.75 0-16-7.25-16-16V64c0-8.75 7.25-16 16-16h384c8.75 0 16 7.25 16 16V352z" />
+                                                </svg>
+                                            </FormButton>
+                                        )}
+                                    </article>
+                                    <article className={styles["location"]}>
+                                        <div className={styles["map"]}>
+                                            <Map
+                                                location={product.location}
+                                                GOOGLE_KEY={data.GOOGLE_KEY}
+                                            />
+                                        </div>
+                                    </article>
+                                </div>
+                            )}
                             <ProductDescription
                                 product={product}
                                 isOwner={isOwner}
