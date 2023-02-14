@@ -4,7 +4,7 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import styles from "./AuthPage.module.css";
 
 import { LoginForm } from "../../components/AuthForms/LoginForm";
-import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { RegisterForm } from "../../components/AuthForms/RegisterForm";
 import { thirdPartyAuth } from "../../../Services/userService";
 import { useNavigate } from "react-router-dom";
@@ -69,10 +69,7 @@ export const AuthPage = ({ action }) => {
                                 type="button"
                             >
                                 <span className={styles["btn-content"]}>
-                                    {action === "register"
-                                        ? "Sign In"
-                                        : "Log In"}{" "}
-                                    with
+                                    Sign In with
                                 </span>
                                 <svg
                                     width={30}
@@ -91,10 +88,7 @@ export const AuthPage = ({ action }) => {
                                 type="button"
                             >
                                 <span className={styles["btn-content"]}>
-                                    {action === "register"
-                                        ? "Sign In"
-                                        : "Log In"}{" "}
-                                    with
+                                    Sign In with
                                 </span>
 
                                 <svg

@@ -2,26 +2,10 @@ import { useState } from "react";
 
 import styles from "./ProductsList.module.css";
 import { ProductItem } from "../ProductItem/ProductItem";
+import { useProducts } from "../../../Hooks/useProducts";
 
 export const ProductsList = ({ products }) => {
-    const [productsState, setProductsState] = useState(products);
-
-    const changeState = (productId, userId, isLike) =>
-        setProductsState((state) => {
-            return state.map((p) => {
-                if (p._id === productId) {
-                    return isLike
-                        ? { ...p, favorites: [...p.favorites, userId] }
-                        : {
-                              ...p,
-                              favorites: p.favorites.filter(
-                                  (id) => id !== userId
-                              ),
-                          };
-                }
-                return p;
-            });
-        });
+    const { productsState, changeLikeState } = useProducts(products);
 
     return (
         <section className={styles["products-wraper"]}>
@@ -33,7 +17,7 @@ export const ProductsList = ({ products }) => {
                     <ProductItem
                         key={p._id}
                         product={p}
-                        changeState={changeState}
+                        changeState={changeLikeState}
                     />
                 ))}
             </div>

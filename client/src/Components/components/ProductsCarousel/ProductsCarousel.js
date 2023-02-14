@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useProducts } from "../../../Hooks/useProducts";
 import { ProductItem } from "../ProductItem/ProductItem";
 
 import styles from "./ProductsCarousel.module.css";
 
 export const ProductsCarousel = ({ products, children }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const { productsState, changeLikeState } = useProducts(products);
 
     const slidesNumber = () => {
         const width = window.innerWidth;
@@ -45,8 +47,12 @@ export const ProductsCarousel = ({ products, children }) => {
                             transform: `translateX(-${currentSlide * 100}%)`,
                         }}
                     >
-                        {products.map((p) => (
-                            <ProductItem key={p._id} product={p} />
+                        {productsState.map((p) => (
+                            <ProductItem
+                                key={p._id}
+                                product={p}
+                                changeState={changeLikeState}
+                            />
                         ))}
                     </div>
                 </div>
