@@ -5,7 +5,7 @@ export function useResize(num) {
 
     useEffect(() => {
         const resizeHandler = (e) => {
-            if (e.target.innerWidth > 600) {
+            if (e.target.innerWidth > num) {
                 setState(false);
             } else {
                 setState(true);
