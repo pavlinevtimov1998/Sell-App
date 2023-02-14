@@ -12,7 +12,7 @@ export const ProductsList = ({ products }) => {
             <header className={styles["products-header"]}>
                 <h2>Recent Offers</h2>
             </header>
-            <div className={styles["product-cards"]}>
+            <div className={styles["product-cards-container"]}>
                 {productsState.map((p) => (
                     <ProductItem
                         key={p._id}
