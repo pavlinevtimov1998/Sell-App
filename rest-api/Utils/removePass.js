@@ -4,4 +4,5 @@ exports.removePass = (user) => ({
     phoneNumber: user.phoneNumber,
     image: user.image,
     isAdmin: user.isAdmin,
+    isThirdParty: user.isThirdParty,
 });
