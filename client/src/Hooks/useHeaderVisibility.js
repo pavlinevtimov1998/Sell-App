@@ -10,10 +10,18 @@ export function useHeaderVisibility() {
             return function inner() {
                 const currentScrollPosition = window.pageYOffset;
 
-                if (currentScrollPosition < prevScrollPosition) {
+                if (
+                    currentScrollPosition < prevScrollPosition &&
+                    currentScrollPosition > 150
+                ) {
                     prevScrollPosition = currentScrollPosition;
                     setIsHeaderVisible(true);
-                } else {
+                }
+
+                if (
+                    currentScrollPosition > prevScrollPosition &&
+                    currentScrollPosition > 150
+                ) {
                     prevScrollPosition = currentScrollPosition;
                     setIsHeaderVisible(false);
                 }
