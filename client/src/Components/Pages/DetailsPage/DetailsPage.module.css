@@ -2,7 +2,6 @@
 
 .info-container {
     width: 100%;
-    max-height: auto;
     background-color: #fff;
     border-radius: 14px;
     box-shadow: 0px 0px 15px -5px rgb(0 0 0 / 11%);
@@ -51,7 +50,7 @@
     max-width: 1250px;
     margin: auto;
     color: #002f34;
-    padding-top: 10%;
+    padding-top: 90px;
 }
 
 .wrapper {
@@ -81,4 +80,49 @@
 .bolder {
     font-weight: 700;
     font-size: 22px;
+}
+
+.user-location-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    .wrapper {
+        display: block;
+        margin: auto;
+    }
+    .main-column {
+        width: 100%;
+    }
+
+    .info-container {
+        margin-bottom: unset;
+    }
+
+    .location {
+        height: 190px;
+    }
+
+    .aside {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .location {
+        display: none;
+    }
+
+    .wrapper {
+        width: 98%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .bolder {
+        font-size: 18px;
+    }
 }
