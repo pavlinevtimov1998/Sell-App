@@ -3,12 +3,25 @@ const Town = require("../Models/Town");
 
 const { getImagesUrl, deleteCloudinaryImage } = require("../Utils/imageUpload");
 
-const getProducts = (title, category) =>
-    Product.find({
-        title: { $regex: title, $options: "i" },
-        category: { $regex: category, $options: "i" },
-    }).select("-description -phoneNumber -condition -type -updatedAt -__v");
-
+const getProducts = (
+    title,
+    category,
+    subcategory,
+    fromPrice,
+    toPrice,
+    condition
+) => {
+    console.log(fromPrice);
+    return Product.find()
+        .regex("title", new RegExp(`^${title}`, "i"))
+        .regex("category", new RegExp(`^${category}`, "i"))
+        .regex("subcategory", new RegExp(`^${subcategory}`, "i"))
+        .regex("condition", new RegExp(`^${condition}`, "i"))
+        .where("price")
+        .gte(+fromPrice)
+        .lte(+toPrice)
+        .select("-description -phoneNumber -condition -type -updatedAt -__v");
+};
 const getProductsCount = () => Product.find().count();
 
 const getOneProduct = async (productId) => {
