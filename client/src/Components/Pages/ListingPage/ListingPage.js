@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     createSearchParams,
     useParams,
@@ -16,49 +17,63 @@ const getData = (params) => () =>
 
 export const ListingPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    console.log(Object.fromEntries(searchParams));
     const query = createSearchParams(Object.fromEntries(searchParams));
-    console.log(query.toString());
     const { data, isLoading, setIsLoading } = useFetch(
         getData("?" + query.toString()),
         [query.toString()]
     );
-    console.log(data);
+    const [inputData, setInputData] = useState({
+        title: "",
+        fromPrice: "",
+        toPrice: "",
+    });
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCondition, setSelectedCondition] = useState({
+        new: false,
+        used: false,
+    });
+
+    useEffect(() => {
+        if (data) {
+            const category = data[1].find((c) =>
+                c.title
+                    .toLocaleLowerCase()
+                    .startsWith(
+                        searchParams.get("category")?.toLocaleLowerCase()
+                    )
+            );
+
+            if (!category) {
+                return setSelectedCategory(null);
+            }
+
+            const subcategoryTitle =
+                searchParams.get("subcategory") &&
+                category.subcategories.find((s) =>
+                    s.title
+                        .toLocaleLowerCase()
+                        .startsWith(
+                            searchParams.get("subcategory")?.toLocaleLowerCase()
+                        )
+                );
+
+            return setSelectedCategory({
+                category: {
+                    title: category.title,
+                    image: category.image,
+                },
+                subcategory: subcategoryTitle?.title,
+            });
+        }
+    }, [data, searchParams]);
+
+    const chooseCategoryHandler = (category) => setSelectedCategory(category);
+
+    const clearCategoryHandler = () => setSelectedCategory(null);
 
     const searchHandler = (e) => {
         e.preventDefault();
     };
-
-    const selectedCategory = () => {
-        const category = data[1].find((c) =>
-            c.title
-                .toLocaleLowerCase()
-                .startsWith(searchParams.get("category")?.toLocaleLowerCase())
-        );
-
-        if (!category) {
-            return false;
-        }
-
-        const subcategoryTitle =
-            searchParams.get("subcategory") &&
-            category.subcategories.find((s) =>
-                s.title
-                    .toLocaleLowerCase()
-                    .startsWith(
-                        searchParams.get("subcategory")?.toLocaleLowerCase()
-                    )
-            );
-
-        return {
-            category: {
-                title: category.title,
-                image: category.image,
-            },
-            subcategory: subcategoryTitle?.title,
-        };
-    };
-
     return isLoading ? (
         <Spinner />
     ) : (
@@ -75,7 +90,9 @@ export const ListingPage = () => {
                             <CategorySelectBtn
                                 background="#fff"
                                 categories={data[1]}
-                                selectedCategory={selectedCategory()}
+                                selectedCategory={selectedCategory}
+                                chooseCategoryHandler={chooseCategoryHandler}
+                                clearCategoryHandler={clearCategoryHandler}
                             />
                         </div>
                         <div className={styles["price"]}>
