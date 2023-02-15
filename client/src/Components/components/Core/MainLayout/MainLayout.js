@@ -8,14 +8,13 @@ export const MainLayout = ({ children }) => {
 
             <div
                 style={{
-                    minHeight: "100vh",
+                    paddingTop: "80px",
+                    minHeight: "80vh",
                     maxWidth: "1250px",
                     margin: "auto",
                 }}
             >
-
                 {children}
-            
             </div>
 
             <Footer />
