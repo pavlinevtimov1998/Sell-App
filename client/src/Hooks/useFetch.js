@@ -18,11 +18,11 @@ export function useFetch(fetchData, deps = []) {
                 setIsLoading(false);
             })
             .catch((error) => {
-                setMessage((state) => ({
+                setMessage({
                     message: error.message,
                     hasError: true,
                     hasMessage: true,
-                }));
+                });
                 setIsLoading(false);
                 navigate("/404", { replace: true });
             });
