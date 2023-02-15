@@ -4,9 +4,14 @@ import { CategoriesFormModal } from "../CategoriesFormModal";
 
 import styles from "./CategorySelectBtn.module.css";
 
-export const CategorySelectBtn = () => {
+export const CategorySelectBtn = ({
+    background,
+    chooseCategoryHandler,
+    clearCategoryHandler,
+    categories,
+    selectedCategory,
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { clearCategoryHandler, selectedCategory } = useContext(FormContext);
 
     const openCategoriesModal = () => setIsModalOpen(true);
 
@@ -18,6 +23,7 @@ export const CategorySelectBtn = () => {
                 className={`${styles["select-wrapper"]} ${
                     styles[selectedCategory ? "selected" : ""]
                 }`}
+                style={{ backgroundColor: background || "" }}
             >
                 {selectedCategory ? (
                     <div className={styles["selected-category"]}>
@@ -67,6 +73,8 @@ export const CategorySelectBtn = () => {
 
             {isModalOpen && (
                 <CategoriesFormModal
+                    chooseCategoryHandler={chooseCategoryHandler}
+                    categories={categories}
                     closeCategoriesModal={closeCategoriesModal}
                 />
             )}
