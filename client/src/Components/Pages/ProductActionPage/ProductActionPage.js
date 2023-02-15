@@ -162,10 +162,6 @@ export const ProductActionPage = ({ action }) => {
             ) : (
                 <FormContext.Provider
                     value={{
-                        chooseCategoryHandler,
-                        clearCategoryHandler,
-                        categories,
-                        selectedCategory,
                         addImages,
                         imagesHandler,
                         imagesInputRef,
@@ -233,7 +229,16 @@ export const ProductActionPage = ({ action }) => {
                                         >
                                             Category
                                         </label>
-                                        <CategorySelectBtn />
+                                        <CategorySelectBtn
+                                            chooseCategoryHandler={
+                                                chooseCategoryHandler
+                                            }
+                                            clearCategoryHandler={
+                                                clearCategoryHandler
+                                            }
+                                            categories={categories}
+                                            selectedCategory={selectedCategory}
+                                        />
 
                                         {errors.category.required && (
                                             <p className="error">
@@ -397,7 +402,7 @@ export const ProductActionPage = ({ action }) => {
                                                     ? "Add"
                                                     : "Edit"
                                             }
-                                            className={styles['btn']}
+                                            className={styles["btn"]}
                                         >
                                             <svg
                                                 width={20}
