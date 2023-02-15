@@ -1,15 +1,11 @@
-import { useContext } from "react";
-import { FormContext } from "../../../../../Contexts/FormContext";
-
 import styles from "../CategoriesFormModal.module.css";
 
 export const SubcategoryModalItem = ({
     subcategory,
     category,
     closeCategoriesModal,
+    chooseCategoryHandler,
 }) => {
-    const { chooseCategoryHandler } = useContext(FormContext);
-
     return (
         <li className={styles["item"]}>
             <button
