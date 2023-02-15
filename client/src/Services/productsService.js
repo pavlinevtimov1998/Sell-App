@@ -1,6 +1,7 @@
 import * as apiService from "./apiService";
 
 const endpoints = {
+    getProducts: "/products",
     getLast: "/products?limit=16",
     withId: (productId) => `/products/${productId}`,
     create: "/products",
@@ -8,6 +9,9 @@ const endpoints = {
     like: (productId) => `/products/like/${productId}`,
     removeLike: (productId) => `/products/remove-like/${productId}`,
 };
+
+export const getProducts = (params) =>
+    apiService.getRequest(endpoints.getProducts + params);
 
 export const getLastProducts = () => apiService.getRequest(endpoints.getLast);
 
