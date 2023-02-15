@@ -9,10 +9,26 @@ const { GOOGLE_KEY } = require("../config/config");
 productsController.get(
     "/",
     catchAsyncError(async (req, res) => {
-        const { title, location, category, skip, limit } = req.query;
+        const {
+            title,
+            category,
+            subcategory,
+            fromPrice,
+            toPrice,
+            condition,
+            skip,
+            limit,
+        } = req.query;
 
         const products = await productsService
-            .getProducts(title || "", location || "", category || "")
+            .getProducts(
+                title || "",
+                category || "",
+                subcategory || "",
+                fromPrice || 0,
+                toPrice || Number.MAX_SAFE_INTEGER,
+                condition || ""
+            )
             .skip(skip || 0)
             .limit(limit || 16);
 
