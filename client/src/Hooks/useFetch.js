@@ -10,6 +10,7 @@ export function useFetch(fetchData, deps = []) {
     const navigate = useNavigate();
 
     useEffect(() => {
+        setIsLoading(true);
         fetchData()
             .then((result) => {
                 if (result) {
@@ -26,7 +27,7 @@ export function useFetch(fetchData, deps = []) {
                 setIsLoading(false);
                 navigate("/404", { replace: true });
             });
-            console.log('asd');
+        console.log("from fetch");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps);
 
