@@ -29,7 +29,7 @@ export const DetailsPage = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
         document.title = "Details Page";
-    }, []);
+    }, [productId]);
 
     const { product, moreUserProducts, moreCategoryProducts } =
         !isLoading && data;
@@ -46,7 +46,11 @@ export const DetailsPage = () => {
                         <div className={styles["main-column"]}>
                             <Carousel images={product.images} />
                             {isSmaller && (
-                                <div className={styles["user-location-container"]}>
+                                <div
+                                    className={
+                                        styles["user-location-container"]
+                                    }
+                                >
                                     <article
                                         className={styles["info-container"]}
                                     >
