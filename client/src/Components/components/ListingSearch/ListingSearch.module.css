@@ -10,15 +10,13 @@
 
 .filters {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 30px;
 }
 
 .categories {
     min-width: 220px;
-}
-
-.price {
-    /* width: 170px; */
 }
 
 .price-title,
