@@ -27,6 +27,11 @@ export const ListingPage = () => {
     const { setMessage } = useContext(ErrorContext);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.title = "Listing Page";
+    }, [searchLoading]);
+
+    useEffect(() => {
         if (data) {
             const category = data[1].find((c) =>
                 c.title
