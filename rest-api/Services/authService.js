@@ -7,6 +7,13 @@ const { removePass } = require("../Utils/removePass");
 async function register(body) {
     const { password, rePassword } = body;
 
+    if (!password) {
+        throw {
+            message: "Passwords is required!",
+            status: 400,
+        };
+    }
+
     if (password !== rePassword) {
         throw {
             message: "Passwords don't match!",
@@ -29,6 +36,13 @@ async function login({ email, password }) {
         };
     }
 
+    if (!user.password) {
+        throw {
+            message: "Email or password don't match!",
+            status: 401,
+        };
+    }
+
     const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
@@ -43,7 +57,7 @@ async function login({ email, password }) {
 
 async function thirdPartyAuth(userData) {
     const user = await User.findOne({ email: userData.email });
-    console.log(user);
+
     if (user) {
         if (user.thirdPartyId !== userData.id) {
             throw {

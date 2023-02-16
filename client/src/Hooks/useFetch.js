@@ -26,9 +26,9 @@ export function useFetch(fetchData, deps = []) {
                 setIsLoading(false);
                 navigate("/404", { replace: true });
             });
-
+            console.log('asd');
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [...deps]);
+    }, deps);
 
-    return { isLoading, setIsLoading, data };
+    return { isLoading, setIsLoading, data, setData };
 }

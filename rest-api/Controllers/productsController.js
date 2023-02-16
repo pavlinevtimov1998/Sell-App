@@ -19,7 +19,7 @@ productsController.get(
             skip,
             limit,
         } = req.query;
-
+        console.log(req.query);
         const products = await productsService
             .getProducts(
                 title || "",

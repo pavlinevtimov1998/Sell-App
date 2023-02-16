@@ -40,10 +40,6 @@ body {
     color: #002f34;
 }
 
-.main {
-    min-height: 80vh;
-}
-
 li {
     list-style: none;
 }
@@ -81,4 +77,11 @@ a {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
 }

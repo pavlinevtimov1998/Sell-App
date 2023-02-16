@@ -9,7 +9,7 @@ export const MainLayout = ({ children }) => {
             <div
                 style={{
                     paddingTop: "80px",
-                    minHeight: "80vh",
+                    minHeight: "95vh",
                     maxWidth: "1250px",
                     margin: "auto",
                 }}
