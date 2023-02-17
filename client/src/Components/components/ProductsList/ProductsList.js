@@ -12,7 +12,12 @@ export const ProductsList = ({ products, title }) => {
             <header className={styles["products-header"]}>
                 <h2>{title || "Recent Offers"}</h2>
             </header>
-            <div className={styles["product-cards-container"]}>
+            <div
+                style={{
+                    justifyContent: products.length === 0 ? "center" : "flex-start",
+                }}
+                className={styles["product-cards-container"]}
+            >
                 {productsState.length === 0 && (
                     <h1 className={styles["no-results"]}>No Results...</h1>
                 )}
