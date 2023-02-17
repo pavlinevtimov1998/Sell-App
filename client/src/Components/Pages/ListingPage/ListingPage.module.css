@@ -6,10 +6,58 @@
     padding: 20px;
 }
 
-
 .line {
     width: 90%;
     height: 1px;
     background-color: #002f34;
     margin: auto;
+}
+
+.filter-btn {
+    position: absolute;
+    z-index: 1001;
+    padding: 5px 5px 5px 15px;
+    border-radius: 0px 20px 20px 0px;
+    right: -25px;
+    top: 20%;
+    box-shadow: rgb(38 57 77) 0px 20px 30px -10px;
+    display: flex;
+    fill: #fff;
+    background-color: #002f34;
+}
+
+.visible-btn {
+    fill: #002f34;
+    background-color: #ebebeb;
+}
+
+.outside-click {
+    width: 100%;
+    min-height: 100vh;
+    z-index: 1001;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+}
+
+@media screen and (max-width: 1040px) {
+    .form-container {
+        position: fixed;
+        top: 0;
+        width: 300px;
+        height: 100vh;
+        z-index: 1002;
+        padding: unset;
+        transition: all 0.3s ease;
+        box-shadow: rgb(38 57 77) 0px 20px 30px -10px;
+    }
+
+    .form-container.show {
+        left: 0;
+    }
+
+    .form-container.hide {
+        left: -301px;
+    }
 }

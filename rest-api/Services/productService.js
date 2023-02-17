@@ -11,7 +11,12 @@ const getProducts = (
     toPrice,
     condition
 ) => {
-    console.log(fromPrice);
+    console.log(title,
+        category,
+        subcategory,
+        fromPrice,
+        toPrice,
+        condition);
     return Product.find()
         .regex("title", new RegExp(`^${title}`, "i"))
         .regex("category", new RegExp(`^${category}`, "i"))

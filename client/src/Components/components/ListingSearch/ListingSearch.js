@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
-import { ErrorContext } from "../../../Contexts/ErrorContext";
 import { CategorySelectBtn } from "../ProductForm/CategoriesFormModal/CategorySelectBtn/CategorySelectBtn";
 
 import styles from "./ListingSearch.module.css";
@@ -40,13 +39,15 @@ export const ListingSearch = ({
         const paramsObj = {
             category:
                 selectedCategory?.category?.title?.toLocaleLowerCase() || "",
-            subcategory: selectedCategory?.subcategory?.toLocaleLowerCase(),
+            subcategory:
+                selectedCategory?.subcategory?.toLocaleLowerCase() || "",
             ...inputData,
             condition:
                 Object.keys(selectedCondition).find(
                     (k) => selectedCondition[k] === true
                 ) || "",
         };
+        console.log(paramsObj);
 
         getSearchedProducts(paramsObj);
     };

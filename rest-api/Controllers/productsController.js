@@ -31,7 +31,7 @@ productsController.get(
             )
             .skip(skip || 0)
             .limit(limit || 16);
-
+console.log(products);
         res.status(200).json(products);
     })
 );

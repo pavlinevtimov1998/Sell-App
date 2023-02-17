@@ -7,8 +7,8 @@ export function useHeaderVisibility() {
         function handleScroll() {
             let prevScrollPosition = 0;
 
-            return function inner() {
-                const currentScrollPosition = window.pageYOffset;
+            return function inner(e) {
+                const currentScrollPosition = e.target.pageYOffset;
 
                 if (
                     currentScrollPosition < prevScrollPosition &&
