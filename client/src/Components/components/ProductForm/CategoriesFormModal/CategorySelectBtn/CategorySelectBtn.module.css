@@ -13,6 +13,7 @@
 .select-btn {
     width: 100%;
     padding: 15px 20px;
+    min-height: 70px;
 }
 
 .content {
